@@ -2,67 +2,25 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://minezeratul.github.io/categories/</loc>
-    <lastmod>2021-05-16T00:47:24+08:00</lastmod>
-  </url><url>
-    <loc>https://minezeratul.github.io/categories/coding/</loc>
-    <lastmod>2021-05-16T00:47:24+08:00</lastmod>
-  </url><url>
-    <loc>https://minezeratul.github.io/tags/java/</loc>
-    <lastmod>2021-05-16T00:47:24+08:00</lastmod>
-  </url><url>
-    <loc>https://minezeratul.github.io/categories/java/</loc>
-    <lastmod>2021-05-16T00:47:24+08:00</lastmod>
-  </url><url>
-    <loc>https://minezeratul.github.io/tags/leetcode/</loc>
-    <lastmod>2021-05-16T00:47:24+08:00</lastmod>
-  </url><url>
-    <loc>https://minezeratul.github.io/categories/leetcode/</loc>
-    <lastmod>2021-05-16T00:47:24+08:00</lastmod>
+    <loc>https://minezeratul.github.io/about/</loc>
+    <lastmod>2021-05-13T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://minezeratul.github.io/</loc>
-    <lastmod>2021-05-16T00:47:24+08:00</lastmod>
-  </url><url>
-    <loc>https://minezeratul.github.io/post/</loc>
-    <lastmod>2021-05-16T00:47:24+08:00</lastmod>
-  </url><url>
-    <loc>https://minezeratul.github.io/p/eighth-blog/</loc>
-    <lastmod>2021-05-16T00:47:24+08:00</lastmod>
-  </url><url>
-    <loc>https://minezeratul.github.io/tags/</loc>
-    <lastmod>2021-05-16T00:47:24+08:00</lastmod>
-  </url><url>
-    <loc>https://minezeratul.github.io/p/seventh-blog/</loc>
-    <lastmod>2021-05-15T20:47:24+08:00</lastmod>
-  </url><url>
-    <loc>https://minezeratul.github.io/p/6th-blog/</loc>
-    <lastmod>2021-05-15T00:00:00+08:00</lastmod>
-  </url><url>
-    <loc>https://minezeratul.github.io/p/5th-blog/</loc>
-    <lastmod>2021-05-13T00:00:00+08:00</lastmod>
-  </url><url>
-    <loc>https://minezeratul.github.io/p/4th-blog/</loc>
-    <lastmod>2021-05-12T18:40:29+08:00</lastmod>
-  </url><url>
-    <loc>https://minezeratul.github.io/about/</loc>
     <lastmod>2021-05-13T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://minezeratul.github.io/page/</loc>
     <lastmod>2021-05-13T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://minezeratul.github.io/p/third-blog/</loc>
-    <lastmod>2021-05-08T00:00:00+08:00</lastmod>
-  </url><url>
-    <loc>https://minezeratul.github.io/p/second-blog/</loc>
-    <lastmod>2021-05-08T00:00:00+08:00</lastmod>
-  </url><url>
-    <loc>https://minezeratul.github.io/p/first-blog/</loc>
-    <lastmod>2021-05-07T00:00:00+08:00</lastmod>
-  </url><url>
     <loc>https://minezeratul.github.io/archives/</loc>
     <lastmod>2021-04-28T00:00:00+00:00</lastmod>
   </url><url>
+    <loc>https://minezeratul.github.io/categories/</loc>
+    <lastmod>2020-09-09T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://minezeratul.github.io/p/test-chinese/</loc>
+    <lastmod>2020-09-09T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://minezeratul.github.io/post/</loc>
     <lastmod>2020-09-09T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://minezeratul.github.io/categories/test/</loc>
@@ -80,6 +38,9 @@
     <loc>https://minezeratul.github.io/p/markdown-syntax-guide/</loc>
     <lastmod>2019-03-11T00:00:00+00:00</lastmod>
   </url><url>
+    <loc>https://minezeratul.github.io/tags/</loc>
+    <lastmod>2019-03-11T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://minezeratul.github.io/tags/themes/</loc>
     <lastmod>2019-03-11T00:00:00+00:00</lastmod>
   </url><url>
@@ -88,6 +49,12 @@
   </url><url>
     <loc>https://minezeratul.github.io/p/emoji-support/</loc>
     <lastmod>2019-03-05T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://minezeratul.github.io/categories/coding/</loc>
+  </url><url>
+    <loc>https://minezeratul.github.io/categories/java/</loc>
+  </url><url>
+    <loc>https://minezeratul.github.io/categories/leetcode/</loc>
   </url><url>
     <loc>https://minezeratul.github.io/search/</loc>
   </url>
