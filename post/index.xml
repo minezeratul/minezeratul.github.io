@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on Minezeratul</title>
+    <link>https://minezeratul.github.io/post/</link>
+    <description>Recent content in Posts on Minezeratul</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 16 May 2021 00:47:24 +0800</lastBuildDate><atom:link href="https://minezeratul.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Rob me if u can</title>
+      <link>https://minezeratul.github.io/p/eighth-blog/</link>
+      <pubDate>Sun, 16 May 2021 00:47:24 +0800</pubDate>
+      
+      <guid>https://minezeratul.github.io/p/eighth-blog/</guid>
+      <description>Leetcode 740 5.5的题目740. 删除并获得点数 和 198. 打家劫舍 有点类似 , 需要在一些地方做出调整
+为了做740，先去当了一遍小偷XDDD
+打家劫舍，经典dp问题，偷还得隔间偷,甚至开了透视知道哪里最多钱（笑
+一间的时候肯定只能偷那个，两间的时候就需要Math.max比较
+n间的时候则需要 when i &amp;gt; 2 , Math.max(dp[i - 2] + num[i] , dp[i - 1])来比较金额大小
+public int rob(int[] nums) { int n = nums.length; if (n == 0 || nums == null) return 0; else if (n == 1) return nums[0]; /** int[] dp = new int[n]; dp[0] = nums[0]; dp[1] = Math.max(nums[0], nums[1]); for (int i = 2; i &amp;lt; n; i++) { dp[i] = Math.</description>
+    </item>
+    
+    <item>
+      <title>minDays 1482</title>
+      <link>https://minezeratul.github.io/p/seventh-blog/</link>
+      <pubDate>Sat, 15 May 2021 20:47:24 +0800</pubDate>
+      
+      <guid>https://minezeratul.github.io/p/seventh-blog/</guid>
+      <description>Leetcode 1482 这是5.9号的题目 1482. 制作 m 束花所需的最少天数
+二分的应用场景不一定有序，只要具备排他性、两段性，就可以二分
+寻找最优临界值的题目，往往可以借助二分搜索
+/** * @param bloomDay 什么时候开花 * @param m m束 * @param k k朵花做成一束 * @return */ public static int minDays(int[] bloomDay, int m, int k) { int n = bloomDay.length; if (n &amp;lt; m * k)//不够花束  return -1; int low = Integer.MAX_VALUE, high = 0; for (int i = 0; i &amp;lt; n; i++) { low = Math.min(low, bloomDay[i]);//找到最小值作为low  high = Math.</description>
+    </item>
+    
+    <item>
+      <title>intToRoman and RomanToInt</title>
+      <link>https://minezeratul.github.io/p/6th-blog/</link>
+      <pubDate>Sat, 15 May 2021 00:00:00 +0800</pubDate>
+      
+      <guid>https://minezeratul.github.io/p/6th-blog/</guid>
+      <description>Leetcode 12 and Leetcode 13 5.14和5.15的每日一题 ，貌似没有什么可写的，可能就需要用StringBuilder来构建string
+12. 整数转罗马数字 class Solution { public String intToRoman(int num) { StringBuilder sb = new StringBuilder(); int[] values = {1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1}; for (int i = 0; i &amp;lt; values.length; i++) { int val = values[i]; while (num &amp;gt;= val){ num -= val; sb.append(getStr(val)); if (num == 0) break; } } return sb.toString(); } private String getStr(int num){ switch (num){ case 1000: return &amp;#34;M&amp;#34;; case 900: return &amp;#34;CM&amp;#34;; case 500: return &amp;#34;D&amp;#34;; case 400: return &amp;#34;CD&amp;#34;; case 100: return &amp;#34;C&amp;#34;; case 90: return &amp;#34;XC&amp;#34;; case 50: return &amp;#34;L&amp;#34;; case 40: return &amp;#34;XL&amp;#34;; case 10: return &amp;#34;X&amp;#34;; case 9: return &amp;#34;IX&amp;#34;; case 5: return &amp;#34;V&amp;#34;; case 4: return &amp;#34;IV&amp;#34;; case 1: return &amp;#34;I&amp;#34;; } return null; } } 13.</description>
+    </item>
+    
+    <item>
+      <title>NumArray307</title>
+      <link>https://minezeratul.github.io/p/5th-blog/</link>
+      <pubDate>Thu, 13 May 2021 00:00:00 +0800</pubDate>
+      
+      <guid>https://minezeratul.github.io/p/5th-blog/</guid>
+      <description>Leetcode 307 这是今天做的一个题 307. 区域和检索 - 数组可修改
+和 303. 区域和检索 - 数组不可变 不同的是 数组可修改
+上一个dalao的分析 , 放弃996了
+/** * 数组不变，求区间和：「前缀和」、「树状数组」、「线段树」 * * 多次修改某个数，求区间和：「树状数组」、「线段树」 * * 多次整体修改某个区间，求区间和：「线段树」、「树状数组」（看修改区间的数据范围） * * 多次将某个区间变成同一个数，求区间和：「线段树」、「树状数组」（看修改区间的数据范围） * */ 学了个树状数组方法。
+class NumArray { int[] tree; int lowBits(int x){ return x &amp;amp; -x;//保留二进制下最后出现的1的位置，其余位置置0  } //当一个偶数与它的负值向与时，结果是能被这个偶数整除的最大的2的n次幂 , 比如10返回2  //当一个奇数与它的负值向与时结果一定是1  // 查询前缀和的方法  int query(int x){ int ans = 0; for (int i = x; i &amp;gt; 0 ; i -= lowBits(i)) { ans += tree[i]; } return ans; } // 在树状数组 x 位置中增加值 u  void add(int x ,int u){ for (int i = x; i &amp;lt;= n ; i += lowBits(i)) { tree[i] += u; } } int[] nums; int n; // 初始化「树状数组」  public NumArray(int[] nums) { this.</description>
+    </item>
+    
+    <item>
+      <title>xorQueries</title>
+      <link>https://minezeratul.github.io/p/4th-blog/</link>
+      <pubDate>Wed, 12 May 2021 18:40:29 +0800</pubDate>
+      
+      <guid>https://minezeratul.github.io/p/4th-blog/</guid>
+      <description>Leetcode 1310 今天又是爆肝的一天 , 感觉这个月应该 是异或月了，全是异或题（痛哭）
+今天的每日一题是1310. 子数组异或查询
+queries数组提供的是查询的范围
+然后返回一个包含所有查询结果的数组
+我们可以用类似 prefix sum 前缀和
+采取 prefix XOR前缀异或 来完成该题
+对于每个查询都要计算，因此我们应该优化每个查询的计算时间
+queries(L , R)
+= array[L] ⊕ &amp;hellip;. ⊕ array[R] , 又 x ⊕ x = 0
+= ( array[0] ⊕ &amp;hellip;. ⊕ array[L - 1] ) ⊕ ( array[0] ⊕ &amp;hellip;. ⊕ array[L - 1] ) ⊕ ( array[L] ⊕ &amp;hellip;. ⊕ array[R] )
+= ( array[0] ⊕ &amp;hellip;. ⊕ array[L - 1] ) ⊕ ( array[0] ⊕ &amp;hellip;.</description>
+    </item>
+    
+    <item>
+      <title>leaf Similar</title>
+      <link>https://minezeratul.github.io/p/third-blog/</link>
+      <pubDate>Sat, 08 May 2021 00:00:00 +0800</pubDate>
+      
+      <guid>https://minezeratul.github.io/p/third-blog/</guid>
+      <description>Leetcode 872 Hello , 我是mz
+这是今天的每日一题872. 叶子相似的树
+题目要求获取这些叶子的值并按从左到右的顺序排列形成一个 叶值序列
+叶 ， 即无左右节点 , 并且还有按顺序，我们可以选择用中序遍历来完成要求
+public boolean leafSimilar(TreeNode root1, TreeNode root2) { List&amp;lt;Integer&amp;gt; list1 = new ArrayList&amp;lt;&amp;gt;(); List&amp;lt;Integer&amp;gt; list2 = new ArrayList&amp;lt;&amp;gt;(); inorder(root1, list1); inorder(root2, list2); return list1.equals(list2); } private void inorder(TreeNode root, List&amp;lt;Integer&amp;gt; list) { if (root != null) { inorder(root.left, list); if (root.left == null &amp;amp;&amp;amp; root.right == null) list.add(root.val); inorder(root.right, list); } } 空间复杂度为O（n + m) ，n , m 分别为两个ArrayList</description>
+    </item>
+    
+    <item>
+      <title>Least Bricks</title>
+      <link>https://minezeratul.github.io/p/second-blog/</link>
+      <pubDate>Sat, 08 May 2021 00:00:00 +0800</pubDate>
+      
+      <guid>https://minezeratul.github.io/p/second-blog/</guid>
+      <description>Leetcode 554 大家好，我是mz
+这是2021.5.2的每日一题554. 砖墙
+题目要求一条自顶向下 的、穿过 最少 砖块的垂线 ， 也可以理解为 总行数- 间隙最多
+这样就可以得出穿过最少砖块的路线
+我选择用了 [哈希表] 去记录了每个间隙所生成的位置 , 然后用Math.max去寻找最大间隙.
+public int leastBricks(List&amp;lt;List&amp;lt;Integer&amp;gt;&amp;gt; wall) { Map&amp;lt;Integer , Integer&amp;gt; map = new HashMap&amp;lt;&amp;gt;(); for (List&amp;lt;Integer&amp;gt; widths:wall){ int n = widths.size(); int sum = 0; for (int i = 0; i &amp;lt; n - 1; i++) { sum += widths.get(i); map.put(sum , map.getOrDefault(sum , 0) + 1);//记录间隙位置  } } int cnt = 0; for (Map.</description>
+    </item>
+    
+    <item>
+      <title>My First Blog here</title>
+      <link>https://minezeratul.github.io/p/first-blog/</link>
+      <pubDate>Fri, 07 May 2021 00:00:00 +0800</pubDate>
+      
+      <guid>https://minezeratul.github.io/p/first-blog/</guid>
+      <description>Hello , This is my first blog here I&amp;rsquo;m Minezeratul 今天的每日一题为 1486. 数组异或操作
+异或操作 , 即为XOR ， 同为0 ，异为1 ，1^0 = 1 0^0 = 0
+if (n == 1)//当为1的时候不运算  return start; int res = 0 ; for (int i = 0; i &amp;lt; n; i++) { res ^= start + 2 * i;//直接循环运算 } return res; 时间复杂度为O(n)</description>
+    </item>
+    
+    <item>
+      <title>Chinese Test</title>
+      <link>https://minezeratul.github.io/p/test-chinese/</link>
+      <pubDate>Wed, 09 Sep 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://minezeratul.github.io/p/test-chinese/</guid>
+      <description>正文测试 而这些并不是完全重要，更加重要的问题是， 带着这些问题，我们来审视一下学生会退会。 既然如何， 对我个人而言，学生会退会不仅仅是一个重大的事件，还可能会改变我的人生。 我们不得不面对一个非常尴尬的事实，那就是， 可是，即使是这样，学生会退会的出现仍然代表了一定的意义。 学生会退会，发生了会如何，不发生又会如何。 经过上述讨论， 生活中，若学生会退会出现了，我们就不得不考虑它出现了的事实。 学生会退会，到底应该如何实现。 这样看来， 在这种困难的抉择下，本人思来想去，寝食难安。 对我个人而言，学生会退会不仅仅是一个重大的事件，还可能会改变我的人生。 就我个人来说，学生会退会对我的意义，不能不说非常重大。 莎士比亚曾经提到过，人的一生是短的，但如果卑劣地过这一生，就太长了。这似乎解答了我的疑惑。 莫扎特说过一句富有哲理的话，谁和我一样用功，谁就会和我一样成功。这启发了我， 对我个人而言，学生会退会不仅仅是一个重大的事件，还可能会改变我的人生。 学生会退会，到底应该如何实现。 一般来说， 从这个角度来看， 这种事实对本人来说意义重大，相信对这个世界也是有一定意义的。 在这种困难的抉择下，本人思来想去，寝食难安。 了解清楚学生会退会到底是一种怎么样的存在，是解决一切问题的关键。 一般来说， 生活中，若学生会退会出现了，我们就不得不考虑它出现了的事实。 问题的关键究竟为何？ 而这些并不是完全重要，更加重要的问题是。
+奥斯特洛夫斯基曾经说过，共同的事业，共同的斗争，可以使人们产生忍受一切的力量。　带着这句话，我们还要更加慎重的审视这个问题： 一般来讲，我们都必须务必慎重的考虑考虑。 既然如此， 这种事实对本人来说意义重大，相信对这个世界也是有一定意义的。 带着这些问题，我们来审视一下学生会退会。 我认为， 我认为， 在这种困难的抉择下，本人思来想去，寝食难安。 问题的关键究竟为何？ 每个人都不得不面对这些问题。 在面对这种问题时， 要想清楚，学生会退会，到底是一种怎么样的存在。 我认为， 既然如此， 每个人都不得不面对这些问题。 在面对这种问题时， 那么， 我认为， 学生会退会因何而发生。
+引用  思念是最暖的忧伤像一双翅膀
+让我停不了飞不远在过往游荡
+不告而别的你 就算为了我着想
+这么沉痛的呵护 我怎么能翱翔
+最暖的憂傷 - 田馥甄
+ 图片 Photo by Florian Klauer on Unsplash Photo by Luca Bravo on Unsplash</description>
+    </item>
+    
+    <item>
+      <title>Markdown Syntax Guide</title>
+      <link>https://minezeratul.github.io/p/markdown-syntax-guide/</link>
+      <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://minezeratul.github.io/p/markdown-syntax-guide/</guid>
+      <description>&lt;p&gt;This article offers a sample of basic Markdown syntax that can be used in Hugo content files, also it shows whether basic HTML elements are decorated with CSS in a Hugo theme.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Emoji Support</title>
+      <link>https://minezeratul.github.io/p/emoji-support/</link>
+      <pubDate>Tue, 05 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://minezeratul.github.io/p/emoji-support/</guid>
+      <description>&lt;p&gt;Emoji can be enabled in a Hugo project in a number of ways.&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
