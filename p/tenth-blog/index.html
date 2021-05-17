@@ -2,9 +2,9 @@
 <html lang="en-us">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'>
-<link type="favicon" rel="shortcut icon" href="favicon.icon"><meta name='description' content='Leetcode-1482'><title>minDays 1482</title>
+<link type="favicon" rel="shortcut icon" href="favicon.icon"><meta name='description' content='Leetcode-993'><title>Are u my cousin?</title>
 
-<link rel='canonical' href='https://minezeratul.github.io/p/seventh-blog/'>
+<link rel='canonical' href='https://minezeratul.github.io/p/tenth-blog/'>
 
 <link rel="stylesheet" href="/scss/style.min.css"><script>
 (function(window,document,undefined){
@@ -74,14 +74,14 @@
 			}
 		})(window,document);
 </script>
-<meta property='og:title' content='minDays 1482'>
-<meta property='og:description' content='Leetcode-1482'>
-<meta property='og:url' content='https://minezeratul.github.io/p/seventh-blog/'>
+<meta property='og:title' content='Are u my cousin?'>
+<meta property='og:description' content='Leetcode-993'>
+<meta property='og:url' content='https://minezeratul.github.io/p/tenth-blog/'>
 <meta property='og:site_name' content='Minezeratul'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Java' /><meta property='article:tag' content='Leetcode' /><meta property='article:published_time' content='2021-05-15T20:47:24&#43;08:00'/><meta property='article:modified_time' content='2021-05-15T20:47:24&#43;08:00'/><meta property='og:image' content='https://minezeratul.github.io/p/seventh-blog/wallhaven-v9qy9l.jpg' />
-<meta name="twitter:title" content="minDays 1482">
-<meta name="twitter:description" content="Leetcode-1482"><meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content='https://minezeratul.github.io/p/seventh-blog/wallhaven-v9qy9l.jpg' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Java' /><meta property='article:tag' content='Leetcode' /><meta property='article:published_time' content='2021-05-17T10:43:19&#43;08:00'/><meta property='article:modified_time' content='2021-05-17T10:43:19&#43;08:00'/><meta property='og:image' content='https://minezeratul.github.io/p/tenth-blog/wallhaven-rdg3dm.jpg' />
+<meta name="twitter:title" content="Are u my cousin?">
+<meta name="twitter:description" content="Leetcode-993"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://minezeratul.github.io/p/tenth-blog/wallhaven-rdg3dm.jpg' />
     <link type="favicon" rel="shortcut icon" href="icon.png" />
 
     </head>
@@ -262,13 +262,13 @@
     <article class="has-image main-article">
     <header class="article-header">
         <div class="article-image">
-            <a href="/p/seventh-blog/">
-                <img src="/p/seventh-blog/wallhaven-v9qy9l_huf424ae543613049e9d1957ffc0ce99c4_1243068_800x0_resize_q75_box.jpg"
-                        srcset="/p/seventh-blog/wallhaven-v9qy9l_huf424ae543613049e9d1957ffc0ce99c4_1243068_800x0_resize_q75_box.jpg 800w, /p/seventh-blog/wallhaven-v9qy9l_huf424ae543613049e9d1957ffc0ce99c4_1243068_1600x0_resize_q75_box.jpg 1600w"
+            <a href="/p/tenth-blog/">
+                <img src="/p/tenth-blog/wallhaven-rdg3dm_hucaf993a63a550e009a6d2190b51b5980_274278_800x0_resize_q75_box.jpg"
+                        srcset="/p/tenth-blog/wallhaven-rdg3dm_hucaf993a63a550e009a6d2190b51b5980_274278_800x0_resize_q75_box.jpg 800w, /p/tenth-blog/wallhaven-rdg3dm_hucaf993a63a550e009a6d2190b51b5980_274278_1600x0_resize_q75_box.jpg 1600w"
                         width="800" 
-                        height="450" 
+                        height="340" 
                         loading="lazy"
-                        alt="Featured image of post minDays 1482" />
+                        alt="Featured image of post Are u my cousin?" />
                 
             </a>
         </div>
@@ -294,12 +294,12 @@
     
 
     <h2 class="article-title">
-        <a href="/p/seventh-blog/">minDays 1482</a>
+        <a href="/p/tenth-blog/">Are u my cousin?</a>
     </h2>
 
     
     <h3 class="article-subtitle">
-        Leetcode-1482
+        Leetcode-993
     </h3>
     <footer class="article-time">
         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -310,63 +310,44 @@
 
 
 
-        <time class="article-time--published">May 15, 2021</time>
+        <time class="article-time--published">May 17, 2021</time>
     </footer></div>
 </header>
 
     <section class="article-content">
-    <h1 id="leetcode-1482">Leetcode 1482</h1>
-<p>这是5.9号的题目 <a class="link" href="https://leetcode-cn.com/problems/minimum-number-of-days-to-make-m-bouquets/"  target="_blank" rel="noopener"
-    >1482. 制作 m 束花所需的最少天数</a></p>
-<p><strong>二分的应用场景不一定有序，只要具备排他性、两段性，就可以二分</strong></p>
-<p><strong>寻找最优临界值的题目，往往可以借助二分搜索</strong></p>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java">   <span class="cm">/**
-</span><span class="cm">     * @param bloomDay 什么时候开花
-</span><span class="cm">     * @param m        m束
-</span><span class="cm">     * @param k        k朵花做成一束
-</span><span class="cm">     * @return
-</span><span class="cm">     */</span>
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">minDays</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">bloomDay</span><span class="o">,</span> <span class="kt">int</span> <span class="n">m</span><span class="o">,</span> <span class="kt">int</span> <span class="n">k</span><span class="o">)</span> <span class="o">{</span>
-        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">bloomDay</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">n</span> <span class="o">&lt;</span> <span class="n">m</span> <span class="o">*</span> <span class="n">k</span><span class="o">)</span><span class="c1">//不够花束
-</span><span class="c1"></span>            <span class="k">return</span> <span class="o">-</span><span class="n">1</span><span class="o">;</span>
+    <h1 id="leetcode-993">Leetcode 993</h1>
+<p>5.17的每日一题<a class="link" href="https://leetcode-cn.com/problems/cousins-in-binary-tree/"  target="_blank" rel="noopener"
+    >993. 二叉树的堂兄弟节点</a></p>
+<p>同深度 ， 不同父节点 就可判断</p>
+<p>直接dfs查找，若不存在，返回null</p>
+<p>不在第n层就继续往下走</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">isCousins993</span> <span class="o">{</span>
+    <span class="n">TreeNode</span> <span class="n">parX</span><span class="o">;</span>
+    <span class="n">TreeNode</span> <span class="n">parY</span><span class="o">;</span>
+    <span class="kt">int</span> <span class="n">deepX</span><span class="o">;</span>
+    <span class="kt">int</span> <span class="n">deepY</span><span class="o">;</span>
 
-        <span class="kt">int</span> <span class="n">low</span> <span class="o">=</span> <span class="n">Integer</span><span class="o">.</span><span class="na">MAX_VALUE</span><span class="o">,</span> <span class="n">high</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
-        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-            <span class="n">low</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">min</span><span class="o">(</span><span class="n">low</span><span class="o">,</span> <span class="n">bloomDay</span><span class="o">[</span><span class="n">i</span><span class="o">]);</span><span class="c1">//找到最小值作为low
-</span><span class="c1"></span>            <span class="n">high</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">high</span><span class="o">,</span> <span class="n">bloomDay</span><span class="o">[</span><span class="n">i</span><span class="o">]);</span><span class="c1">//找到最大值作为high
-</span><span class="c1"></span>        <span class="o">}</span>
-        <span class="k">while</span> <span class="o">(</span><span class="n">low</span> <span class="o">&lt;</span> <span class="n">high</span><span class="o">)</span> <span class="o">{</span><span class="c1">//不断靠近目标值,当low = high时，此时即为最少天数
-</span><span class="c1"></span>            <span class="kt">int</span> <span class="n">days</span> <span class="o">=</span> <span class="o">(</span><span class="n">high</span> <span class="o">-</span> <span class="n">low</span><span class="o">)</span> <span class="o">/</span> <span class="n">2</span> <span class="o">+</span> <span class="n">low</span><span class="o">;</span>
-            <span class="k">if</span> <span class="o">(</span><span class="n">canMake</span><span class="o">(</span><span class="n">bloomDay</span><span class="o">,</span> <span class="n">days</span><span class="o">,</span> <span class="n">m</span><span class="o">,</span> <span class="n">k</span><span class="o">))</span> <span class="o">{</span>
-                <span class="n">high</span> <span class="o">=</span> <span class="n">days</span><span class="o">;</span>
-            <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-                <span class="n">low</span> <span class="o">=</span> <span class="n">days</span> <span class="o">+</span> <span class="n">1</span><span class="o">;</span>
-            <span class="o">}</span>
-        <span class="o">}</span>
-        <span class="k">return</span> <span class="n">low</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">isCousins</span><span class="o">(</span><span class="n">TreeNode</span> <span class="n">root</span><span class="o">,</span> <span class="kt">int</span> <span class="n">x</span><span class="o">,</span> <span class="kt">int</span> <span class="n">y</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">dfs</span><span class="o">(</span><span class="n">root</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span> <span class="n">0</span><span class="o">,</span> <span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">);</span>
+        <span class="k">return</span> <span class="n">parX</span> <span class="o">!=</span> <span class="n">parY</span> <span class="o">&amp;&amp;</span> <span class="n">deepX</span> <span class="o">==</span> <span class="n">deepY</span><span class="o">;</span>
     <span class="o">}</span>
 
-	<span class="c1">//辅助函数，找到临界点
-</span><span class="c1"></span>    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">boolean</span> <span class="nf">canMake</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">bloomDay</span><span class="o">,</span> <span class="kt">int</span> <span class="n">days</span><span class="o">,</span> <span class="kt">int</span> <span class="n">m</span><span class="o">,</span> <span class="kt">int</span> <span class="n">k</span><span class="o">)</span> <span class="o">{</span>
-        <span class="c1">//在确保可以制作出指定数量的花束的情况下，所需的最少天数一定会大于min，小于max
-</span><span class="c1"></span>        <span class="c1">//days很小的时候，总是返回false，不够做够花束，而days很大的时候，则总是返回true
-</span><span class="c1"></span>        <span class="kt">int</span> <span class="n">bouquets</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
-        <span class="kt">int</span> <span class="n">flowers</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
-        <span class="kt">int</span> <span class="n">length</span> <span class="o">=</span> <span class="n">bloomDay</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
-        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">length</span> <span class="o">&amp;&amp;</span> <span class="n">bouquets</span> <span class="o">&lt;</span> <span class="n">m</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-            <span class="k">if</span> <span class="o">(</span><span class="n">bloomDay</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">&lt;=</span> <span class="n">days</span><span class="o">)</span> <span class="o">{</span>
-                <span class="n">flowers</span><span class="o">++;</span>
-                <span class="k">if</span> <span class="o">(</span><span class="n">flowers</span> <span class="o">==</span> <span class="n">k</span><span class="o">)</span> <span class="o">{</span>
-                    <span class="n">bouquets</span><span class="o">++;</span>
-                    <span class="n">flowers</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
-                <span class="o">}</span>
-            <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-                <span class="n">flowers</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
-            <span class="o">}</span>
+    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">dfs</span><span class="o">(</span><span class="n">TreeNode</span> <span class="n">root</span><span class="o">,</span> <span class="n">TreeNode</span> <span class="n">par</span><span class="o">,</span> <span class="kt">int</span> <span class="n">deep</span><span class="o">,</span> <span class="kt">int</span> <span class="n">x</span><span class="o">,</span> <span class="kt">int</span> <span class="n">y</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">root</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
+            <span class="k">return</span><span class="o">;</span>
+
+        <span class="k">if</span> <span class="o">(</span><span class="n">root</span><span class="o">.</span><span class="na">val</span> <span class="o">==</span> <span class="n">x</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">deepX</span> <span class="o">=</span> <span class="n">deep</span><span class="o">;</span>
+            <span class="n">parX</span> <span class="o">=</span> <span class="n">par</span><span class="o">;</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">root</span><span class="o">.</span><span class="na">val</span> <span class="o">==</span> <span class="n">y</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">deepY</span> <span class="o">=</span> <span class="n">deep</span><span class="o">;</span>
+            <span class="n">parY</span> <span class="o">=</span> <span class="n">par</span><span class="o">;</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+            <span class="n">dfs</span><span class="o">(</span><span class="n">root</span><span class="o">.</span><span class="na">left</span><span class="o">,</span> <span class="n">root</span><span class="o">,</span> <span class="n">deep</span> <span class="o">+</span> <span class="n">1</span><span class="o">,</span> <span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">);</span>
+            <span class="n">dfs</span><span class="o">(</span><span class="n">root</span><span class="o">.</span><span class="na">right</span><span class="o">,</span> <span class="n">root</span><span class="o">,</span> <span class="n">deep</span> <span class="o">+</span> <span class="n">1</span><span class="o">,</span> <span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">);</span>
         <span class="o">}</span>
-        <span class="k">return</span> <span class="n">bouquets</span> <span class="o">&gt;=</span> <span class="n">m</span><span class="o">;</span>
-    <span class="o">}</span>	
+    <span class="o">}</span>
+<span class="o">}</span>
 </code></pre></div>
 </section>
 
@@ -408,28 +389,6 @@
                 
                     
 <article class="has-image">
-    <a href="/p/tenth-blog/">
-        
-        
-            <div class="article-image">
-                <img src="/p/tenth-blog/wallhaven-rdg3dm.5872901d5ed06934a85f7f4a23766644_hucaf993a63a550e009a6d2190b51b5980_274278_250x150_fill_q75_box_smart1.jpg" 
-                        width="250" 
-                        height="150" 
-                        loading="lazy" 
-                        data-key="tenth-blog" 
-                        data-hash="md5-WHKQHV7QaTSoX39KI3ZmRA==">
-                
-            </div>
-        
-
-        <div class="article-details">
-            <h2 class="article-title">Are u my cousin?</h2>
-        </div>
-    </a>
-</article>
-                
-                    
-<article class="has-image">
     <a href="/p/ninth-blog/">
         
         
@@ -468,6 +427,28 @@
 
         <div class="article-details">
             <h2 class="article-title">Rob me if u can</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="has-image">
+    <a href="/p/seventh-blog/">
+        
+        
+            <div class="article-image">
+                <img src="/p/seventh-blog/wallhaven-v9qy9l.8d23393517b16b1b0aff188c3249d973_huf424ae543613049e9d1957ffc0ce99c4_1243068_250x150_fill_q75_box_smart1.jpg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy" 
+                        data-key="seventh-blog" 
+                        data-hash="md5-jSM5NRexaxsK/xiMMknZcw==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">minDays 1482</h2>
         </div>
     </a>
 </article>
