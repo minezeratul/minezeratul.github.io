@@ -320,6 +320,7 @@
     >421. 数组中两个数的最大异或值</a></p>
 <h4 id="用到了-208-实现-trie-前缀树httpsleetcode-cncomproblemsimplement-trie-prefix-tree">用到了 <a class="link" href="https://leetcode-cn.com/problems/implement-trie-prefix-tree/"  target="_blank" rel="noopener"
     >208. 实现 Trie (前缀树)</a></h4>
+<p>algs4的chapter5.2</p>
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Trie</span> <span class="o">{</span>
     <span class="kd">private</span> <span class="n">Trie</span><span class="o">[]</span> <span class="n">children</span><span class="o">;</span>
     <span class="kd">private</span> <span class="kt">boolean</span> <span class="n">isEnd</span><span class="o">;</span>
@@ -377,8 +378,19 @@
         <span class="k">return</span> <span class="n">node</span><span class="o">;</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre></div><p>![Trie tree](Trie Tree.png)</p>
-<p>421则是用了trie的方法来做</p>
+</code></pre></div><p><figure style="flex-grow: 225; flex-basis: 542px">
+		<a href="/p/ninth-blog/Trie-Tree.png" data-size="800x354"><img src="/p/ninth-blog/Trie-Tree.png"
+				srcset="/p/ninth-blog/Trie-Tree_huc3fa89ccc927b94baba73865127fdf93_85212_480x0_resize_box_2.png 480w, /p/ninth-blog/Trie-Tree_huc3fa89ccc927b94baba73865127fdf93_85212_1024x0_resize_box_2.png 1024w"
+				width="800"
+				height="354"
+				loading="lazy"
+				alt="Trie tree">
+		</a>
+		
+		<figcaption>Trie tree</figcaption>
+		
+	</figure></p>
+<p>421则是用了Trie的方法来做</p>
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
         <span class="c1">// 字典树的根节点
 </span><span class="c1"></span>        <span class="n">Trie</span> <span class="n">root</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Trie</span><span class="o">();</span>
@@ -415,7 +427,7 @@
             <span class="o">}</span>
         <span class="o">}</span>
 
-    	<span class="c1">//尽可能找异位 ,  0 ⊕ 1 = 1 , 使得
+    	<span class="c1">//尽可能找异位 ,  0 ⊕ 1 = 1 , 使得值为最大
 </span><span class="c1"></span>        <span class="kd">public</span> <span class="kt">int</span> <span class="nf">check</span><span class="o">(</span><span class="kt">int</span> <span class="n">num</span><span class="o">)</span> <span class="o">{</span>
             <span class="n">Trie</span> <span class="n">cur</span> <span class="o">=</span> <span class="n">root</span><span class="o">;</span>
             <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
