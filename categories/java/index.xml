@@ -6,7 +6,21 @@
     <description>Recent content in Java on Minezeratul</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 17 May 2021 10:43:19 +0800</lastBuildDate><atom:link href="https://minezeratul.github.io/categories/java/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 18 May 2021 19:32:07 +0800</lastBuildDate><atom:link href="https://minezeratul.github.io/categories/java/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>又又又是XOR</title>
+      <link>https://minezeratul.github.io/p/eleventh-blog/</link>
+      <pubDate>Tue, 18 May 2021 19:32:07 +0800</pubDate>
+      
+      <guid>https://minezeratul.github.io/p/eleventh-blog/</guid>
+      <description>Leetcode 1442 5.18的每日一题1442. 形成两个异或相等数组的三元组数目
+a = arr[i] ^ arr[i + 1] ^ &amp;hellip; ^ arr[j - 1] b = arr[j] ^ arr[j + 1] ^ &amp;hellip; ^ arr[k
+利用了x^y = 0 ，可知两个数必相等。计算每个数的异或 ， 若出现0 ， 则说明该区间有能够令 a == b 成立的三元组 (i, j , k) 的数目
+其实 i ^ k = 0 , i &amp;lt; j &amp;lt;= k , j在区间范围内，异或结果都等于0
+Talk is cheap , show u the code XDDDD
+public int countTriplets(int[] arr) { int n = arr.</description>
+    </item>
+    
     <item>
       <title>Are u my cousin?</title>
       <link>https://minezeratul.github.io/p/tenth-blog/</link>
