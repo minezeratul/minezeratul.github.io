@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Database on Minezeratul</title>
+    <link>https://minezeratul.github.io/tags/database/</link>
+    <description>Recent content in Database on Minezeratul</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 20 May 2021 14:49:56 +0800</lastBuildDate><atom:link href="https://minezeratul.github.io/tags/database/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>SQLPratice</title>
+      <link>https://minezeratul.github.io/p/mysql-learning/</link>
+      <pubDate>Thu, 20 May 2021 14:49:56 +0800</pubDate>
+      
+      <guid>https://minezeratul.github.io/p/mysql-learning/</guid>
+      <description>Database / SQL Code Student(Sid,Sname,Sage,Ssex) 学生表
+Sid：学号；Sname：学生姓名；Sage：学生年龄；Ssex：学生性别
+Course(Cid,Cname,Tid) 课程表
+Cid,课程编号；Cname：课程名字；Tid：教师编号
+SC(Sid,Cid,score) 成绩表
+Sid：学号；Cid,课程编号；score：成绩
+Teacher(Tid,Tname) 教师表
+Tid：教师编号； Tname：教师名字
+CREATE TABLE Student ( Sid INT PRIMARY KEY NOT NULL, Sname nvarchar(32) NOT NULL, Sage DATETIME NOT NULL, Ssex nvarchar(8) NOT NULL ) CREATE TABLE Course ( Cid INT PRIMARY KEY, Cname nvarchar(32) NOT NULL, Tid INT NOT NULL ) CREATE TABLE SC ( Sid INT NOT NULL, Cid INT NOT NULL, score INT NOT NULL, PRIMARY KEY(Sid , Cid) ) CREATE TABLE Teacher ( Tid INT PRIMARY KEY NOT NULL, Tname nvarchar(16) NOT NULL ) 问题： 1、查询“001”课程比“002”课程成绩高的所有学生的学号； SELECT Sid FROM SC AS a , SC AS b where a.</description>
+    </item>
+    
+  </channel>
+</rss>
