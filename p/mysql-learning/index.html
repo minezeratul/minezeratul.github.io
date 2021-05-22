@@ -400,12 +400,9 @@
 <span class="k">AND</span> <span class="n">b</span><span class="p">.</span><span class="n">Cid</span> <span class="o">=</span> <span class="s1">&#39;002&#39;</span>
 <span class="k">AND</span> <span class="n">a</span><span class="p">.</span><span class="n">Score</span> <span class="o">&gt;</span> <span class="n">b</span><span class="p">.</span><span class="n">Score</span>
 </code></pre></div><h3 id="9查询所有课程成绩小于60分的同学的学号姓名">9、查询所有课程成绩小于60分的同学的学号、姓名；</h3>
-<pre><code> ```mysql
- SELECT Sid , Sname FROM Student , SC
- WHERE Sid = SC.Sid AND Sc.Score &lt; 60;
- ```
-</code></pre>
-<h3 id="13把sc表中叶平老师教的课的成绩都更改为此课程的平均成绩">13、把“SC”表中“叶平”老师教的课的成绩都更改为此课程的平均成绩；</h3>
+<div class="highlight"><pre class="chroma"><code class="language-mysql" data-lang="mysql"><span class="k">SELECT</span> <span class="n">Sid</span> <span class="p">,</span> <span class="n">Sname</span> <span class="k">FROM</span> <span class="n">Student</span> <span class="p">,</span> <span class="n">SC</span>
+<span class="k">WHERE</span> <span class="n">Sid</span> <span class="o">=</span> <span class="n">SC</span><span class="p">.</span><span class="n">Sid</span> <span class="k">AND</span> <span class="n">Sc</span><span class="p">.</span><span class="n">Score</span> <span class="o">&lt;</span> <span class="mi">60</span><span class="p">;</span>
+</code></pre></div><h3 id="13把sc表中叶平老师教的课的成绩都更改为此课程的平均成绩">13、把“SC”表中“叶平”老师教的课的成绩都更改为此课程的平均成绩；</h3>
 <div class="highlight"><pre class="chroma"><code class="language-mysql" data-lang="mysql"><span class="k">UPDATE</span> <span class="n">SC</span>
 <span class="kt">SET</span> <span class="n">Score</span> <span class="o">=</span> <span class="p">(</span><span class="k">SELECT</span> <span class="nf">AVG</span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">Score</span><span class="p">)</span> <span class="k">FROM</span> <span class="n">SC</span> <span class="k">AS</span> <span class="n">a</span> <span class="p">,</span> <span class="n">SC</span> <span class="k">AS</span> <span class="n">QEb</span> <span class="k">WHERE</span> <span class="n">a</span><span class="p">.</span><span class="n">Cid</span> <span class="o">=</span> <span class="n">b</span><span class="p">.</span><span class="n">Cid</span><span class="p">)</span>
 <span class="k">FROM</span> <span class="n">Course</span> <span class="p">,</span> <span class="n">Teacher</span> 
@@ -417,15 +414,12 @@
 <span class="k">AND</span> <span class="n">Cid</span> <span class="k">IN</span> <span class="p">(</span><span class="k">SELECT</span> <span class="n">Cid</span> <span class="k">FROM</span> <span class="n">SC</span> <span class="k">WHERE</span> <span class="n">Sid</span> <span class="o">=</span><span class="s1">&#39;1002&#39;</span><span class="p">)</span> 
 <span class="k">GROUP</span> <span class="k">BY</span> <span class="n">Sid</span> <span class="k">HAVING</span> <span class="nf">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="o">=</span> <span class="p">(</span><span class="k">SELECT</span> <span class="nf">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="k">FROM</span> <span class="n">SC</span> <span class="k">WHERE</span> <span class="n">Sid</span> <span class="o">=</span><span class="s1">&#39;1002&#39;</span><span class="p">);</span>
 </code></pre></div><h3 id="15删除学习叶平老师课的sc表记录">15、删除学习“叶平”老师课的SC表记录；</h3>
-<pre><code> ```MYSQL
- DELETE SC
- FROM Course , Teacher , SC
- WHERE Course.Cid = SC.Cid 
- AND Teacher.Tid = Course.Tid
- AND Teacher.Tname = '叶平';
- ```
-</code></pre>
-<h3 id="17按平均成绩从高到低显示所有学生的数据库企业管理英语三门的课程成绩按如下形式显示-学生id数据库企业管理英语有效课程数有效平均分">17、按平均成绩从高到低显示所有学生的“数据库”、“企业管理”、“英语”三门的课程成绩，按如下形式显示： 学生ID,,数据库,企业管理,英语,有效课程数,有效平均分</h3>
+<div class="highlight"><pre class="chroma"><code class="language-mysql" data-lang="mysql"><span class="k">DELETE</span> <span class="n">SC</span>
+<span class="k">FROM</span> <span class="n">Course</span> <span class="p">,</span> <span class="n">Teacher</span> <span class="p">,</span> <span class="n">SC</span>
+<span class="k">WHERE</span> <span class="n">Course</span><span class="p">.</span><span class="n">Cid</span> <span class="o">=</span> <span class="n">SC</span><span class="p">.</span><span class="n">Cid</span> 
+<span class="k">AND</span> <span class="n">Teacher</span><span class="p">.</span><span class="n">Tid</span> <span class="o">=</span> <span class="n">Course</span><span class="p">.</span><span class="n">Tid</span>
+<span class="k">AND</span> <span class="n">Teacher</span><span class="p">.</span><span class="n">Tname</span> <span class="o">=</span> <span class="s1">&#39;叶平&#39;</span><span class="p">;</span>
+</code></pre></div><h3 id="17按平均成绩从高到低显示所有学生的数据库企业管理英语三门的课程成绩按如下形式显示-学生id数据库企业管理英语有效课程数有效平均分">17、按平均成绩从高到低显示所有学生的“数据库”、“企业管理”、“英语”三门的课程成绩，按如下形式显示： 学生ID,,数据库,企业管理,英语,有效课程数,有效平均分</h3>
 <div class="highlight"><pre class="chroma"><code class="language-MYSQL" data-lang="MYSQL"><span class="k">SELECT</span> <span class="n">Sid</span> <span class="k">as</span> <span class="n">StuID</span> <span class="p">,</span>
 <span class="p">(</span><span class="k">SELECT</span> <span class="n">score</span> <span class="k">FROM</span> <span class="n">SC</span> <span class="k">WHERE</span> <span class="n">SC</span><span class="p">.</span><span class="n">Sid</span> <span class="o">=</span> <span class="n">t</span><span class="p">.</span><span class="n">id</span> <span class="k">AND</span> <span class="n">Cname</span> <span class="o">=</span> <span class="s1">&#39;Database&#39;</span><span class="p">)</span> <span class="k">AS</span> <span class="n">DataBaseSYS</span> <span class="p">,</span>
 <span class="p">(</span><span class="k">SELECT</span> <span class="n">score</span> <span class="k">FROM</span> <span class="n">SC</span> <span class="k">WHERE</span> <span class="n">SC</span><span class="p">.</span><span class="n">Sid</span> <span class="o">=</span> <span class="n">t</span><span class="p">.</span><span class="n">Sid</span> <span class="k">AND</span> <span class="n">Cname</span> <span class="o">=</span><span class="s1">&#39;Management&#39;</span><span class="p">)</span> <span class="k">AS</span> <span class="n">Management</span> <span class="p">,</span>
@@ -558,18 +552,12 @@
 <span class="k">HAVING</span> <span class="nf">COUNT</span><span class="p">(</span><span class="k">DISTINCT</span> <span class="n">Sid</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">10</span> 
 <span class="k">ORDER</span> <span class="k">BY</span> <span class="nf">COUNT</span><span class="p">(</span><span class="k">DISTINCT</span> <span class="n">Sid</span><span class="p">)</span> <span class="k">DESC</span> <span class="p">,</span> <span class="n">Cid</span> <span class="k">ASC</span><span class="p">;</span>
 </code></pre></div><h3 id="45检索至少选修两门课程的学生学号">45、检索至少选修两门课程的学生学号</h3>
-<pre><code>```Mysql
-SELECT Sid FROM SC 
-GROUP BY Sid
-HAVING COUNT(*) &gt;= 2;
-```
-</code></pre>
-<h3 id="46查询全部学生都选修的课程的课程号和课程名">46、查询全部学生都选修的课程的课程号和课程名</h3>
-<pre><code>```Mysql
-SELECT Cid , Cname FROM Course ;
-```
-</code></pre>
-<h3 id="47查询没学过叶平老师讲授的任一门课程的学生姓名">47、查询没学过“叶平”老师讲授的任一门课程的学生姓名</h3>
+<div class="highlight"><pre class="chroma"><code class="language-mysql" data-lang="mysql"><span class="k">SELECT</span> <span class="n">Sid</span> <span class="k">FROM</span> <span class="n">SC</span> 
+<span class="k">GROUP</span> <span class="k">BY</span> <span class="n">Sid</span>
+<span class="k">HAVING</span> <span class="nf">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">;</span>
+</code></pre></div><h3 id="46查询全部学生都选修的课程的课程号和课程名">46、查询全部学生都选修的课程的课程号和课程名</h3>
+<div class="highlight"><pre class="chroma"><code class="language-mysql" data-lang="mysql"><span class="k">SELECT</span> <span class="n">Cid</span> <span class="p">,</span> <span class="n">Cname</span> <span class="k">FROM</span> <span class="n">Course</span> <span class="p">;</span>
+</code></pre></div><h3 id="47查询没学过叶平老师讲授的任一门课程的学生姓名">47、查询没学过“叶平”老师讲授的任一门课程的学生姓名</h3>
 <div class="highlight"><pre class="chroma"><code class="language-mysql" data-lang="mysql"><span class="k">SELECT</span> <span class="n">Sname</span> <span class="k">FROM</span> <span class="n">Student</span>
 <span class="k">WHERE</span> <span class="n">Sid</span> <span class="k">NOT</span> <span class="k">IN</span> <span class="p">(</span><span class="k">SELECT</span> <span class="n">Sid</span> <span class="k">FROM</span> <span class="n">SC</span> <span class="p">,</span> <span class="n">Course</span> <span class="p">,</span> <span class="n">Teacher</span> 
                <span class="k">WHERE</span> <span class="n">Course</span><span class="p">.</span><span class="n">Cid</span> <span class="o">=</span> <span class="n">SC</span><span class="p">.</span><span class="n">Cid</span>
