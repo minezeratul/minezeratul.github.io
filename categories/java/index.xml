@@ -6,7 +6,30 @@
     <description>Recent content in Java on Minezeratul</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 18 May 2021 19:32:07 +0800</lastBuildDate><atom:link href="https://minezeratul.github.io/categories/java/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 22 May 2021 19:47:51 +0800</lastBuildDate><atom:link href="https://minezeratul.github.io/categories/java/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>K-Largest XOR Value</title>
+      <link>https://minezeratul.github.io/p/13rd-blog/</link>
+      <pubDate>Sat, 22 May 2021 19:47:51 +0800</pubDate>
+      
+      <guid>https://minezeratul.github.io/p/13rd-blog/</guid>
+      <description>Leetcode 1738 这是Leetcode 5.19的题目 1738. 找出第 K 大的异或坐标值 ，是215. 数组中的第K个最大元素 的二维异或版本 215回顾
+第一种方法，用前缀异或 + PriorityQueue , Java是用最小堆实现pq
+public int kthLargestValue(int[][] matrix, int k) { int m = mat.length , n = mat[0].length; int[][] pre = new int[m + 1][n + 1]; PriorityQueue&amp;lt;Integer&amp;gt; pq = new PriorityQueue&amp;lt;&amp;gt;(); for (int i = 1; i &amp;lt;= m ; i++) { for (int j = 1; j &amp;lt;= n ; j++) { //二维数组的前缀异或  pre[i][j] = pre[i - 1][j] ^ pre[i][j - 1] ^ pre[i - 1][j - 1] ^ mat[i - 1][j - 1]; if (pq.</description>
+    </item>
+    
+    <item>
+      <title>Largest Val in my mind xD</title>
+      <link>https://minezeratul.github.io/p/12nd-blog/</link>
+      <pubDate>Sat, 22 May 2021 19:27:24 +0800</pubDate>
+      
+      <guid>https://minezeratul.github.io/p/12nd-blog/</guid>
+      <description>Leetcode K-Largest Val 215. 数组中的第K个最大元素 , 题目需要 在未排序的数组找到第 k 个最大的元素 ，而且不是第k个不同的元素
+先看简单方法，用Java的PriorityQueue来解答，需注意的是PriorityQueue是用小顶堆实现的
+public int findKthLargest2(int[] nums, int k) { PriorityQueue&amp;lt;Integer&amp;gt; pq = new PriorityQueue&amp;lt;&amp;gt;(); //小顶堆去除元素  for (int num : nums) { pq.offer(num); if (pq.size() &amp;gt; k) { //因为我们只需要找到第K大的数,超过size直接去除堆顶元素就好  pq.poll(); } } return pq.peek(); } 亦或者和官方解答一样，用大顶堆实现也可以得出第K大的数
+public int findKthLargest(int[] nums, int k) { int heapSize = nums.length; buildMaxHeap(nums, heapSize); for (int i = nums.length - 1; i &amp;gt;= nums.length - k + 1; --i) { swap(nums, 0, i); --heapSize; maxHeapify(nums, 0, heapSize); } return nums[0]; } public void buildMaxHeap(int[] a, int heapSize) { for (int i = heapSize / 2; i &amp;gt;= 0; i--) { maxHeapify(a, i, heapSize); } } public void maxHeapify(int[] a, int i, int heapSize) { int l = i * 2 + 1, r = i * 2 + 2, largest = i; if (l &amp;lt; heapSize &amp;amp;&amp;amp; a[l] &amp;gt; a[largest]) { largest = l; } if (r &amp;lt; heapSize &amp;amp;&amp;amp; a[r] &amp;gt; a[largest]) { largest = r; } if (largest !</description>
+    </item>
+    
     <item>
       <title>又又又是XOR</title>
       <link>https://minezeratul.github.io/p/eleventh-blog/</link>
