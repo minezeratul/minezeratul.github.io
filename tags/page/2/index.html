@@ -74,11 +74,22 @@
 			}
 		})(window,document);
 </script>
-<meta property='og:title' content='Tags'>
+<script>
+function addLink(event) {
+    event.preventDefault();
+
+    var pagelink = '\n\nThanks for reading. You are copying from: ' + document.location.href,
+        copytext =  window.getSelection() + pagelink;
+
+    (event.clipboardData || window.clipboardData).setData('Text', copytext);
+}
+
+document.addEventListener('copy', addLink);
+</script><meta property='og:title' content='Tags'>
 <meta property='og:description' content='What&#39;s past is prologue'>
 <meta property='og:url' content='https://minezeratul.github.io/tags/'>
 <meta property='og:site_name' content='Minezeratul'>
-<meta property='og:type' content='website'><meta property='og:updated_time' content=' 2021-05-22T19:47:51&#43;08:00 '/>
+<meta property='og:type' content='website'><meta property='og:updated_time' content=' 2021-05-22T21:08:13&#43;08:00 '/>
 <meta name="twitter:title" content="Tags">
 <meta name="twitter:description" content="What&#39;s past is prologue"><link rel="alternate" type="application/rss&#43;xml" href="https://minezeratul.github.io/tags/index.xml">
     <link type="favicon" rel="shortcut icon" href="icon.png" />
@@ -252,7 +263,7 @@
 
     <div class="section-card">
         <div class="section-details">
-            <h3 class="section-count">9 pages</h3>
+            <h3 class="section-count">11 pages</h3>
             <h1 class="section-term">Tags</h1>
             
         </div>
@@ -260,6 +271,30 @@
         
     
     <section class="article-list--compact">
+        
+            <article>
+    <a href="/tags/mysql/">
+        <div class="article-details">
+            <h2 class="article-title">MySQL</h2>
+            <footer class="article-time">
+                <time datetime='2021-05-20T14:49:56&#43;08:00'>May 20, 2021&nbsp;
+                    0 min read</time>
+            </footer>
+        </div>
+    </a>
+</article>
+        
+            <article>
+    <a href="/tags/css/">
+        <div class="article-details">
+            <h2 class="article-title">css</h2>
+            <footer class="article-time">
+                <time datetime='2019-03-11T00:00:00Z'>Mar 11, 2019&nbsp;
+                    0 min read</time>
+            </footer>
+        </div>
+    </a>
+</article>
         
             <article>
     <a href="/tags/html/">
@@ -297,18 +332,6 @@
     </a>
 </article>
         
-            <article>
-    <a href="/tags/emoji/">
-        <div class="article-details">
-            <h2 class="article-title">emoji</h2>
-            <footer class="article-time">
-                <time datetime='2019-03-05T00:00:00Z'>Mar 05, 2019&nbsp;
-                    0 min read</time>
-            </footer>
-        </div>
-    </a>
-</article>
-        
     </section>
     <nav class='pagination'>
         
@@ -321,6 +344,10 @@
             
             
                 <span class='page-link current'>2</span>
+                
+            
+            
+                    <a class='page-link' href='/tags/page/3/'>3</a>
                 
             
     </nav>
@@ -391,7 +418,7 @@
                     <a href="/archives/#2021">
                         
                             <span class="year">2021</span>
-                            <span class="count">14</span>
+                            <span class="count">15</span>
                         
                     </a> 
                 </div>
@@ -430,12 +457,16 @@
 
     <div class="tagCloud-tags">
         
-            <a href="/tags/java/" class="font_size_13">
+            <a href="/tags/java/" class="font_size_14">
                 Java
             </a>
         
             <a href="/tags/leetcode/" class="font_size_13">
                 Leetcode
+            </a>
+        
+            <a href="/tags/algorithm/" class="font_size_1">
+                Algorithm
             </a>
         
             <a href="/tags/css/" class="font_size_1">
@@ -462,8 +493,8 @@
                 MySQL
             </a>
         
-            <a href="/tags/themes/" class="font_size_1">
-                themes
+            <a href="/tags/sort/" class="font_size_1">
+                Sort
             </a>
         
     </div>

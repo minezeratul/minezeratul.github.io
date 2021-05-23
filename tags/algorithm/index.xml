@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Algorithm on Minezeratul</title>
+    <link>https://minezeratul.github.io/tags/algorithm/</link>
+    <description>Recent content in Algorithm on Minezeratul</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 22 May 2021 21:08:13 +0800</lastBuildDate><atom:link href="https://minezeratul.github.io/tags/algorithm/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Collections of quickSort</title>
+      <link>https://minezeratul.github.io/p/quicksort/</link>
+      <pubDate>Sat, 22 May 2021 21:08:13 +0800</pubDate>
+      
+      <guid>https://minezeratul.github.io/p/quicksort/</guid>
+      <description>如何理解quickSort? 最近在复习快排，便重新整理了一下，除了classic quickSort 还有变种quickSelectionSort(随机快排)，如215、1738，还有Dual-Pivot Partition、Three-Way Partition。 不同的partition复用，使其在面对不同情况下有不同的效果
+最常见的快排，最坏的情况是 1.已经/几乎有序 → 退化成冒泡排序
+2.pivot刚好是最大值/最小值
+Hoare quickSort, 这个版本的算法在含有许多重复元素的情况下，可以避免其出现最坏情况的划分
+public int partition(int[] a , int lo , int hi){ int p = a[lo]; int i = lo - 1 , j = hi + 1; while(true){ while(a[--j] &amp;gt; p); while(a[++i] &amp;lt; p); if(i &amp;lt; j) swap(a , i , j); else return j ; } } 这是改进后的，也是我们现在最常用的版本
+public void quickSort(int[] arr){ quickSort(arr , 0 , arr.</description>
+    </item>
+    
+  </channel>
+</rss>

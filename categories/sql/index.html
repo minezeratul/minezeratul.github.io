@@ -74,11 +74,22 @@
 			}
 		})(window,document);
 </script>
-<meta property='og:title' content='Category: SQL - Minezeratul'>
+<script>
+function addLink(event) {
+    event.preventDefault();
+
+    var pagelink = '\n\nThanks for reading. You are copying from: ' + document.location.href,
+        copytext =  window.getSelection() + pagelink;
+
+    (event.clipboardData || window.clipboardData).setData('Text', copytext);
+}
+
+document.addEventListener('copy', addLink);
+</script><meta property='og:title' content='Category: SQL - Minezeratul'>
 <meta property='og:description' content='What&#39;s past is prologue'>
 <meta property='og:url' content='https://minezeratul.github.io/categories/sql/'>
 <meta property='og:site_name' content='Minezeratul'>
-<meta property='og:type' content='website'><meta property='og:updated_time' content=' 2021-05-22T19:47:51&#43;08:00 '/>
+<meta property='og:type' content='website'><meta property='og:updated_time' content=' 2021-05-22T21:08:13&#43;08:00 '/>
 <meta name="twitter:title" content="Category: SQL - Minezeratul">
 <meta name="twitter:description" content="What&#39;s past is prologue"><link rel="alternate" type="application/rss&#43;xml" href="https://minezeratul.github.io/categories/sql/index.xml">
     <link type="favicon" rel="shortcut icon" href="icon.png" />
@@ -344,7 +355,7 @@
                     <a href="/archives/#2021">
                         
                             <span class="year">2021</span>
-                            <span class="count">14</span>
+                            <span class="count">15</span>
                         
                     </a> 
                 </div>
@@ -383,12 +394,16 @@
 
     <div class="tagCloud-tags">
         
-            <a href="/tags/java/" class="font_size_13">
+            <a href="/tags/java/" class="font_size_14">
                 Java
             </a>
         
             <a href="/tags/leetcode/" class="font_size_13">
                 Leetcode
+            </a>
+        
+            <a href="/tags/algorithm/" class="font_size_1">
+                Algorithm
             </a>
         
             <a href="/tags/css/" class="font_size_1">
@@ -415,8 +430,8 @@
                 MySQL
             </a>
         
-            <a href="/tags/themes/" class="font_size_1">
-                themes
+            <a href="/tags/sort/" class="font_size_1">
+                Sort
             </a>
         
     </div>

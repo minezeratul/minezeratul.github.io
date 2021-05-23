@@ -6,13 +6,31 @@
     <description>Recent content in Tags on Minezeratul</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 22 May 2021 19:47:51 +0800</lastBuildDate><atom:link href="https://minezeratul.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 22 May 2021 21:08:13 +0800</lastBuildDate><atom:link href="https://minezeratul.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Algorithm</title>
+      <link>https://minezeratul.github.io/tags/algorithm/</link>
+      <pubDate>Sat, 22 May 2021 21:08:13 +0800</pubDate>
+      
+      <guid>https://minezeratul.github.io/tags/algorithm/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>Java</title>
       <link>https://minezeratul.github.io/tags/java/</link>
-      <pubDate>Sat, 22 May 2021 19:47:51 +0800</pubDate>
+      <pubDate>Sat, 22 May 2021 21:08:13 +0800</pubDate>
       
       <guid>https://minezeratul.github.io/tags/java/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Sort</title>
+      <link>https://minezeratul.github.io/tags/sort/</link>
+      <pubDate>Sat, 22 May 2021 21:08:13 +0800</pubDate>
+      
+      <guid>https://minezeratul.github.io/tags/sort/</guid>
       <description></description>
     </item>
     

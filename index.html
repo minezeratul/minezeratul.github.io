@@ -75,11 +75,22 @@
 			}
 		})(window,document);
 </script>
-<meta property='og:title' content='Minezeratul'>
+<script>
+function addLink(event) {
+    event.preventDefault();
+
+    var pagelink = '\n\nThanks for reading. You are copying from: ' + document.location.href,
+        copytext =  window.getSelection() + pagelink;
+
+    (event.clipboardData || window.clipboardData).setData('Text', copytext);
+}
+
+document.addEventListener('copy', addLink);
+</script><meta property='og:title' content='Minezeratul'>
 <meta property='og:description' content='What&#39;s past is prologue'>
 <meta property='og:url' content='https://minezeratul.github.io/'>
 <meta property='og:site_name' content='Minezeratul'>
-<meta property='og:type' content='website'><meta property='og:updated_time' content=' 2021-05-22T19:47:51&#43;08:00 '/>
+<meta property='og:type' content='website'><meta property='og:updated_time' content=' 2021-05-22T21:08:13&#43;08:00 '/>
 <meta name="twitter:title" content="Minezeratul">
 <meta name="twitter:description" content="What&#39;s past is prologue"><link rel="alternate" type="application/rss&#43;xml" href="https://minezeratul.github.io/index.xml">
     <link type="favicon" rel="shortcut icon" href="icon.png" />
@@ -251,6 +262,74 @@
     
 
     <section class="article-list">
+        
+            
+<article class="has-image">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/p/quicksort/">
+                <img src="/p/quicksort/wallhaven-y858yd_hu5438825b9b6d1014226d20d231e650c2_2128318_800x0_resize_q75_box.jpg"
+                        srcset="/p/quicksort/wallhaven-y858yd_hu5438825b9b6d1014226d20d231e650c2_2128318_800x0_resize_q75_box.jpg 800w, /p/quicksort/wallhaven-y858yd_hu5438825b9b6d1014226d20d231e650c2_2128318_1600x0_resize_q75_box.jpg 1600w"
+                        width="800" 
+                        height="464" 
+                        loading="lazy"
+                        alt="Featured image of post Collections of quickSort" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+        <a href="/categories/java/"
+            >
+            Java
+        </a>
+        
+        <a href="/categories/coding/"
+            >
+            Coding
+        </a>
+        
+    </header>
+    
+
+    <h2 class="article-title">
+        <a href="/p/quicksort/">Collections of quickSort</a>
+    </h2>
+
+    
+    <h3 class="article-subtitle">
+        Nothing is true , Everything is permitted
+    </h3>
+    <footer class="article-time">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+        <time class="article-time--published">May 22, 2021&emsp;
+        </time>
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+        <time class="article-time--published">
+            5 min read
+        </time>
+    </footer></div>
+</header>
+</article>
         
             
 <article class="has-image">
@@ -539,79 +618,6 @@
 </header>
 </article>
         
-            
-<article class="has-image">
-    <header class="article-header">
-        <div class="article-image">
-            <a href="/p/tenth-blog/">
-                <img src="/p/tenth-blog/wallhaven-rdg3dm_hucaf993a63a550e009a6d2190b51b5980_274278_800x0_resize_q75_box.jpg"
-                        srcset="/p/tenth-blog/wallhaven-rdg3dm_hucaf993a63a550e009a6d2190b51b5980_274278_800x0_resize_q75_box.jpg 800w, /p/tenth-blog/wallhaven-rdg3dm_hucaf993a63a550e009a6d2190b51b5980_274278_1600x0_resize_q75_box.jpg 1600w"
-                        width="800" 
-                        height="340" 
-                        loading="lazy"
-                        alt="Featured image of post Are u my cousin?" />
-                
-            </a>
-        </div>
-    
-
-    <div class="article-details">
-    
-    <header class="article-category">
-        
-        <a href="/categories/leetcode/"
-            >
-            Leetcode Daily
-        </a>
-        
-        <a href="/categories/java/"
-            >
-            Java
-        </a>
-        
-        <a href="/categories/coding/"
-            >
-            Coding
-        </a>
-        
-    </header>
-    
-
-    <h2 class="article-title">
-        <a href="/p/tenth-blog/">Are u my cousin?</a>
-    </h2>
-
-    
-    <h3 class="article-subtitle">
-        Leetcode-993
-    </h3>
-    <footer class="article-time">
-        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
-  <circle cx="18" cy="18" r="4" />
-  <path d="M15 3v4" />
-  <path d="M7 3v4" />
-  <path d="M3 11h16" />
-  <path d="M18 16.496v1.504l1 1" />
-</svg>
-        <time class="article-time--published">May 17, 2021&emsp;
-        </time>
-        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="12" cy="12" r="9" />
-  <polyline points="12 7 12 12 15 15" />
-</svg>
-
-
-
-        <time class="article-time--published">
-            1 min read
-        </time>
-    </footer></div>
-</header>
-</article>
-        
     </section>
     <nav class='pagination'>
         
@@ -704,7 +710,7 @@
                     <a href="/archives/#2021">
                         
                             <span class="year">2021</span>
-                            <span class="count">14</span>
+                            <span class="count">15</span>
                         
                     </a> 
                 </div>
@@ -743,12 +749,16 @@
 
     <div class="tagCloud-tags">
         
-            <a href="/tags/java/" class="font_size_13">
+            <a href="/tags/java/" class="font_size_14">
                 Java
             </a>
         
             <a href="/tags/leetcode/" class="font_size_13">
                 Leetcode
+            </a>
+        
+            <a href="/tags/algorithm/" class="font_size_1">
+                Algorithm
             </a>
         
             <a href="/tags/css/" class="font_size_1">
@@ -775,8 +785,8 @@
                 MySQL
             </a>
         
-            <a href="/tags/themes/" class="font_size_1">
-                themes
+            <a href="/tags/sort/" class="font_size_1">
+                Sort
             </a>
         
     </div>

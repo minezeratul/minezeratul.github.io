@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<link type="favicon" rel="shortcut icon" href="favicon.icon"><meta name='description' content='Nothing is true , Everything is permitted'><title>Collections of quickSort</title>
+
+<link rel='canonical' href='https://minezeratul.github.io/p/quicksort/'>
+
+<link rel="stylesheet" href="/scss/style.min.css"><script>
+(function(window,document,undefined){
+			var hearts = [];
+			window.requestAnimationFrame = (function(){
+				return window.requestAnimationFrame ||
+				window.webkitRequestAnimationFrame ||
+				window.mozRequestAnimationFrame ||
+				window.oRequestAnimationFrame ||
+				window.msRequestAnimationFrame ||
+				function (callback){
+					setTimeout(callback,1000/60);
+				}
+			})();
+			init();
+			function init(){
+				css(".heart{width: 10px;height: 10px;position: fixed;background: #f00;transform: rotate(45deg);-webkit-transform: rotate(45deg);-moz-transform: rotate(45deg);}.heart:after,.heart:before{content: '';width: inherit;height: inherit;background: inherit;border-radius: 50%;-webkit-border-radius: 50%;-moz-border-radius: 50%;position: absolute;}.heart:after{top: -5px;}.heart:before{left: -5px;}");
+				attachEvent();
+				gameloop();
+			}
+			function gameloop(){
+				for(var i=0;i<hearts.length;i++){
+					if(hearts[i].alpha <=0){
+						document.body.removeChild(hearts[i].el);
+						hearts.splice(i,1);
+						continue;
+					}
+					hearts[i].y--;
+					hearts[i].scale += 0.004;
+					hearts[i].alpha -= 0.013;
+					hearts[i].el.style.cssText = "left:"+hearts[i].x+"px;top:"+hearts[i].y+"px;opacity:"+hearts[i].alpha+";transform:scale("+hearts[i].scale+","+hearts[i].scale+") rotate(45deg);background:"+hearts[i].color;
+				}
+				requestAnimationFrame(gameloop);
+			}
+			function attachEvent(){
+				var old = typeof window.onclick==="function" && window.onclick;
+				window.onclick = function(event){
+					old && old();
+					createHeart(event);
+				}
+			}
+			function createHeart(event){
+				var d = document.createElement("div");
+				d.className = "heart";
+				hearts.push({
+					el : d,
+					x : event.clientX - 5,
+					y : event.clientY - 5,
+					scale : 1,
+					alpha : 1,
+					color : randomColor()
+				});
+				document.body.appendChild(d);
+			}
+			function css(css){
+				var style = document.createElement("style");
+				style.type="text/css";
+				try{
+					style.appendChild(document.createTextNode(css));
+				}catch(ex){
+					style.styleSheet.cssText = css;
+				}
+				document.getElementsByTagName('head')[0].appendChild(style);
+			}
+			function randomColor(){
+				return "rgb("+(~~(Math.random()*255))+","+(~~(Math.random()*255))+","+(~~(Math.random()*255))+")";
+			}
+		})(window,document);
+</script>
+<script>
+function addLink(event) {
+    event.preventDefault();
+
+    var pagelink = '\n\nThanks for reading. You are copying from: ' + document.location.href,
+        copytext =  window.getSelection() + pagelink;
+
+    (event.clipboardData || window.clipboardData).setData('Text', copytext);
+}
+
+document.addEventListener('copy', addLink);
+</script><meta property='og:title' content='Collections of quickSort'>
+<meta property='og:description' content='Nothing is true , Everything is permitted'>
+<meta property='og:url' content='https://minezeratul.github.io/p/quicksort/'>
+<meta property='og:site_name' content='Minezeratul'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Java' /><meta property='article:tag' content='Sort' /><meta property='article:tag' content='Algorithm' /><meta property='article:published_time' content='2021-05-22T21:08:13&#43;08:00'/><meta property='article:modified_time' content='2021-05-22T21:08:13&#43;08:00'/><meta property='og:image' content='https://minezeratul.github.io/p/quicksort/wallhaven-y858yd.jpg' />
+<meta name="twitter:title" content="Collections of quickSort">
+<meta name="twitter:description" content="Nothing is true , Everything is permitted"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://minezeratul.github.io/p/quicksort/wallhaven-y858yd.jpg' />
+    <link type="favicon" rel="shortcut icon" href="icon.png" />
+
+    </head>
+    <body class="">
+	
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.body.dataset.scheme = 'dark';
+			
+        } else {
+            document.body.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended article-page with-toolbar">
+            <aside class="sidebar left-sidebar sticky">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header class="site-info">
+        
+            <figure class="site-avatar">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar3_hu45b9d54795338903be33d24fdbb0632c_114789_300x0_resize_box_2.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+        
+        <h1 class="site-name"><a href="https://minezeratul.github.io/">Minezeratul</a></h1>
+        <h2 class="site-description">What&#39;s past is prologue</h2>
+    </header>
+
+    <ol class="menu" id="main-menu">
+        
+        
+        
+
+        <li >
+            <a href='/'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/about/'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>About</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/archives/'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/search/'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+	
+        
+            <li id="dark-mode-toggle">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                <span>Dark Mode</span>
+            </li>
+
+        
+    </ol>
+
+</aside>
+
+            <main class="main full-width">
+
+    <div id="article-toolbar">
+        <a href="https://minezeratul.github.io/" class="back-home">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="15 6 9 12 15 18" />
+</svg>
+
+
+
+            <span>Back</span>
+        </a>
+    </div>
+
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/p/quicksort/">
+                <img src="/p/quicksort/wallhaven-y858yd_hu5438825b9b6d1014226d20d231e650c2_2128318_800x0_resize_q75_box.jpg"
+                        srcset="/p/quicksort/wallhaven-y858yd_hu5438825b9b6d1014226d20d231e650c2_2128318_800x0_resize_q75_box.jpg 800w, /p/quicksort/wallhaven-y858yd_hu5438825b9b6d1014226d20d231e650c2_2128318_1600x0_resize_q75_box.jpg 1600w"
+                        width="800" 
+                        height="464" 
+                        loading="lazy"
+                        alt="Featured image of post Collections of quickSort" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+        <a href="/categories/java/"
+            >
+            Java
+        </a>
+        
+        <a href="/categories/coding/"
+            >
+            Coding
+        </a>
+        
+    </header>
+    
+
+    <h2 class="article-title">
+        <a href="/p/quicksort/">Collections of quickSort</a>
+    </h2>
+
+    
+    <h3 class="article-subtitle">
+        Nothing is true , Everything is permitted
+    </h3>
+    <footer class="article-time">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+        <time class="article-time--published">May 22, 2021&emsp;
+        </time>
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+        <time class="article-time--published">
+            5 min read
+        </time>
+    </footer></div>
+</header>
+
+    <section class="article-content">
+    <h1 id="如何理解quicksort">如何理解quickSort?</h1>
+<p>最近在复习快排，便重新整理了一下，除了<code>classic quickSort</code> 还有变种<code>quickSelectionSort</code>(随机快排)，如<a class="link" href="https://minezeratul.github.io/p/12nd-blog/"  target="_blank" rel="noopener"
+    >215</a>、<a class="link" href="https://leetcode-cn.com/problems/find-kth-largest-xor-coordinate-value/solution/zhao-chu-di-k-da-de-yi-huo-zuo-biao-zhi-mgick/"  target="_blank" rel="noopener"
+    >1738</a>，还有<code>Dual-Pivot Partition</code>、<code>Three-Way Partition</code>。 不同的partition复用，使其在面对不同情况下有不同的效果</p>
+<h3 id="最常见的快排最坏的情况是">最常见的快排，最坏的情况是</h3>
+<p>1.已经/几乎有序 → 退化成冒泡排序</p>
+<p>2.pivot刚好是最大值/最小值</p>
+<h2 id="hoare-quicksort"><strong>Hoare quickSort</strong>,</h2>
+<p>这个版本的算法在含有许多重复元素的情况下，可以避免其出现最坏情况的划分</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kt">int</span> <span class="nf">partition</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">a</span> <span class="o">,</span> <span class="kt">int</span> <span class="n">lo</span> <span class="o">,</span> <span class="kt">int</span> <span class="n">hi</span><span class="o">){</span>
+    <span class="kt">int</span> <span class="n">p</span> <span class="o">=</span> <span class="n">a</span><span class="o">[</span><span class="n">lo</span><span class="o">];</span>
+    <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">lo</span> <span class="o">-</span> <span class="n">1</span> <span class="o">,</span> <span class="n">j</span> <span class="o">=</span> <span class="n">hi</span> <span class="o">+</span> <span class="n">1</span><span class="o">;</span>
+    
+   <span class="k">while</span><span class="o">(</span><span class="kc">true</span><span class="o">){</span>
+       <span class="k">while</span><span class="o">(</span><span class="n">a</span><span class="o">[--</span><span class="n">j</span><span class="o">]</span> <span class="o">&gt;</span> <span class="n">p</span><span class="o">);</span>
+       <span class="k">while</span><span class="o">(</span><span class="n">a</span><span class="o">[++</span><span class="n">i</span><span class="o">]</span> <span class="o">&lt;</span> <span class="n">p</span><span class="o">);</span>
+       
+       <span class="k">if</span><span class="o">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">j</span><span class="o">)</span>
+           <span class="n">swap</span><span class="o">(</span><span class="n">a</span> <span class="o">,</span> <span class="n">i</span> <span class="o">,</span> <span class="n">j</span><span class="o">);</span>
+       <span class="k">else</span>
+           <span class="k">return</span> <span class="n">j</span> <span class="o">;</span>
+   <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div><p>这是改进后的，也是我们现在最常用的版本</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java">    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">quickSort</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">arr</span><span class="o">){</span>
+        <span class="n">quickSort</span><span class="o">(</span><span class="n">arr</span> <span class="o">,</span> <span class="n">0</span> <span class="o">,</span> <span class="n">arr</span><span class="o">.</span><span class="na">length</span> <span class="o">-</span> <span class="n">1</span><span class="o">);</span>
+    <span class="o">}</span>
+    
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">quickSort</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span><span class="n">arr</span> <span class="o">,</span> <span class="kt">int</span> <span class="n">first</span> <span class="o">,</span> <span class="kt">int</span> <span class="n">last</span><span class="o">){</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">last</span> <span class="o">&gt;</span> <span class="n">first</span><span class="o">){</span>
+            <span class="kt">int</span> <span class="n">pivotIndex</span> <span class="o">=</span> <span class="n">partition</span><span class="o">(</span><span class="n">arr</span> <span class="o">,</span> <span class="n">first</span> <span class="o">,</span> <span class="n">last</span><span class="o">);</span>
+            <span class="n">quickSort</span><span class="o">(</span><span class="n">arr</span> <span class="o">,</span> <span class="n">first</span> <span class="o">,</span> <span class="n">pivotIndex</span> <span class="o">-</span> <span class="n">1</span><span class="o">);</span>
+            <span class="n">quickSort</span><span class="o">(</span><span class="n">arr</span> <span class="o">,</span> <span class="n">pivotIndex</span> <span class="o">+</span> <span class="n">1</span><span class="o">,</span> <span class="n">last</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">partition</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span><span class="n">arr</span> <span class="o">,</span> <span class="kt">int</span> <span class="n">first</span> <span class="o">,</span> <span class="kt">int</span> <span class="n">last</span><span class="o">){</span>
+        <span class="kt">int</span> <span class="n">pivot</span> <span class="o">=</span> <span class="n">arr</span><span class="o">[</span><span class="n">first</span><span class="o">];</span>
+        <span class="kt">int</span> <span class="n">low</span> <span class="o">=</span> <span class="n">first</span> <span class="o">+</span> <span class="n">1</span><span class="o">;</span>
+        <span class="kt">int</span> <span class="n">high</span> <span class="o">=</span> <span class="n">last</span><span class="o">;</span>
+
+        <span class="k">while</span> <span class="o">(</span><span class="n">high</span> <span class="o">&gt;</span> <span class="n">low</span><span class="o">){</span>
+            <span class="c1">//Search left to right
+</span><span class="c1"></span>            <span class="k">while</span> <span class="o">(</span><span class="n">high</span> <span class="o">&gt;=</span> <span class="n">low</span> <span class="o">&amp;&amp;</span> <span class="n">arr</span><span class="o">[</span><span class="n">low</span><span class="o">]</span> <span class="o">&lt;=</span> <span class="n">pivot</span><span class="o">){</span>
+                <span class="n">low</span><span class="o">++;</span>
+            <span class="o">}</span>
+
+            <span class="c1">//Search right to left
+</span><span class="c1"></span>            <span class="k">while</span> <span class="o">(</span><span class="n">high</span> <span class="o">&gt;=</span> <span class="n">low</span> <span class="o">&amp;&amp;</span> <span class="n">arr</span><span class="o">[</span><span class="n">high</span><span class="o">]</span> <span class="o">&gt;</span> <span class="n">pivot</span><span class="o">){</span>
+                <span class="n">high</span><span class="o">--;</span>
+            <span class="o">}</span>
+
+            <span class="k">if</span> <span class="o">(</span><span class="n">high</span> <span class="o">&gt;</span> <span class="n">low</span><span class="o">){</span>  <span class="c1">//swap the element in the array
+</span><span class="c1"></span>                <span class="n">swap</span><span class="o">(</span><span class="n">arr</span> <span class="o">,</span> <span class="n">low</span> <span class="o">,</span> <span class="n">high</span><span class="o">);</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+
+        <span class="k">while</span> <span class="o">(</span><span class="n">high</span> <span class="o">&gt;</span> <span class="n">first</span> <span class="o">&amp;&amp;</span> <span class="n">arr</span><span class="o">[</span><span class="n">high</span><span class="o">]</span> <span class="o">&gt;=</span> <span class="n">pivot</span><span class="o">){</span>
+            <span class="n">high</span><span class="o">--;</span>
+        <span class="o">}</span>
+
+        <span class="c1">//swap the pivot
+</span><span class="c1"></span>        <span class="k">if</span> <span class="o">(</span><span class="n">pivot</span> <span class="o">&gt;</span> <span class="n">arr</span><span class="o">[</span><span class="n">high</span><span class="o">]){</span>
+            <span class="n">swap</span><span class="o">(</span><span class="n">arr</span> <span class="o">,</span> <span class="n">first</span> <span class="o">,</span> <span class="n">high</span><span class="o">)</span>
+            <span class="k">return</span> <span class="n">high</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="k">else</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="n">first</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+	
+	<span class="kd">private</span> <span class="kt">void</span> <span class="nf">swap</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">arr</span> <span class="o">,</span> <span class="kt">int</span> <span class="n">i</span> <span class="o">,</span> <span class="kt">int</span> <span class="n">j</span><span class="o">){</span>
+        <span class="kt">int</span> <span class="n">temp</span> <span class="o">=</span> <span class="n">arr</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
+        <span class="n">arr</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">arr</span><span class="o">[</span><span class="n">j</span><span class="o">];</span>
+        <span class="n">arr</span><span class="o">[</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="n">temp</span><span class="o">;</span>
+    <span class="o">}</span>
+</code></pre></div><h3 id="随机化">随机化</h3>
+<p>先洗牌后partition , 随机生成pivot , 然而并没有改变最坏情况下的运行时间，只是减少了出现最坏情况的可能，即无法保证每次pivot都是正中间的索引的。</p>
+<p>且quickSelectionSort不关心<strong>a[ lo&hellip;p - 1]</strong> 和 <strong>a[p + 1 &hellip; hi]</strong> 是否 <strong>有序</strong> ，此方法一般应用于找Kth Element</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">private</span> <span class="kt">int</span> <span class="nf">partition</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">,</span> <span class="kt">int</span> <span class="n">lo</span><span class="o">,</span> <span class="kt">int</span> <span class="n">hi</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">lo</span> <span class="o">==</span> <span class="n">hi</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="n">lo</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="kt">int</span> <span class="n">pivot</span> <span class="o">=</span> <span class="n">nums</span><span class="o">[</span><span class="n">lo</span><span class="o">];</span>
+        <span class="c1">// j = hi + 1 因为 while 中会先执行--
+</span><span class="c1"></span>        <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">lo</span><span class="o">,</span> <span class="n">j</span> <span class="o">=</span> <span class="n">hi</span> <span class="o">+</span> <span class="n">1</span><span class="o">;</span>
+
+        <span class="k">while</span> <span class="o">(</span><span class="kc">true</span><span class="o">)</span> <span class="o">{</span>
+            <span class="c1">// 保证 nums[lo..i] 都小于 pivot
+</span><span class="c1"></span>            <span class="k">while</span> <span class="o">(</span><span class="n">nums</span><span class="o">[++</span><span class="n">i</span><span class="o">]</span> <span class="o">&lt;</span> <span class="n">pivot</span><span class="o">)</span> <span class="o">{</span>
+                <span class="k">if</span> <span class="o">(</span><span class="n">i</span> <span class="o">==</span> <span class="n">hi</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="k">break</span><span class="o">;</span>
+                <span class="o">}</span>
+            <span class="o">}</span>
+            <span class="c1">// 保证 nums[j..hi] 都大于 pivot
+</span><span class="c1"></span>            <span class="k">while</span> <span class="o">(</span><span class="n">nums</span><span class="o">[--</span><span class="n">j</span><span class="o">]</span> <span class="o">&gt;</span> <span class="n">pivot</span><span class="o">)</span> <span class="o">{</span>
+                <span class="k">if</span> <span class="o">(</span><span class="n">j</span> <span class="o">==</span> <span class="n">lo</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="k">break</span><span class="o">;</span>
+                <span class="o">}</span>
+            <span class="o">}</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">i</span> <span class="o">&gt;=</span> <span class="n">j</span><span class="o">)</span> <span class="o">{</span>
+                <span class="k">break</span><span class="o">;</span>
+            <span class="o">}</span>
+
+            <span class="n">swap</span><span class="o">(</span><span class="n">nums</span><span class="o">,</span> <span class="n">i</span><span class="o">,</span> <span class="n">j</span><span class="o">);</span>
+        <span class="o">}</span>
+
+       <span class="c1">//交换pivot
+</span><span class="c1"></span>        <span class="n">swap</span><span class="o">(</span><span class="n">nums</span><span class="o">,</span> <span class="n">j</span><span class="o">,</span> <span class="n">lo</span><span class="o">);</span>
+       <span class="c1">// 如果走到这里，一定有：
+</span><span class="c1"></span>       <span class="c1">// nums[i] &gt; pivot &amp;&amp; nums[j] &lt; pivot
+</span><span class="c1"></span>       <span class="c1">// 所以需要交换 nums[i] 和 nums[j]，
+</span><span class="c1"></span>       <span class="c1">// 保证 nums[low..i] &lt; pivot &lt; nums[j..high]
+</span><span class="c1"></span>    
+        <span class="k">return</span> <span class="n">j</span><span class="o">;</span>
+<span class="o">}</span>
+
+<span class="kd">private</span> <span class="kt">void</span> <span class="nf">shuffle</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">)</span> <span class="o">{</span><span class="c1">//打乱数组
+</span><span class="c1"></span>        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">nums</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+        <span class="n">Random</span> <span class="n">ran</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Random</span><span class="o">();</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="kt">int</span> <span class="n">r</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="n">ran</span><span class="o">.</span><span class="na">nextInt</span><span class="o">(</span><span class="n">n</span> <span class="o">-</span> <span class="n">i</span><span class="o">);</span>
+            <span class="n">swap</span><span class="o">(</span><span class="n">nums</span><span class="o">,</span> <span class="n">i</span><span class="o">,</span> <span class="n">r</span><span class="o">);</span>
+        <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="c1">//another ver.
+</span><span class="c1"></span><span class="kd">public</span> <span class="kt">int</span> <span class="nf">randomPartition</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">a</span><span class="o">,</span> <span class="kt">int</span> <span class="n">l</span><span class="o">,</span> <span class="kt">int</span> <span class="n">r</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="na">nextInt</span><span class="o">(</span><span class="n">r</span> <span class="o">-</span> <span class="n">l</span> <span class="o">+</span> <span class="n">1</span><span class="o">)</span> <span class="o">+</span> <span class="n">l</span><span class="o">;</span>
+        <span class="n">swap</span><span class="o">(</span><span class="n">a</span><span class="o">,</span> <span class="n">i</span><span class="o">,</span> <span class="n">r</span><span class="o">);</span>
+        <span class="k">return</span> <span class="n">partition</span><span class="o">(</span><span class="n">a</span><span class="o">,</span> <span class="n">l</span><span class="o">,</span> <span class="n">r</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div><h3 id="lomuto划分">Lomuto划分</h3>
+<p>一个数组被分成三段 ，设最左为pivot , 一段是&lt;a[pivot]  , 一段&gt;a[pivot] ,  还有一段未处理的数据</p>
+<p>从左往右扫描数组，将第三段未处理的数据和p比较 , 其中 <!-- raw HTML omitted -->s<!-- raw HTML omitted --> 指向 <strong>第一段末尾</strong> ， <!-- raw HTML omitted -->i<!-- raw HTML omitted --> 指向 <strong>第二段末尾</strong></p>
+<p>若val &gt;= a[p] 则 i++  / 若val &lt;= a[p] , 则需要s++ ， 并和a[i]互换 ,然后 i++ ，继续指向尾端</p>
+<p>直到第三段为空，a[s] 与 a[pivot] 交换</p>
+<p><figure style="flex-grow: 164; flex-basis: 394px">
+		<a href="/p/quicksort/lomutoPartition.png" data-size="922x561"><img src="/p/quicksort/lomutoPartition.png"
+				srcset="/p/quicksort/lomutoPartition_huce08db509bd0e1044f72aa409d830b57_26008_480x0_resize_box_2.png 480w, /p/quicksort/lomutoPartition_huce08db509bd0e1044f72aa409d830b57_26008_1024x0_resize_box_2.png 1024w"
+				width="922"
+				height="561"
+				loading="lazy"
+				alt="Lomuto">
+		</a>
+		
+		<figcaption>Lomuto</figcaption>
+		
+	</figure></p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kt">void</span> <span class="nf">quickSort</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">a</span> <span class="o">,</span> <span class="kt">int</span> <span class="n">l</span> <span class="o">,</span> <span class="kt">int</span> <span class="n">r</span><span class="o">){</span>
+    <span class="k">if</span><span class="o">(</span><span class="n">l</span> <span class="o">&lt;</span> <span class="n">r</span><span class="o">){</span>
+        <span class="kt">int</span> <span class="n">p</span> <span class="o">=</span> <span class="n">partition</span><span class="o">(</span><span class="n">a</span> <span class="o">,</span> <span class="n">l</span> <span class="o">,</span> <span class="n">r</span><span class="o">);</span>
+        <span class="n">quickSort</span><span class="o">(</span><span class="n">a</span> <span class="o">,</span> <span class="n">l</span> <span class="o">,</span> <span class="n">p</span> <span class="o">-</span> <span class="n">1</span><span class="o">);</span>
+        <span class="n">quickSort</span><span class="o">(</span><span class="n">a</span> <span class="o">,</span> <span class="n">p</span> <span class="o">+</span> <span class="n">1</span> <span class="o">,</span> <span class="n">r</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">private</span> <span class="kt">int</span> <span class="nf">partition</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">a</span> <span class="o">,</span><span class="kt">int</span> <span class="n">l</span><span class="o">,</span> <span class="kt">int</span> <span class="n">r</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">p</span> <span class="o">=</span> <span class="n">a</span><span class="o">[</span><span class="n">l</span><span class="o">];</span>
+        <span class="kt">int</span> <span class="n">s</span> <span class="o">=</span> <span class="n">l</span><span class="o">;</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">l</span> <span class="o">+</span> <span class="n">1</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">r</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">a</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">&lt;</span> <span class="n">p</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">s</span> <span class="o">=</span> <span class="n">s</span> <span class="o">+</span> <span class="n">1</span><span class="o">;</span>
+                <span class="kt">int</span> <span class="n">temp</span> <span class="o">=</span> <span class="n">a</span><span class="o">[</span><span class="n">s</span><span class="o">];</span>
+                <span class="n">a</span><span class="o">[</span><span class="n">s</span><span class="o">]</span> <span class="o">=</span> <span class="n">a</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
+                <span class="n">a</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">temp</span><span class="o">;</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+        <span class="kt">int</span> <span class="n">temp</span> <span class="o">=</span> <span class="n">a</span><span class="o">[</span><span class="n">l</span><span class="o">];</span>
+        <span class="n">a</span><span class="o">[</span><span class="n">l</span><span class="o">]</span> <span class="o">=</span> <span class="n">a</span><span class="o">[</span><span class="n">s</span><span class="o">];</span>
+        <span class="n">a</span><span class="o">[</span><span class="n">s</span><span class="o">]</span> <span class="o">=</span> <span class="n">temp</span><span class="o">;</span>
+        <span class="k">return</span> <span class="n">s</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div><h3 id="dual-pivot-partition">Dual-Pivot Partition</h3>
+<p>Arrays.sort()就是用该方法实现的</p>
+<ol>
+<li>对于长度小于17的数组使用插入排序(常见优化步骤，传统快排也有应用)。</li>
+<li>选择两个枢纽元p1,p2，一般选择起始元素a[left]和末尾元素a[right]（有其他选取方式）。</li>
+<li>假设p1&lt;p2，如果不是就交换。</li>
+<li>将整个数组分成三部分，分别为 &lt;p1的 , p1&lt;X&lt;p2  , &gt;p2 的。</li>
+<li>递归排序这三个部分。</li>
+</ol>
+<p><figure style="flex-grow: 252; flex-basis: 606px">
+		<a href="/p/quicksort/DualPivot.png" data-size="2154x852"><img src="/p/quicksort/DualPivot.png"
+				srcset="/p/quicksort/DualPivot_hu73ac45033e730058db0de5058a11a041_101803_480x0_resize_box_2.png 480w, /p/quicksort/DualPivot_hu73ac45033e730058db0de5058a11a041_101803_1024x0_resize_box_2.png 1024w"
+				width="2154"
+				height="852"
+				loading="lazy"
+				alt="Dual-Pivot">
+		</a>
+		
+		<figcaption>Dual-Pivot</figcaption>
+		
+	</figure></p>
+<p>这样进行一次后递归的进行下一次双轴快排，一直到结束，但是在这个<strong>执行过程</strong>应该去如何处理分析呢？需要几个参数呢？</p>
+<ul>
+<li>假设知道排序区间[start，end]。数组为arr，<code> pivot1=arr[start],pivot2=arr[end]</code></li>
+<li>还需要三个参数<strong>left，right和k。</strong> l</li>
+<li>left初始为start，[start,left]区域即为小于等于pivot1小的区域(第一个等于)。</li>
+<li>right与left对应，初始为end，[right,end]为大于等于pivot2的区域(最后一个等于)。</li>
+<li>k初始为start+1，是一个从左往右遍历的指针，遍历的数值与pivot1，pivot2比较进行适当交换，当k&gt;=right即可停止。</li>
+</ul>
+<p><figure style="flex-grow: 252; flex-basis: 605px">
+		<a href="/p/quicksort/pre1.png" data-size="2256x894"><img src="/p/quicksort/pre1.png"
+				srcset="/p/quicksort/pre1_hu84d281d570eb7ac60d2ed2c1279c71ad_127138_480x0_resize_box_2.png 480w, /p/quicksort/pre1_hu84d281d570eb7ac60d2ed2c1279c71ad_127138_1024x0_resize_box_2.png 1024w"
+				width="2256"
+				height="894"
+				loading="lazy"
+				alt="pre1">
+		</a>
+		
+		<figcaption>pre1</figcaption>
+		
+	</figure></p>
+<p>k交换过程然后你可能会问k遍历时候究竟怎么去交换？left和right该如何处理呢？不急我带你慢慢分析，首先K是在left和right中间的，遍历k的位置和pivot1，pivot2进行比较：如果<strong>arr[k]&lt;pivot1</strong>,那么先++left，然后swap(arr,k,left),**因为初始在start在这个过程不结束start先不动。**然后k++；继续进行</p>
+<p><figure style="flex-grow: 167; flex-basis: 402px">
+		<a href="/p/quicksort/pre2.png" data-size="1952x1164"><img src="/p/quicksort/pre2.png"
+				srcset="/p/quicksort/pre2_huf3bb2ee4a33ab338af7eb083933c07c1_208734_480x0_resize_box_2.png 480w, /p/quicksort/pre2_huf3bb2ee4a33ab338af7eb083933c07c1_208734_1024x0_resize_box_2.png 1024w"
+				width="1952"
+				height="1164"
+				loading="lazy"
+				alt="pre2">
+		</a>
+		
+		<figcaption>pre2</figcaption>
+		
+	</figure></p>
+<p>而如果<strong>arr[k]&gt;pivot2</strong>.(区间自行安排即可) 有点区别的就是right可能连续的大于arr[k],比如<code>9 3 3 9 7</code>如果我们需要跳过7前面9到3才能正常交换，这和快排的交换思想一致，当然再具体的实现上就是right&ndash;到一个合适比arr[k]小的位置。然后swap(arr,k,right)**切记此时k不能自加。**因为带交换的那个有可能比pivot1还小要和left交换。如果是介于两者之间，k++即可</p>
+<p><figure style="flex-grow: 231; flex-basis: 555px">
+		<a href="/p/quicksort/pre3.png" data-size="1958x846"><img src="/p/quicksort/pre3.png"
+				srcset="/p/quicksort/pre3_hu4c1706661a08efa7abf9f349fea6716d_159191_480x0_resize_box_2.png 480w, /p/quicksort/pre3_hu4c1706661a08efa7abf9f349fea6716d_159191_1024x0_resize_box_2.png 1024w"
+				width="1958"
+				height="846"
+				loading="lazy"
+				alt="pre3">
+		</a>
+		
+		<figcaption>pre3</figcaption>
+		
+	</figure></p>
+<p>最后则是在执行完这一趟即k=right之后，即开始需要将pivot1和pivot2的数值进行交换</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">swap</span><span class="o">(</span><span class="n">arr</span><span class="o">,</span> <span class="n">start</span><span class="o">,</span> <span class="n">left</span><span class="o">);</span>
+<span class="n">swap</span><span class="o">(</span><span class="n">arr</span><span class="o">,</span> <span class="n">end</span><span class="o">,</span> <span class="n">right</span><span class="o">);</span>
+</code></pre></div><p>然后三个区间根据编号递归执行排序函数即可。</p>
+<p><figure style="flex-grow: 204; flex-basis: 491px">
+		<a href="/p/quicksort/pre4.png" data-size="1972x962"><img src="/p/quicksort/pre4.png"
+				srcset="/p/quicksort/pre4_hu789d2ecfc3504976f2df935b122efd82_148413_480x0_resize_box_2.png 480w, /p/quicksort/pre4_hu789d2ecfc3504976f2df935b122efd82_148413_1024x0_resize_box_2.png 1024w"
+				width="1972"
+				height="962"
+				loading="lazy"
+				alt="pre4">
+		</a>
+		
+		<figcaption>pre4</figcaption>
+		
+	</figure></p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kt">void</span> <span class="nf">dualPivotQuickSort</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">arr</span><span class="o">,</span> <span class="kt">int</span> <span class="n">start</span><span class="o">,</span> <span class="kt">int</span> <span class="n">end</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span><span class="o">(</span><span class="n">start</span> <span class="o">&gt;</span> <span class="n">end</span><span class="o">){</span>
+            <span class="k">return</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="k">if</span><span class="o">(</span><span class="n">arr</span><span class="o">[</span><span class="n">start</span><span class="o">]</span> <span class="o">&gt;</span> <span class="n">arr</span><span class="o">[</span><span class="n">end</span><span class="o">])</span>
+            <span class="n">swap</span><span class="o">(</span><span class="n">arr</span><span class="o">,</span> <span class="n">start</span><span class="o">,</span> <span class="n">end</span><span class="o">);</span>
+        <span class="kt">int</span> <span class="n">pivot1</span> <span class="o">=</span> <span class="n">arr</span><span class="o">[</span><span class="n">start</span><span class="o">]</span> <span class="o">,</span> <span class="n">pivot2</span> <span class="o">=</span><span class="n">a</span> <span class="n">rr</span><span class="o">[</span><span class="n">end</span><span class="o">];</span>
+    	<span class="c1">//取最左侧和最右侧作为pivot
+</span><span class="c1"></span>        <span class="c1">//(start，left]:左侧小于等于pivot1 [right,end)大于pivot2
+</span><span class="c1"></span>        <span class="kt">int</span> <span class="n">left</span> <span class="o">=</span> <span class="n">start</span> <span class="o">,</span> <span class="n">right</span> <span class="o">=</span> <span class="n">end</span><span class="o">,</span> <span class="n">k</span> <span class="o">=</span> <span class="n">left</span> <span class="o">+</span> <span class="n">1</span><span class="o">;</span>
+        <span class="k">while</span> <span class="o">(</span><span class="n">k</span> <span class="o">&lt;</span> <span class="n">right</span><span class="o">)</span> <span class="o">{</span>
+            <span class="c1">//和左侧交换
+</span><span class="c1"></span>            <span class="k">if</span><span class="o">(</span><span class="n">arr</span><span class="o">[</span><span class="n">k</span><span class="o">]</span> <span class="o">&lt;=</span> <span class="n">pivot1</span><span class="o">)</span>
+            <span class="o">{</span>
+                <span class="c1">//需要交换
+</span><span class="c1"></span>                <span class="n">swap</span><span class="o">(</span><span class="n">arr</span><span class="o">,</span> <span class="o">++</span><span class="n">left</span><span class="o">,</span> <span class="n">k</span><span class="o">++);</span>
+            <span class="o">}</span>
+            <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">arr</span><span class="o">[</span><span class="n">k</span><span class="o">]&lt;=</span><span class="n">pivot2</span><span class="o">)</span> <span class="o">{</span><span class="c1">//在中间的情况
+</span><span class="c1"></span>                <span class="n">k</span><span class="o">++;</span>
+            <span class="o">}</span>
+            <span class="k">else</span> <span class="o">{</span>
+                <span class="k">while</span> <span class="o">(</span><span class="n">arr</span><span class="o">[</span><span class="n">right</span><span class="o">]&gt;=</span><span class="n">pivot2</span><span class="o">)</span> <span class="o">{</span><span class="c1">//如果全部小于直接跳出外层循环
+</span><span class="c1"></span>                    <span class="k">if</span><span class="o">(</span><span class="n">right</span><span class="o">--==</span><span class="n">k</span><span class="o">)</span>
+                        <span class="k">break</span> <span class="o">;</span>
+                <span class="o">}</span>
+                <span class="k">if</span><span class="o">(</span><span class="n">k</span><span class="o">&gt;=</span><span class="n">right</span><span class="o">)</span><span class="k">break</span> <span class="o">;</span>
+                <span class="n">swap</span><span class="o">(</span><span class="n">arr</span><span class="o">,</span> <span class="n">k</span><span class="o">,</span> <span class="n">right</span><span class="o">);</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+        <span class="n">swap</span><span class="o">(</span><span class="n">arr</span><span class="o">,</span> <span class="n">start</span><span class="o">,</span> <span class="n">left</span><span class="o">);</span>
+        <span class="n">swap</span><span class="o">(</span><span class="n">arr</span><span class="o">,</span> <span class="n">end</span><span class="o">,</span> <span class="n">right</span><span class="o">);</span>
+    	<span class="c1">//分段递归，继续排序
+</span><span class="c1"></span>        <span class="n">dualPivotQuickSort</span><span class="o">(</span><span class="n">arr</span><span class="o">,</span> <span class="n">start</span><span class="o">,</span> <span class="n">left</span><span class="o">-</span><span class="n">1</span><span class="o">);</span>
+        <span class="n">dualPivotQuickSort</span><span class="o">(</span><span class="n">arr</span><span class="o">,</span> <span class="n">left</span><span class="o">+</span><span class="n">1</span><span class="o">,</span> <span class="n">right</span><span class="o">-</span><span class="n">1</span><span class="o">);</span>
+        <span class="n">dualPivotQuickSort</span><span class="o">(</span><span class="n">arr</span><span class="o">,</span> <span class="n">right</span><span class="o">+</span><span class="n">1</span><span class="o">,</span> <span class="n">end</span><span class="o">);</span>
+    <span class="o">}</span>
+
+<span class="kd">private</span> <span class="kt">void</span> <span class="nf">swap</span><span class="o">(</span><span class="kt">int</span> <span class="n">arr</span><span class="o">[],</span><span class="kt">int</span> <span class="n">i</span><span class="o">,</span><span class="kt">int</span> <span class="n">j</span><span class="o">){</span>
+        <span class="kt">int</span> <span class="n">team</span><span class="o">=</span><span class="n">arr</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
+        <span class="n">arr</span><span class="o">[</span><span class="n">i</span><span class="o">]=</span><span class="n">arr</span><span class="o">[</span><span class="n">j</span><span class="o">];</span>
+        <span class="n">arr</span><span class="o">[</span><span class="n">j</span><span class="o">]=</span><span class="n">team</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div><h3 id="three-way-partition--三路快排--dijkstra--bentley-mcilroy">Three-Way Partition ， 三路快排 , Dijkstra / Bentley-McIlroy</h3>
+<p>以最左元素、最右元素、最中间元素为pivot ，在双轴快排的基础上，在分一个<strong>等于p</strong>的区段</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">private</span> <span class="kt">void</span> <span class="nf">sort</span><span class="o">(</span><span class="n">Comparable</span><span class="o">[]</span> <span class="n">arr</span><span class="o">,</span> <span class="kt">int</span> <span class="n">l</span><span class="o">,</span> <span class="kt">int</span> <span class="n">r</span><span class="o">){</span>
+        <span class="c1">// 对于小规模数组, 使用插入排序
+</span><span class="c1"></span>        <span class="k">if</span><span class="o">(</span><span class="n">r</span> <span class="o">-</span> <span class="n">l</span> <span class="o">&lt;=</span> <span class="n">15</span><span class="o">){</span>
+            <span class="n">InsertionSort</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="n">arr</span><span class="o">,</span> <span class="n">l</span><span class="o">,</span> <span class="n">r</span><span class="o">);</span>
+            <span class="k">return</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="c1">// 随机在arr[l...r]的范围中, 选择一个数值作为标定点pivot
+</span><span class="c1"></span>        <span class="n">swap</span><span class="o">(</span><span class="n">arr</span><span class="o">,</span> <span class="n">l</span><span class="o">,</span> <span class="o">(</span><span class="kt">int</span><span class="o">)(</span><span class="n">Math</span><span class="o">.</span><span class="na">random</span><span class="o">()*(</span><span class="n">r</span><span class="o">-</span><span class="n">l</span><span class="o">+</span><span class="n">1</span><span class="o">))</span> <span class="o">+</span> <span class="n">l</span> <span class="o">);</span>
+ 
+        <span class="n">Comparable</span> <span class="n">v</span> <span class="o">=</span> <span class="n">arr</span><span class="o">[</span><span class="n">l</span><span class="o">];</span>
+ 
+        <span class="kt">int</span> <span class="n">lt</span> <span class="o">=</span> <span class="n">l</span><span class="o">;</span>     <span class="c1">// arr[l+1...lt] &lt; v
+</span><span class="c1"></span>        <span class="kt">int</span> <span class="n">gt</span> <span class="o">=</span> <span class="n">r</span> <span class="o">+</span> <span class="n">1</span><span class="o">;</span> <span class="c1">// arr[gt...r] &gt; v
+</span><span class="c1"></span>        <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">l</span> <span class="o">+</span> <span class="n">1</span><span class="o">;</span>    <span class="c1">// arr[lt+1...i) == v
+</span><span class="c1"></span>        <span class="k">while</span><span class="o">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">gt</span><span class="o">){</span>
+            <span class="k">if</span><span class="o">(</span><span class="n">arr</span><span class="o">[</span><span class="n">i</span><span class="o">].</span><span class="na">compareTo</span><span class="o">(</span><span class="n">v</span><span class="o">)</span> <span class="o">&lt;</span> <span class="n">0</span><span class="o">){</span>
+                <span class="n">swap</span><span class="o">(</span> <span class="n">arr</span><span class="o">,</span> <span class="n">i</span><span class="o">,</span> <span class="n">lt</span> <span class="o">+</span> <span class="n">1</span><span class="o">);</span>
+                <span class="n">i</span><span class="o">++;</span>
+                <span class="n">lt</span><span class="o">++;</span>
+            <span class="o">}</span> <span class="k">else</span> <span class="k">if</span><span class="o">(</span><span class="n">arr</span><span class="o">[</span><span class="n">i</span><span class="o">].</span><span class="na">compareTo</span><span class="o">(</span><span class="n">v</span><span class="o">)</span> <span class="o">&gt;</span> <span class="n">0</span><span class="o">){</span>
+                <span class="n">swap</span><span class="o">(</span><span class="n">arr</span><span class="o">,</span> <span class="n">i</span><span class="o">,</span> <span class="n">gt</span> <span class="o">-</span> <span class="n">1</span><span class="o">);</span>
+                <span class="n">gt</span><span class="o">--;</span>
+            <span class="o">}</span> <span class="k">else</span><span class="o">{</span> <span class="c1">// arr[i] == v
+</span><span class="c1"></span>                <span class="n">i</span><span class="o">++;</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+ 
+        <span class="n">swap</span><span class="o">(</span><span class="n">arr</span><span class="o">,</span> <span class="n">l</span><span class="o">,</span> <span class="n">lt</span><span class="o">);</span>
+        <span class="n">sort</span><span class="o">(</span><span class="n">arr</span><span class="o">,</span> <span class="n">l</span><span class="o">,</span> <span class="n">lt</span><span class="o">-</span><span class="n">1</span><span class="o">);</span>
+        <span class="n">sort</span><span class="o">(</span><span class="n">arr</span><span class="o">,</span> <span class="n">gt</span><span class="o">,</span> <span class="n">r</span><span class="o">);</span>
+<span class="o">}</span>
+ 
+<span class="kd">private</span> <span class="kt">void</span> <span class="nf">swap</span><span class="o">(</span><span class="n">Object</span><span class="o">[]</span> <span class="n">arr</span><span class="o">,</span> <span class="kt">int</span> <span class="n">i</span><span class="o">,</span> <span class="kt">int</span> <span class="n">j</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">Object</span> <span class="n">t</span> <span class="o">=</span> <span class="n">arr</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
+        <span class="n">arr</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">arr</span><span class="o">[</span><span class="n">j</span><span class="o">];</span>
+        <span class="n">arr</span><span class="o">[</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="n">t</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div><p>Dijkstra / Bentley-McIlroy的源码 , 在无重复值的情况下，Bentley-McIlroy方法相较于双轴快排， 由于头尾只有少量的等值元素需要交换，所以额外的开销很小。</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// Dijkstra 3-way partitioning
+</span><span class="c1"></span><span class="kd">private</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">sort</span><span class="o">(</span><span class="n">Comparable</span><span class="o">[]</span> <span class="n">a</span><span class="o">,</span> <span class="kt">int</span> <span class="n">lo</span><span class="o">,</span> <span class="kt">int</span> <span class="n">hi</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">hi</span> <span class="o">&lt;=</span> <span class="n">lo</span><span class="o">)</span> <span class="k">return</span><span class="o">;</span>
+    <span class="kt">int</span> <span class="n">lt</span> <span class="o">=</span> <span class="n">lo</span><span class="o">,</span> <span class="n">gt</span> <span class="o">=</span> <span class="n">hi</span><span class="o">;</span>
+    <span class="n">Comparable</span> <span class="n">v</span> <span class="o">=</span> <span class="n">a</span><span class="o">[</span><span class="n">lo</span><span class="o">];</span>
+    <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">lo</span><span class="o">+</span><span class="n">1</span><span class="o">;</span>
+    <span class="k">while</span> <span class="o">(</span><span class="n">i</span> <span class="o">&lt;=</span> <span class="n">gt</span><span class="o">)</span>
+    <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">cmp</span> <span class="o">=</span> <span class="n">a</span><span class="o">[</span><span class="n">i</span><span class="o">].</span><span class="na">compareTo</span><span class="o">(</span><span class="n">v</span><span class="o">);</span>
+        <span class="k">if</span>      <span class="o">(</span><span class="n">cmp</span> <span class="o">&lt;</span> <span class="n">0</span><span class="o">)</span> <span class="n">exch</span><span class="o">(</span><span class="n">a</span><span class="o">,</span> <span class="n">lt</span><span class="o">++,</span> <span class="n">i</span><span class="o">++);</span>
+        <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">cmp</span> <span class="o">&gt;</span> <span class="n">0</span><span class="o">)</span> <span class="n">exch</span><span class="o">(</span><span class="n">a</span><span class="o">,</span> <span class="n">i</span><span class="o">,</span> <span class="n">gt</span><span class="o">--);</span>
+        <span class="k">else</span>              <span class="n">i</span><span class="o">++;</span>
+    <span class="o">}</span>
+    <span class="n">sort</span><span class="o">(</span><span class="n">a</span><span class="o">,</span> <span class="n">lo</span><span class="o">,</span> <span class="n">lt</span> <span class="o">-</span> <span class="n">1</span><span class="o">);</span>
+    <span class="n">sort</span><span class="o">(</span><span class="n">a</span><span class="o">,</span> <span class="n">gt</span> <span class="o">+</span> <span class="n">1</span><span class="o">,</span> <span class="n">hi</span><span class="o">);</span>
+<span class="o">}</span>
+
+<span class="c1">// Bentley-McIlroy 3-way partitioning
+</span><span class="c1"></span><span class="kd">private</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">sort</span><span class="o">(</span><span class="n">Comparable</span><span class="o">[]</span> <span class="n">a</span><span class="o">,</span> <span class="kt">int</span> <span class="n">lo</span><span class="o">,</span> <span class="kt">int</span> <span class="n">hi</span><span class="o">)</span> <span class="o">{</span> 
+    <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">lo</span><span class="o">,</span> <span class="n">j</span> <span class="o">=</span> <span class="n">hi</span><span class="o">+</span><span class="n">1</span><span class="o">;</span>
+    <span class="kt">int</span> <span class="n">p</span> <span class="o">=</span> <span class="n">lo</span><span class="o">,</span> <span class="n">q</span> <span class="o">=</span> <span class="n">hi</span><span class="o">+</span><span class="n">1</span><span class="o">;</span>
+    <span class="n">Comparable</span> <span class="n">v</span> <span class="o">=</span> <span class="n">a</span><span class="o">[</span><span class="n">lo</span><span class="o">];</span>
+    <span class="k">while</span> <span class="o">(</span><span class="kc">true</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">while</span> <span class="o">(</span><span class="n">less</span><span class="o">(</span><span class="n">a</span><span class="o">[++</span><span class="n">i</span><span class="o">],</span> <span class="n">v</span><span class="o">))</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">i</span> <span class="o">==</span> <span class="n">hi</span><span class="o">)</span> <span class="k">break</span><span class="o">;</span>
+        <span class="k">while</span> <span class="o">(</span><span class="n">less</span><span class="o">(</span><span class="n">v</span><span class="o">,</span> <span class="n">a</span><span class="o">[--</span><span class="n">j</span><span class="o">]))</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">j</span> <span class="o">==</span> <span class="n">lo</span><span class="o">)</span> <span class="k">break</span><span class="o">;</span>
+
+        <span class="c1">// pointers cross
+</span><span class="c1"></span>        <span class="k">if</span> <span class="o">(</span><span class="n">i</span> <span class="o">==</span> <span class="n">j</span> <span class="o">&amp;&amp;</span> <span class="n">eq</span><span class="o">(</span><span class="n">a</span><span class="o">[</span><span class="n">i</span><span class="o">],</span> <span class="n">v</span><span class="o">))</span>
+            <span class="n">exch</span><span class="o">(</span><span class="n">a</span><span class="o">,</span> <span class="o">++</span><span class="n">p</span><span class="o">,</span> <span class="n">i</span><span class="o">);</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">i</span> <span class="o">&gt;=</span> <span class="n">j</span><span class="o">)</span> <span class="k">break</span><span class="o">;</span>
+
+        <span class="n">exch</span><span class="o">(</span><span class="n">a</span><span class="o">,</span> <span class="n">i</span><span class="o">,</span> <span class="n">j</span><span class="o">);</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">eq</span><span class="o">(</span><span class="n">a</span><span class="o">[</span><span class="n">i</span><span class="o">],</span> <span class="n">v</span><span class="o">))</span> <span class="n">exch</span><span class="o">(</span><span class="n">a</span><span class="o">,</span> <span class="o">++</span><span class="n">p</span><span class="o">,</span> <span class="n">i</span><span class="o">);</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">eq</span><span class="o">(</span><span class="n">a</span><span class="o">[</span><span class="n">j</span><span class="o">],</span> <span class="n">v</span><span class="o">))</span> <span class="n">exch</span><span class="o">(</span><span class="n">a</span><span class="o">,</span> <span class="o">--</span><span class="n">q</span><span class="o">,</span> <span class="n">j</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="n">i</span> <span class="o">=</span> <span class="n">j</span> <span class="o">+</span> <span class="n">1</span><span class="o">;</span>
+    <span class="c1">//多了交换的步骤
+</span><span class="c1"></span>    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="n">lo</span><span class="o">;</span> <span class="n">k</span> <span class="o">&lt;=</span> <span class="n">p</span><span class="o">;</span> <span class="n">k</span><span class="o">++)</span>
+        <span class="n">exch</span><span class="o">(</span><span class="n">a</span><span class="o">,</span> <span class="n">k</span><span class="o">,</span> <span class="n">j</span><span class="o">--);</span>
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="n">hi</span><span class="o">;</span> <span class="n">k</span> <span class="o">&gt;=</span> <span class="n">q</span><span class="o">;</span> <span class="n">k</span><span class="o">--)</span>
+        <span class="n">exch</span><span class="o">(</span><span class="n">a</span><span class="o">,</span> <span class="n">k</span><span class="o">,</span> <span class="n">i</span><span class="o">++);</span>
+<span class="o">}</span>
+</code></pre></div>
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/java/">Java</a>
+        
+            <a href="/tags/sort/">Sort</a>
+        
+            <a href="/tags/algorithm/">Algorithm</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Maybe it can be made by mz</span>
+    </section>
+    </footer>
+
+    
+</article>
+
+    <aside class="related-contents--wrapper">
+    
+    
+        <h2 class="section-title">Related contents</h2>
+        <div class="related-contents">
+            <div class="flex article-list--tile">
+                
+                    
+<article class="has-image">
+    <a href="/p/13rd-blog/">
+        
+        
+            <div class="article-image">
+                <img src="/p/13rd-blog/wallhaven-3z3zdv.23bcee6078477fd1d2a8898a7342d5d4_hu5438825b9b6d1014226d20d231e650c2_1578832_250x150_fill_q75_box_smart1.jpg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy" 
+                        data-key="13rd-blog" 
+                        data-hash="md5-I7zuYHhHf9HSqImKc0LV1A==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">K-Largest XOR Value</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="has-image">
+    <a href="/p/12nd-blog/">
+        
+        
+            <div class="article-image">
+                <img src="/p/12nd-blog/wallhaven-v9z9wl.1db47c5adabe0c39f6d9fd79924d1fb1_hu5438825b9b6d1014226d20d231e650c2_1928554_250x150_fill_q75_box_smart1.jpg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy" 
+                        data-key="12nd-blog" 
+                        data-hash="md5-HbR8Wtq&#43;DDn22f15kk0fsQ==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Largest Val in my mind xD</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="has-image">
+    <a href="/p/eleventh-blog/">
+        
+        
+            <div class="article-image">
+                <img src="/p/eleventh-blog/wallhaven-wq1o8p.c8780549dd0b5a3860253ba167571e23_hufcd2f25bc6dea744efafee36c63d9ed8_1117287_250x150_fill_q75_box_smart1.jpg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy" 
+                        data-key="eleventh-blog" 
+                        data-hash="md5-yHgFSd0LWjhgJTuhZ1ceIw==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">又又又是XOR</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="has-image">
+    <a href="/p/tenth-blog/">
+        
+        
+            <div class="article-image">
+                <img src="/p/tenth-blog/wallhaven-rdg3dm.5872901d5ed06934a85f7f4a23766644_hucaf993a63a550e009a6d2190b51b5980_274278_250x150_fill_q75_box_smart1.jpg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy" 
+                        data-key="tenth-blog" 
+                        data-hash="md5-WHKQHV7QaTSoX39KI3ZmRA==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Are u my cousin?</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="has-image">
+    <a href="/p/ninth-blog/">
+        
+        
+            <div class="article-image">
+                <img src="/p/ninth-blog/wallhaven-z8p1jy.56427b2bd4b098270afb7737bc7e26e4_hu38044c2a6d833b8cc715b17eaec2c4bb_307896_250x150_fill_q75_box_smart1.jpg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy" 
+                        data-key="ninth-blog" 
+                        data-hash="md5-VkJ7K9SwmCcK&#43;3c3vH4m5A==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Trie &amp; XOR</h2>
+        </div>
+    </a>
+</article>
+                
+            </div>
+        </div>
+    
+</aside>
+
+
+    
+        
+    
+
+    <footer class="site-footer">
+	
+    <section class="copyright">
+        &copy; 
+        
+        2021 Minezeratul
+    </section>
+  
+    <section class="powerby">
+        Welcome to the world of <a href="https://github.com/minezeratul" target="_blank" rel="noopener">Minezeratul</a><br>
+		
+		<span id="runtime_span"></span>
+		<script type="text/javascript">function show_runtime(){window.setTimeout("show_runtime()",1000);X=new 
+			Date("4/20/2021 00:00:00");
+		Y=new Date();T=(Y.getTime()-X.getTime());M=24*60*60*1000;
+		a=T/M;A=Math.floor(a);b=(a-A)*24;B=Math.floor(b);c=(b-B)*60;C=Math.floor((b-B)*60);D=Math.floor((c-C)*60);
+		runtime_span.innerHTML="本站运行: "+A+"天"+B+"小时"+C+"分"+D+"秒"}show_runtime();</script>
+    </section>
+	
+</footer>
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer="true"
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer="true"
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css"integrity="sha256-c0uckgykQ9v5k&#43;IqViZOZKc47Jn7KQil4/MP3ySA3F8="crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css"integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE="crossorigin="anonymous"
+            >
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"
+                defer="false"
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

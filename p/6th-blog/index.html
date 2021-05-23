@@ -74,7 +74,18 @@
 			}
 		})(window,document);
 </script>
-<meta property='og:title' content='intToRoman and RomanToInt'>
+<script>
+function addLink(event) {
+    event.preventDefault();
+
+    var pagelink = '\n\nThanks for reading. You are copying from: ' + document.location.href,
+        copytext =  window.getSelection() + pagelink;
+
+    (event.clipboardData || window.clipboardData).setData('Text', copytext);
+}
+
+document.addEventListener('copy', addLink);
+</script><meta property='og:title' content='intToRoman and RomanToInt'>
 <meta property='og:description' content='Leetcode-12 &amp; 13'>
 <meta property='og:url' content='https://minezeratul.github.io/p/6th-blog/'>
 <meta property='og:site_name' content='Minezeratul'>

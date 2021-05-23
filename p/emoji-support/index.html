@@ -74,7 +74,18 @@
 			}
 		})(window,document);
 </script>
-<meta property='og:title' content='Emoji Support'>
+<script>
+function addLink(event) {
+    event.preventDefault();
+
+    var pagelink = '\n\nThanks for reading. You are copying from: ' + document.location.href,
+        copytext =  window.getSelection() + pagelink;
+
+    (event.clipboardData || window.clipboardData).setData('Text', copytext);
+}
+
+document.addEventListener('copy', addLink);
+</script><meta property='og:title' content='Emoji Support'>
 <meta property='og:description' content='Guide to emoji usage in Hugo'>
 <meta property='og:url' content='https://minezeratul.github.io/p/emoji-support/'>
 <meta property='og:site_name' content='Minezeratul'>

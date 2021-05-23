@@ -74,11 +74,22 @@
 			}
 		})(window,document);
 </script>
-<meta property='og:title' content='Posts'>
+<script>
+function addLink(event) {
+    event.preventDefault();
+
+    var pagelink = '\n\nThanks for reading. You are copying from: ' + document.location.href,
+        copytext =  window.getSelection() + pagelink;
+
+    (event.clipboardData || window.clipboardData).setData('Text', copytext);
+}
+
+document.addEventListener('copy', addLink);
+</script><meta property='og:title' content='Posts'>
 <meta property='og:description' content='What&#39;s past is prologue'>
 <meta property='og:url' content='https://minezeratul.github.io/post/'>
 <meta property='og:site_name' content='Minezeratul'>
-<meta property='og:type' content='website'><meta property='og:updated_time' content=' 2021-05-22T19:47:51&#43;08:00 '/>
+<meta property='og:type' content='website'><meta property='og:updated_time' content=' 2021-05-22T21:08:13&#43;08:00 '/>
 <meta name="twitter:title" content="Posts">
 <meta name="twitter:description" content="What&#39;s past is prologue"><link rel="alternate" type="application/rss&#43;xml" href="https://minezeratul.github.io/post/index.xml">
     <link type="favicon" rel="shortcut icon" href="icon.png" />
@@ -252,13 +263,30 @@
 
     <div class="section-card">
         <div class="section-details">
-            <h3 class="section-count">17 pages</h3>
+            <h3 class="section-count">18 pages</h3>
             <h1 class="section-term">Posts</h1>
             
         </div>
     </div>
     
     <section class="article-list--compact">
+        
+            <article>
+    <a href="/p/tenth-blog/">
+        <div class="article-details">
+            <h2 class="article-title">Are u my cousin?</h2>
+            <footer class="article-time">
+                <time datetime='2021-05-17T10:43:19&#43;08:00'>May 17, 2021&nbsp;
+                    1 min read</time>
+            </footer>
+        </div>
+        <div class="article-image">
+            <img src="/p/tenth-blog/wallhaven-rdg3dm_hucaf993a63a550e009a6d2190b51b5980_274278_120x120_fill_q75_box_smart1.jpg" width="120" height="120" loading="lazy">
+            
+        </div>
+        
+    </a>
+</article>
         
             <article>
     <a href="/p/ninth-blog/">
@@ -322,23 +350,6 @@
         </div>
         <div class="article-image">
             <img src="/p/6th-blog/wallhaven-rdqvpq_hu4a0c1228b7c9baee4eb7cca01158b3ad_537850_120x120_fill_q75_box_smart1.jpg" width="120" height="120" loading="lazy">
-            
-        </div>
-        
-    </a>
-</article>
-        
-            <article>
-    <a href="/p/5th-blog/">
-        <div class="article-details">
-            <h2 class="article-title">NumArray307</h2>
-            <footer class="article-time">
-                <time datetime='2021-05-13T00:00:00&#43;08:00'>May 13, 2021&nbsp;
-                    1 min read</time>
-            </footer>
-        </div>
-        <div class="article-image">
-            <img src="/p/5th-blog/wallhaven-nkd6x6_hu91ef828cf299bfb62d37d6673a920b75_286363_120x120_fill_q75_box_smart1.jpg" width="120" height="120" loading="lazy">
             
         </div>
         
@@ -435,7 +446,7 @@
                     <a href="/archives/#2021">
                         
                             <span class="year">2021</span>
-                            <span class="count">14</span>
+                            <span class="count">15</span>
                         
                     </a> 
                 </div>
@@ -474,12 +485,16 @@
 
     <div class="tagCloud-tags">
         
-            <a href="/tags/java/" class="font_size_13">
+            <a href="/tags/java/" class="font_size_14">
                 Java
             </a>
         
             <a href="/tags/leetcode/" class="font_size_13">
                 Leetcode
+            </a>
+        
+            <a href="/tags/algorithm/" class="font_size_1">
+                Algorithm
             </a>
         
             <a href="/tags/css/" class="font_size_1">
@@ -506,8 +521,8 @@
                 MySQL
             </a>
         
-            <a href="/tags/themes/" class="font_size_1">
-                themes
+            <a href="/tags/sort/" class="font_size_1">
+                Sort
             </a>
         
     </div>

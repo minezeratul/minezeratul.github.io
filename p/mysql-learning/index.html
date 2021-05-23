@@ -74,7 +74,18 @@
 			}
 		})(window,document);
 </script>
-<meta property='og:title' content='SQLPratice'>
+<script>
+function addLink(event) {
+    event.preventDefault();
+
+    var pagelink = '\n\nThanks for reading. You are copying from: ' + document.location.href,
+        copytext =  window.getSelection() + pagelink;
+
+    (event.clipboardData || window.clipboardData).setData('Text', copytext);
+}
+
+document.addEventListener('copy', addLink);
+</script><meta property='og:title' content='SQLPratice'>
 <meta property='og:description' content='First Time Praticing'>
 <meta property='og:url' content='https://minezeratul.github.io/p/mysql-learning/'>
 <meta property='og:site_name' content='Minezeratul'>
