@@ -45,6 +45,16 @@ public int findKthLargest(int[] nums, int k) { int heapSize = nums.length; build
     </item>
     
     <item>
+      <title>You hava my word now</title>
+      <link>https://minezeratul.github.io/p/kth/</link>
+      <pubDate>Wed, 19 May 2021 10:32:16 +0800</pubDate>
+      
+      <guid>https://minezeratul.github.io/p/kth/</guid>
+      <description>Find the Kth-frequency word 这是5.19 的 692. 前K个高频单词
+用哈希表 + 排序， HashMap记录次数 , 然后从大到小排列 public static List&amp;lt;String&amp;gt; topKFrequent(String[] words, int k) { Map&amp;lt;String, Integer&amp;gt; map = new HashMap&amp;lt;&amp;gt;(); List&amp;lt;String&amp;gt; ans = new ArrayList&amp;lt;&amp;gt;(); for (String word : words) { map.put(word, map.getOrDefault(word, 0) + 1); } for (Map.Entry&amp;lt;String, Integer&amp;gt; entry : map.entrySet()) { ans.add(entry.getKey()); } Collections.sort(ans, new Comparator&amp;lt;String&amp;gt;() { //compare&amp;gt;0则大在前 &amp;lt;0则大在后  //compareTo 比较两个str  @Override public int compare(String o1, String o2) { return map.</description>
+    </item>
+    
+    <item>
       <title>又又又是XOR</title>
       <link>https://minezeratul.github.io/p/eleventh-blog/</link>
       <pubDate>Tue, 18 May 2021 19:32:07 +0800</pubDate>
