@@ -870,11 +870,11 @@
         </item>
         <item>
         <title>You hava my word now</title>
-        <link>https://minezeratul.github.io/p/kth/</link>
+        <link>https://minezeratul.github.io/p/kth-word/</link>
         <pubDate>Wed, 19 May 2021 10:32:16 +0800</pubDate>
         
-        <guid>https://minezeratul.github.io/p/kth/</guid>
-        <description>&lt;img src="https://minezeratul.github.io/p/kth/wallhaven-kww621.jpg" alt="Featured image of post You hava my word now" /&gt;&lt;h1 id=&#34;find-the-kth-frequency-word&#34;&gt;Find the Kth-frequency word&lt;/h1&gt;
+        <guid>https://minezeratul.github.io/p/kth-word/</guid>
+        <description>&lt;img src="https://minezeratul.github.io/p/kth-word/wallhaven-kww621.jpg" alt="Featured image of post You hava my word now" /&gt;&lt;h1 id=&#34;find-the-kth-frequency-word&#34;&gt;Find the Kth-frequency word&lt;/h1&gt;
 &lt;p&gt;这是5.19 的 &lt;a class=&#34;link&#34; href=&#34;https://leetcode-cn.com/problems/top-k-frequent-words/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;692. 前K个高频单词&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&#34;用哈希表--排序-hashmap记录次数--然后从大到小排列&#34;&gt;用哈希表 + 排序， HashMap记录次数 , 然后从大到小排列&lt;/h3&gt;
