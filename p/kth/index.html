@@ -2,8 +2,7 @@
 <html lang="en-us">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'>
-<link type="favicon" rel="shortcut icon" href="favicon.icon"><meta name='description' content='Find the Kth-frequency word 这是5.19 的 692. 前K个高频单词
-用哈希表 &#43; 排序， HashMap记录次数 , 然后从大到小排列 public static List&amp;lt;String&amp;gt; topKFrequent(String[] words, int k) { Map&amp;lt;String, Integer&amp;gt; map = new HashMap&amp;lt;&amp;gt;(); List&amp;lt;String&amp;gt; ans = new ArrayList&amp;lt;&amp;gt;(); for (String word : words) { map.put(word, map.getOrDefault(word, 0) &#43; 1); } for (Map.Entry&amp;lt;String, Integer&amp;gt; entry : map.entrySet()) { ans.add(entry.getKey()); } Collections.sort(ans, new Comparator&amp;lt;String&amp;gt;() { //compare&amp;gt;0则大在前 &amp;lt;0则大在后  //compareTo 比较两个str  @Override public int compare(String o1, String o2) { return map.'><title>You hava my word now</title>
+<link type="favicon" rel="shortcut icon" href="favicon.icon"><meta name='description' content='Find my frequent word'><title>You hava my word now</title>
 
 <link rel='canonical' href='https://minezeratul.github.io/p/kth/'>
 
@@ -87,14 +86,12 @@ function addLink(event) {
 
 document.addEventListener('copy', addLink);
 </script><meta property='og:title' content='You hava my word now'>
-<meta property='og:description' content='Find the Kth-frequency word 这是5.19 的 692. 前K个高频单词
-用哈希表 &#43; 排序， HashMap记录次数 , 然后从大到小排列 public static List&amp;lt;String&amp;gt; topKFrequent(String[] words, int k) { Map&amp;lt;String, Integer&amp;gt; map = new HashMap&amp;lt;&amp;gt;(); List&amp;lt;String&amp;gt; ans = new ArrayList&amp;lt;&amp;gt;(); for (String word : words) { map.put(word, map.getOrDefault(word, 0) &#43; 1); } for (Map.Entry&amp;lt;String, Integer&amp;gt; entry : map.entrySet()) { ans.add(entry.getKey()); } Collections.sort(ans, new Comparator&amp;lt;String&amp;gt;() { //compare&amp;gt;0则大在前 &amp;lt;0则大在后  //compareTo 比较两个str  @Override public int compare(String o1, String o2) { return map.'>
+<meta property='og:description' content='Find my frequent word'>
 <meta property='og:url' content='https://minezeratul.github.io/p/kth/'>
 <meta property='og:site_name' content='Minezeratul'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Java' /><meta property='article:tag' content='Leetcode' /><meta property='article:published_time' content='2021-05-19T10:32:16&#43;08:00'/><meta property='article:modified_time' content='2021-05-19T10:32:16&#43;08:00'/><meta property='og:image' content='https://minezeratul.github.io/p/kth/wallhaven-kww621.jpg' />
 <meta name="twitter:title" content="You hava my word now">
-<meta name="twitter:description" content="Find the Kth-frequency word 这是5.19 的 692. 前K个高频单词
-用哈希表 &#43; 排序， HashMap记录次数 , 然后从大到小排列 public static List&amp;lt;String&amp;gt; topKFrequent(String[] words, int k) { Map&amp;lt;String, Integer&amp;gt; map = new HashMap&amp;lt;&amp;gt;(); List&amp;lt;String&amp;gt; ans = new ArrayList&amp;lt;&amp;gt;(); for (String word : words) { map.put(word, map.getOrDefault(word, 0) &#43; 1); } for (Map.Entry&amp;lt;String, Integer&amp;gt; entry : map.entrySet()) { ans.add(entry.getKey()); } Collections.sort(ans, new Comparator&amp;lt;String&amp;gt;() { //compare&amp;gt;0则大在前 &amp;lt;0则大在后  //compareTo 比较两个str  @Override public int compare(String o1, String o2) { return map."><meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:description" content="Find my frequent word"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://minezeratul.github.io/p/kth/wallhaven-kww621.jpg' />
     <link type="favicon" rel="shortcut icon" href="icon.png" />
 
@@ -314,6 +311,10 @@ document.addEventListener('copy', addLink);
         <a href="/p/kth/">You hava my word now</a>
     </h2>
 
+    
+    <h3 class="article-subtitle">
+        Find my frequent word
+    </h3>
     <footer class="article-time">
         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
