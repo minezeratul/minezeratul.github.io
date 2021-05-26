@@ -6,7 +6,19 @@
     <description>Recent content in Leetcode Daily on Minezeratul</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 22 May 2021 19:47:51 +0800</lastBuildDate><atom:link href="https://minezeratul.github.io/categories/leetcode/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 26 May 2021 21:02:46 +0800</lastBuildDate><atom:link href="https://minezeratul.github.io/categories/leetcode/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>In Reverse , we finally meet in the sunset</title>
+      <link>https://minezeratul.github.io/p/stacktoreverse/</link>
+      <pubDate>Wed, 26 May 2021 21:02:46 +0800</pubDate>
+      
+      <guid>https://minezeratul.github.io/p/stacktoreverse/</guid>
+      <description>Leetcode 1190 5.26的每日一题，需从内到外翻转字符串 ，我们可以遇到)就开始翻转内容
+可以用stack来存储每个(的index，找到第一个)的时候即为优先级最高的里面，开始第一次翻转char[]数组
+Sample input:&amp;quot;(abcd)&amp;quot; output:&amp;quot;dcba&amp;quot;
+public String reverseParentheses(String s) { StringBuilder sb = new StringBuilder();//用stringbuilder构建字符串  char[] chs = s.toCharArray(); int n = s.length(); Stack&amp;lt;Integer&amp;gt; stack = new Stack&amp;lt;&amp;gt;(); for (int i = 0; i &amp;lt; n; i++) { if (chs[i] == &amp;#39;(&amp;#39;) {//记录index  stack.push(i); } if (chs[i] == &amp;#39;)&amp;#39;) {//匹配，开始  reverse(chs, stack.pop() + 1, i); } } for (int i = 0; i &amp;lt; n; i++) { if (chs[i] !</description>
+    </item>
+    
     <item>
       <title>K-Largest XOR Value</title>
       <link>https://minezeratul.github.io/p/13rd-blog/</link>
