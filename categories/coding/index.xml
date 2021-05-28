@@ -207,7 +207,7 @@ public int leastBricks(List&amp;lt;List&amp;lt;Integer&amp;gt;&amp;gt; wall) { M
       <guid>https://minezeratul.github.io/p/first-blog/</guid>
       <description>Hello , This is my first blog here I&amp;rsquo;m Minezeratul 今天的每日一题为 1486. 数组异或操作
 异或操作 , 即为XOR ， 同为0 ，异为1 ，1^0 = 1 0^0 = 0
-if (n == 1)//当为1的时候不运算  return start; int res = 0 ; for (int i = 0; i &amp;lt; n; i++) { res ^= start + 2 * i;//直接循环运算 } return res; 时间复杂度为O(n)</description>
+public static int xorOperation(int n, int start) { if (n == 1) { return start; } int res = 0 ; for (int i = 0; i &amp;lt; n; i++) { res ^= start + 2 * i; } return res; } 时间复杂度为O(n)</description>
     </item>
     
   </channel>

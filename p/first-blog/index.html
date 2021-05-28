@@ -347,14 +347,17 @@ document.addEventListener('copy', addLink);
 <p>今天的每日一题为 <a class="link" href="https://leetcode-cn.com/problems/xor-operation-in-an-array/"  target="_blank" rel="noopener"
     >1486. 数组异或操作</a></p>
 <p>异或操作 ,  即为XOR ， 同为0 ，异为1 ，1^0 = 1 0^0 = 0</p>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">if</span> <span class="o">(</span><span class="n">n</span> <span class="o">==</span> <span class="n">1</span><span class="o">)</span><span class="c1">//当为1的时候不运算
-</span><span class="c1"></span>    <span class="k">return</span> <span class="n">start</span><span class="o">;</span>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java">    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">xorOperation</span><span class="o">(</span><span class="kt">int</span> <span class="n">n</span><span class="o">,</span> <span class="kt">int</span> <span class="n">start</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">n</span> <span class="o">==</span> <span class="n">1</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="n">start</span><span class="o">;</span>
+        <span class="o">}</span>
 
-<span class="kt">int</span> <span class="n">res</span> <span class="o">=</span> <span class="n">0</span> <span class="o">;</span>
-<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-    <span class="n">res</span> <span class="o">^=</span> <span class="n">start</span> <span class="o">+</span> <span class="n">2</span> <span class="o">*</span> <span class="n">i</span><span class="o">;</span><span class="c1">//直接循环运算
-</span><span class="c1"></span><span class="o">}</span>
-<span class="k">return</span> <span class="n">res</span><span class="o">;</span>
+        <span class="kt">int</span> <span class="n">res</span> <span class="o">=</span> <span class="n">0</span> <span class="o">;</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="n">res</span> <span class="o">^=</span> <span class="n">start</span> <span class="o">+</span> <span class="n">2</span> <span class="o">*</span> <span class="n">i</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">res</span><span class="o">;</span>
+    <span class="o">}</span>
 </code></pre></div><p>时间复杂度为O(n)</p>
 
 </section>
