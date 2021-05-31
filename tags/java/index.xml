@@ -9,10 +9,10 @@
     <lastBuildDate>Sun, 30 May 2021 16:09:40 +0800</lastBuildDate><atom:link href="https://minezeratul.github.io/tags/java/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Week-243 chubao</title>
-      <link>https://minezeratul.github.io/p/lccontest/</link>
+      <link>https://minezeratul.github.io/p/lcweek243/</link>
       <pubDate>Sun, 30 May 2021 16:09:40 +0800</pubDate>
       
-      <guid>https://minezeratul.github.io/p/lccontest/</guid>
+      <guid>https://minezeratul.github.io/p/lcweek243/</guid>
       <description>触宝周赛Week 243 不会做最后一题哈哈哈
 第一题5772. 检查某单词是否等于两单词之和
 public boolean isSumEqual(String firstWord, String secondWord, String targetWord) { int ans = decode(firstWord) + decode(secondWord); return ans == decode(targetWord); } private int decode(String str) { int n = str.length(); int cnt = 0; //从个位开始计算  for (int i = n - 1, j = 1; i &amp;gt;= 0; i--, j = j * 10) { cnt += ((str.charAt(i) - &amp;#39;a&amp;#39;) * j); } return cnt; } 第二题 5773.</description>

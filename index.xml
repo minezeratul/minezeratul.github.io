@@ -8,11 +8,11 @@
         <language>en-us</language>
         <lastBuildDate>Sun, 30 May 2021 16:09:40 +0800</lastBuildDate><atom:link href="https://minezeratul.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>Week-243 chubao</title>
-        <link>https://minezeratul.github.io/p/lccontest/</link>
+        <link>https://minezeratul.github.io/p/lcweek243/</link>
         <pubDate>Sun, 30 May 2021 16:09:40 +0800</pubDate>
         
-        <guid>https://minezeratul.github.io/p/lccontest/</guid>
-        <description>&lt;img src="https://minezeratul.github.io/p/lccontest/11.png" alt="Featured image of post Week-243 chubao" /&gt;&lt;h1 id=&#34;触宝周赛week-243&#34;&gt;触宝周赛Week 243&lt;/h1&gt;
+        <guid>https://minezeratul.github.io/p/lcweek243/</guid>
+        <description>&lt;img src="https://minezeratul.github.io/p/lcweek243/11.png" alt="Featured image of post Week-243 chubao" /&gt;&lt;h1 id=&#34;触宝周赛week-243&#34;&gt;触宝周赛Week 243&lt;/h1&gt;
 &lt;p&gt;不会做最后一题哈哈哈&lt;/p&gt;
 &lt;p&gt;第一题&lt;a class=&#34;link&#34; href=&#34;https://leetcode-cn.com/problems/check-if-word-equals-summation-of-two-words/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;5772. 检查某单词是否等于两单词之和&lt;/a&gt;&lt;/p&gt;
@@ -91,8 +91,8 @@
         &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ans&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
     &lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
 
-&lt;span class=&#34;kd&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;ServerState&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
-    &lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;idx&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;kd&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;ServerState&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;//存储服务器的info
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;    &lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;idx&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
     &lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;weight&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
     &lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ending&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
 
