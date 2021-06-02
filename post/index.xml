@@ -6,7 +6,19 @@
     <description>Recent content in Posts on Minezeratul</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 30 May 2021 16:09:40 +0800</lastBuildDate><atom:link href="https://minezeratul.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 02 Jun 2021 09:46:48 +0800</lastBuildDate><atom:link href="https://minezeratul.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>CheckSubArray</title>
+      <link>https://minezeratul.github.io/p/leetcode-523/</link>
+      <pubDate>Wed, 02 Jun 2021 09:46:48 +0800</pubDate>
+      
+      <guid>https://minezeratul.github.io/p/leetcode-523/</guid>
+      <description>Leetcode 523 523. 连续的子数组和 给你一个整数数组 nums 和一个整数 k ，编写一个函数来判断该数组是否含有同时满足下述条件的连续子数组：
+子数组大小 至少为2 ，且子数组元素总和为 k 的倍数。 如果存在，返回 true ；否则，返回 false 。
+如果存在一个整数 n ，令整数 x 符合 x = n * k ，则称 x 是 k 的一个倍数。
+public boolean checkSubarraySum(int[] nums, int k) { int n = nums.length; if (n &amp;lt; 2) {//大小至少为2  return false; } //利用了同余定理  //即 ( pre(j) - pre (i) ) % k == 0 则 pre(j) % k == pre(i) % k  //推导 =&amp;gt; pre (i) % k = (a0 + a1 + .</description>
+    </item>
+    
     <item>
       <title>Week-243 chubao</title>
       <link>https://minezeratul.github.io/p/lcweek243/</link>
