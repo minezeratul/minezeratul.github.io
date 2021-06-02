@@ -2,34 +2,40 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://minezeratul.github.io/categories/</loc>
-    <lastmod>2021-06-02T09:46:48+08:00</lastmod>
+    <loc>https://minezeratul.github.io/tags/algorithms/</loc>
+    <lastmod>2021-06-02T23:58:08+08:00</lastmod>
   </url><url>
-    <loc>https://minezeratul.github.io/p/leetcode-523/</loc>
-    <lastmod>2021-06-02T09:46:48+08:00</lastmod>
+    <loc>https://minezeratul.github.io/categories/</loc>
+    <lastmod>2021-06-02T23:58:08+08:00</lastmod>
   </url><url>
     <loc>https://minezeratul.github.io/categories/coding/</loc>
-    <lastmod>2021-06-02T09:46:48+08:00</lastmod>
+    <lastmod>2021-06-02T23:58:08+08:00</lastmod>
+  </url><url>
+    <loc>https://minezeratul.github.io/p/graph/</loc>
+    <lastmod>2021-06-02T23:58:08+08:00</lastmod>
   </url><url>
     <loc>https://minezeratul.github.io/tags/java/</loc>
-    <lastmod>2021-06-02T09:46:48+08:00</lastmod>
+    <lastmod>2021-06-02T23:58:08+08:00</lastmod>
   </url><url>
     <loc>https://minezeratul.github.io/categories/java/</loc>
+    <lastmod>2021-06-02T23:58:08+08:00</lastmod>
+  </url><url>
+    <loc>https://minezeratul.github.io/</loc>
+    <lastmod>2021-06-02T23:58:08+08:00</lastmod>
+  </url><url>
+    <loc>https://minezeratul.github.io/post/</loc>
+    <lastmod>2021-06-02T23:58:08+08:00</lastmod>
+  </url><url>
+    <loc>https://minezeratul.github.io/tags/</loc>
+    <lastmod>2021-06-02T23:58:08+08:00</lastmod>
+  </url><url>
+    <loc>https://minezeratul.github.io/p/leetcode-523/</loc>
     <lastmod>2021-06-02T09:46:48+08:00</lastmod>
   </url><url>
     <loc>https://minezeratul.github.io/tags/leetcode/</loc>
     <lastmod>2021-06-02T09:46:48+08:00</lastmod>
   </url><url>
     <loc>https://minezeratul.github.io/categories/leetcode/</loc>
-    <lastmod>2021-06-02T09:46:48+08:00</lastmod>
-  </url><url>
-    <loc>https://minezeratul.github.io/</loc>
-    <lastmod>2021-06-02T09:46:48+08:00</lastmod>
-  </url><url>
-    <loc>https://minezeratul.github.io/post/</loc>
-    <lastmod>2021-06-02T09:46:48+08:00</lastmod>
-  </url><url>
-    <loc>https://minezeratul.github.io/tags/</loc>
     <lastmod>2021-06-02T09:46:48+08:00</lastmod>
   </url><url>
     <loc>https://minezeratul.github.io/p/lcweek243/</loc>

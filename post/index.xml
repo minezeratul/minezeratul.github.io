@@ -6,7 +6,16 @@
     <description>Recent content in Posts on Minezeratul</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 02 Jun 2021 09:46:48 +0800</lastBuildDate><atom:link href="https://minezeratul.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 02 Jun 2021 23:58:08 +0800</lastBuildDate><atom:link href="https://minezeratul.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Graph Algorithms Part I</title>
+      <link>https://minezeratul.github.io/p/graph/</link>
+      <pubDate>Wed, 02 Jun 2021 23:58:08 +0800</pubDate>
+      
+      <guid>https://minezeratul.github.io/p/graph/</guid>
+      <description>Graph Algorithms Part I. MST 最小生成树 public class MST extends Tree { private double totalWeight; // Total weight of all edges in the tree  public MST(int root, int[] parent, List&amp;lt;Integer&amp;gt; searchOrder, double totalWeight) { super(root, parent, searchOrder); this.totalWeight = totalWeight; } public double getTotalWeight() { return totalWeight; } } ShortestPathTree类似 public class ShortestPathTree extends Tree{ private double[] cost; public ShortestPathTree(int source , int[] parent , List&amp;lt;Integer&amp;gt; searchOrder , double[] cost){ super(source , parent , searchOrder); this.</description>
+    </item>
+    
     <item>
       <title>CheckSubArray</title>
       <link>https://minezeratul.github.io/p/leetcode-523/</link>

@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<link type="favicon" rel="shortcut icon" href="favicon.icon"><meta name='description' content='Prim / Kruskal &amp; Djikstr / Floyd &amp; Bellman-Ford'><title>Graph Algorithms Part I</title>
+
+<link rel='canonical' href='https://minezeratul.github.io/p/graph/'>
+
+<link rel="stylesheet" href="/scss/style.min.css"><script>
+(function(window,document,undefined){
+			var hearts = [];
+			window.requestAnimationFrame = (function(){
+				return window.requestAnimationFrame ||
+				window.webkitRequestAnimationFrame ||
+				window.mozRequestAnimationFrame ||
+				window.oRequestAnimationFrame ||
+				window.msRequestAnimationFrame ||
+				function (callback){
+					setTimeout(callback,1000/60);
+				}
+			})();
+			init();
+			function init(){
+				css(".heart{width: 10px;height: 10px;position: fixed;background: #f00;transform: rotate(45deg);-webkit-transform: rotate(45deg);-moz-transform: rotate(45deg);}.heart:after,.heart:before{content: '';width: inherit;height: inherit;background: inherit;border-radius: 50%;-webkit-border-radius: 50%;-moz-border-radius: 50%;position: absolute;}.heart:after{top: -5px;}.heart:before{left: -5px;}");
+				attachEvent();
+				gameloop();
+			}
+			function gameloop(){
+				for(var i=0;i<hearts.length;i++){
+					if(hearts[i].alpha <=0){
+						document.body.removeChild(hearts[i].el);
+						hearts.splice(i,1);
+						continue;
+					}
+					hearts[i].y--;
+					hearts[i].scale += 0.004;
+					hearts[i].alpha -= 0.013;
+					hearts[i].el.style.cssText = "left:"+hearts[i].x+"px;top:"+hearts[i].y+"px;opacity:"+hearts[i].alpha+";transform:scale("+hearts[i].scale+","+hearts[i].scale+") rotate(45deg);background:"+hearts[i].color;
+				}
+				requestAnimationFrame(gameloop);
+			}
+			function attachEvent(){
+				var old = typeof window.onclick==="function" && window.onclick;
+				window.onclick = function(event){
+					old && old();
+					createHeart(event);
+				}
+			}
+			function createHeart(event){
+				var d = document.createElement("div");
+				d.className = "heart";
+				hearts.push({
+					el : d,
+					x : event.clientX - 5,
+					y : event.clientY - 5,
+					scale : 1,
+					alpha : 1,
+					color : randomColor()
+				});
+				document.body.appendChild(d);
+			}
+			function css(css){
+				var style = document.createElement("style");
+				style.type="text/css";
+				try{
+					style.appendChild(document.createTextNode(css));
+				}catch(ex){
+					style.styleSheet.cssText = css;
+				}
+				document.getElementsByTagName('head')[0].appendChild(style);
+			}
+			function randomColor(){
+				return "rgb("+(~~(Math.random()*255))+","+(~~(Math.random()*255))+","+(~~(Math.random()*255))+")";
+			}
+		})(window,document);
+</script>
+<script>
+function addLink(event) {
+    event.preventDefault();
+
+    var pagelink = '\n\nThanks for reading. You are copying from: ' + document.location.href,
+        copytext =  window.getSelection() + pagelink;
+
+    (event.clipboardData || window.clipboardData).setData('Text', copytext);
+}
+
+document.addEventListener('copy', addLink);
+</script><meta property='og:title' content='Graph Algorithms Part I'>
+<meta property='og:description' content='Prim / Kruskal &amp; Djikstr / Floyd &amp; Bellman-Ford'>
+<meta property='og:url' content='https://minezeratul.github.io/p/graph/'>
+<meta property='og:site_name' content='Minezeratul'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Java' /><meta property='article:tag' content='Algorithms' /><meta property='article:published_time' content='2021-06-02T23:58:08&#43;08:00'/><meta property='article:modified_time' content='2021-06-02T23:58:08&#43;08:00'/><meta property='og:image' content='https://minezeratul.github.io/p/graph/wallhaven-o3ywdp.jpg' />
+<meta name="twitter:title" content="Graph Algorithms Part I">
+<meta name="twitter:description" content="Prim / Kruskal &amp; Djikstr / Floyd &amp; Bellman-Ford"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://minezeratul.github.io/p/graph/wallhaven-o3ywdp.jpg' />
+    <link type="favicon" rel="shortcut icon" href="icon.png" />
+
+    </head>
+    <body class="">
+	
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.body.dataset.scheme = 'dark';
+			
+        } else {
+            document.body.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended article-page with-toolbar">
+            <aside class="sidebar left-sidebar sticky">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header class="site-info">
+        
+            <figure class="site-avatar">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar3_hu45b9d54795338903be33d24fdbb0632c_114789_300x0_resize_box_2.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+        
+        <h1 class="site-name"><a href="https://minezeratul.github.io/">Minezeratul</a></h1>
+        <h2 class="site-description">What&#39;s past is prologue</h2>
+    </header>
+
+    <ol class="menu" id="main-menu">
+        
+        
+        
+
+        <li >
+            <a href='/'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/about/'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>About</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/archives/'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/search/'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+	
+        
+            <li id="dark-mode-toggle">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                <span>Dark Mode</span>
+            </li>
+
+        
+    </ol>
+
+</aside>
+
+            <main class="main full-width">
+
+    <div id="article-toolbar">
+        <a href="https://minezeratul.github.io/" class="back-home">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="15 6 9 12 15 18" />
+</svg>
+
+
+
+            <span>Back</span>
+        </a>
+    </div>
+
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/p/graph/">
+                <img src="/p/graph/wallhaven-o3ywdp_hu254556f4d7c6fac32ed9b7127f78f282_531223_800x0_resize_q75_box.jpg"
+                        srcset="/p/graph/wallhaven-o3ywdp_hu254556f4d7c6fac32ed9b7127f78f282_531223_800x0_resize_q75_box.jpg 800w, /p/graph/wallhaven-o3ywdp_hu254556f4d7c6fac32ed9b7127f78f282_531223_1600x0_resize_q75_box.jpg 1600w"
+                        width="800" 
+                        height="450" 
+                        loading="lazy"
+                        alt="Featured image of post Graph Algorithms Part I" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+        <a href="/categories/java/"
+            >
+            Java
+        </a>
+        
+        <a href="/categories/coding/"
+            >
+            Coding
+        </a>
+        
+    </header>
+    
+
+    <h2 class="article-title">
+        <a href="/p/graph/">Graph Algorithms Part I</a>
+    </h2>
+
+    
+    <h3 class="article-subtitle">
+        Prim / Kruskal &amp; Djikstr / Floyd &amp; Bellman-Ford
+    </h3>
+    <footer class="article-time">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+        <time class="article-time--published">Jun 02, 2021&emsp;
+        </time>
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+        <time class="article-time--published">
+            5 min read
+        </time>
+    </footer></div>
+</header>
+
+    <section class="article-content">
+    <h1 id="graph-algorithms-part-i">Graph Algorithms Part I.</h1>
+<h2 id="mst-最小生成树">MST 最小生成树</h2>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MST</span> <span class="kd">extends</span> <span class="n">Tree</span> <span class="o">{</span>
+            <span class="kd">private</span> <span class="kt">double</span> <span class="n">totalWeight</span><span class="o">;</span> <span class="c1">// Total weight of all edges in the tree
+</span><span class="c1"></span>
+            <span class="kd">public</span> <span class="nf">MST</span><span class="o">(</span><span class="kt">int</span> <span class="n">root</span><span class="o">,</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">parent</span><span class="o">,</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">searchOrder</span><span class="o">,</span>
+                       <span class="kt">double</span> <span class="n">totalWeight</span><span class="o">)</span> <span class="o">{</span>
+                <span class="kd">super</span><span class="o">(</span><span class="n">root</span><span class="o">,</span> <span class="n">parent</span><span class="o">,</span> <span class="n">searchOrder</span><span class="o">);</span>
+                <span class="k">this</span><span class="o">.</span><span class="na">totalWeight</span> <span class="o">=</span> <span class="n">totalWeight</span><span class="o">;</span>
+            <span class="o">}</span>
+
+            <span class="kd">public</span> <span class="kt">double</span> <span class="nf">getTotalWeight</span><span class="o">()</span> <span class="o">{</span>
+                <span class="k">return</span> <span class="n">totalWeight</span><span class="o">;</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+</code></pre></div><h2 id="shortestpathtree类似">ShortestPathTree类似</h2>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ShortestPathTree</span> <span class="kd">extends</span> <span class="n">Tree</span><span class="o">{</span>
+        <span class="kd">private</span> <span class="kt">double</span><span class="o">[]</span> <span class="n">cost</span><span class="o">;</span>
+
+        <span class="kd">public</span> <span class="nf">ShortestPathTree</span><span class="o">(</span><span class="kt">int</span> <span class="n">source</span> <span class="o">,</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">parent</span> <span class="o">,</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">searchOrder</span> <span class="o">,</span> <span class="kt">double</span><span class="o">[]</span> <span class="n">cost</span><span class="o">){</span>
+            <span class="kd">super</span><span class="o">(</span><span class="n">source</span> <span class="o">,</span> <span class="n">parent</span> <span class="o">,</span> <span class="n">searchOrder</span><span class="o">);</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">cost</span> <span class="o">=</span> <span class="n">cost</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="kd">public</span> <span class="kt">double</span><span class="o">[]</span> <span class="nf">getCost</span><span class="o">()</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="n">cost</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">printAllPaths</span><span class="o">(){</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;All shortest paths from &#34;</span> <span class="o">+</span> <span class="n">vertices</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">getRoot</span><span class="o">())</span> <span class="o">+</span> <span class="s">&#34; are:&#34;</span><span class="o">);</span>
+
+            <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">cost</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+                <span class="n">printPath</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
+                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;(cost: &#34;</span> <span class="o">+</span> <span class="n">cost</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">+</span><span class="s">&#34;)&#34;</span><span class="o">);</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+</code></pre></div><h2 id="1prim--最小生成树--即最小的总权重的生成树">1.Prim  最小生成树 , 即最小的总权重的生成树</h2>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="n">MST</span> <span class="nf">getMinSpanningTree</span><span class="o">(){</span>
+        <span class="k">return</span> <span class="n">getMinSpanningTree</span><span class="o">(</span><span class="n">0</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="c1">//包括了连通图里的所有顶点，
+</span><span class="c1"></span>    <span class="c1">//且其所有边的权值之和亦为最小
+</span><span class="c1"></span>    <span class="c1">//连通图足够密集时（当E满足Ω（VlogV）条件时），
+</span><span class="c1"></span>    <span class="c1">//可较显著地提高运行速度。
+</span><span class="c1"></span>    <span class="c1">//搜索到哪个edge权重最小就加入到T
+</span><span class="c1"></span>    <span class="kd">public</span> <span class="n">MST</span> <span class="nf">getMinSpanningTree</span><span class="o">(</span><span class="kt">int</span> <span class="n">sourceVertex</span><span class="o">)</span> <span class="o">{</span><span class="c1">//Algorithm Prim
+</span><span class="c1"></span>        <span class="kt">double</span><span class="o">[]</span> <span class="n">cost</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">double</span><span class="o">[</span><span class="n">size</span><span class="o">()];</span>
+        <span class="c1">// cost[v] stores the cost by adding v to the tree
+</span><span class="c1"></span>        <span class="n">Arrays</span><span class="o">.</span><span class="na">fill</span><span class="o">(</span><span class="n">cost</span><span class="o">,</span> <span class="n">Double</span><span class="o">.</span><span class="na">POSITIVE_INFINITY</span><span class="o">);</span>
+        <span class="n">cost</span><span class="o">[</span><span class="n">sourceVertex</span><span class="o">]</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
+
+        <span class="kt">int</span><span class="o">[]</span> <span class="n">parent</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">size</span><span class="o">()];</span>
+        <span class="n">parent</span><span class="o">[</span><span class="n">sourceVertex</span><span class="o">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">1</span><span class="o">;</span>
+        <span class="kt">double</span> <span class="n">totalWeight</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
+
+        <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">T</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
+
+        <span class="k">while</span> <span class="o">(</span><span class="n">T</span><span class="o">.</span><span class="na">size</span><span class="o">()</span> <span class="o">&lt;</span> <span class="n">size</span><span class="o">()){</span>    
+            <span class="kt">int</span> <span class="n">u</span> <span class="o">=</span> <span class="o">-</span><span class="n">1</span> <span class="o">;</span>
+            <span class="kt">double</span> <span class="n">curMinCost</span> <span class="o">=</span> <span class="n">Double</span><span class="o">.</span><span class="na">POSITIVE_INFINITY</span><span class="o">;</span>
+
+            <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">size</span><span class="o">();</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+                <span class="k">if</span> <span class="o">(!</span><span class="n">T</span><span class="o">.</span><span class="na">contains</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="n">cost</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">&lt;</span> <span class="n">curMinCost</span><span class="o">){</span>
+                    <span class="c1">//开始寻找最小值权重edge
+</span><span class="c1"></span>                    <span class="n">curMinCost</span> <span class="o">=</span> <span class="n">cost</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
+                    <span class="n">u</span> <span class="o">=</span> <span class="n">i</span><span class="o">;</span>
+                <span class="o">}</span>
+            <span class="o">}</span>
+
+            <span class="n">T</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">u</span><span class="o">);</span>
+            <span class="n">totalWeight</span> <span class="o">+=</span> <span class="n">cost</span><span class="o">[</span><span class="n">u</span><span class="o">];</span><span class="c1">//累加最小权重
+</span><span class="c1"></span>
+            <span class="k">for</span> <span class="o">(</span><span class="n">Edge</span> <span class="n">e</span><span class="o">:</span><span class="n">neighbors</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">u</span><span class="o">)){</span>
+                <span class="k">if</span> <span class="o">(!</span><span class="n">T</span><span class="o">.</span><span class="na">contains</span><span class="o">(</span><span class="n">e</span><span class="o">.</span><span class="na">v</span><span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="n">cost</span><span class="o">[</span><span class="n">e</span><span class="o">.</span><span class="na">v</span><span class="o">]</span> <span class="o">&gt;</span> <span class="o">((</span><span class="n">MyWeightedEdge</span><span class="o">)</span><span class="n">e</span><span class="o">).</span><span class="na">weight</span><span class="o">){</span><span class="c1">//adjust cost[v]
+</span><span class="c1"></span>                    <span class="c1">//对每个edge的权重进行比较，找出最小值
+</span><span class="c1"></span>                    <span class="n">cost</span><span class="o">[</span><span class="n">e</span><span class="o">.</span><span class="na">v</span><span class="o">]</span> <span class="o">=</span> <span class="o">((</span><span class="n">MyWeightedEdge</span><span class="o">)</span><span class="n">e</span><span class="o">).</span><span class="na">weight</span><span class="o">;</span>
+                    <span class="n">parent</span><span class="o">[</span><span class="n">e</span><span class="o">.</span><span class="na">v</span><span class="o">]</span> <span class="o">=</span> <span class="n">u</span><span class="o">;</span>
+                <span class="o">}</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+
+        <span class="k">return</span> <span class="k">new</span> <span class="n">MST</span><span class="o">(</span><span class="n">sourceVertex</span> <span class="o">,</span> <span class="n">parent</span> <span class="o">,</span> <span class="n">T</span> <span class="o">,</span> <span class="n">totalWeight</span><span class="o">);</span>
+        <span class="c1">//返回一个MST
+</span><span class="c1"></span>    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div><h2 id="2kruskal-另一种寻找最小生成树算法">2.Kruskal 另一种寻找最小生成树算法</h2>
+<p>重复寻找最小总权重edge，若不出现环，则添加到树</p>
+<p>用了PriorityQueue去实现</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="n">MST</span> <span class="nf">getMinimumSpanningTree</span><span class="o">()</span> <span class="o">{</span> <span class="c1">//KrusKal 相当于 Union-Find 
+</span><span class="c1"></span>            <span class="n">WeightedGraph</span><span class="o">&lt;</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">t</span> <span class="o">=</span> <span class="k">new</span> <span class="n">WeightedGraph</span><span class="o">&lt;&gt;();</span>
+            <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="k">this</span><span class="o">.</span><span class="na">getSize</span><span class="o">();</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+                <span class="n">t</span><span class="o">.</span><span class="na">addVertex</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">vertices</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">i</span><span class="o">));</span>
+            <span class="o">}</span>
+
+            <span class="n">PriorityQueue</span><span class="o">&lt;</span><span class="n">WeightedEdge</span><span class="o">&gt;</span> <span class="n">edgeList</span> <span class="o">=</span> <span class="n">getEdges</span><span class="o">();</span>
+
+            <span class="kt">double</span> <span class="n">totalWeight</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
+            <span class="k">while</span> <span class="o">(!</span><span class="n">edgeList</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span> <span class="o">{</span>
+                <span class="n">WeightedEdge</span> <span class="n">e</span> <span class="o">=</span> <span class="n">edgeList</span><span class="o">.</span><span class="na">remove</span><span class="o">();</span>
+                <span class="n">t</span><span class="o">.</span><span class="na">neighbors</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">e</span><span class="o">.</span><span class="na">u</span><span class="o">).</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">WeightedEdge</span><span class="o">(</span><span class="n">e</span><span class="o">.</span><span class="na">u</span><span class="o">,</span> <span class="n">e</span><span class="o">.</span><span class="na">v</span><span class="o">,</span> <span class="n">e</span><span class="o">.</span><span class="na">weight</span><span class="o">));</span>
+                <span class="n">t</span><span class="o">.</span><span class="na">neighbors</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">e</span><span class="o">.</span><span class="na">v</span><span class="o">).</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">WeightedEdge</span><span class="o">(</span><span class="n">e</span><span class="o">.</span><span class="na">v</span><span class="o">,</span> <span class="n">e</span><span class="o">.</span><span class="na">u</span><span class="o">,</span> <span class="n">e</span><span class="o">.</span><span class="na">weight</span><span class="o">));</span>
+                <span class="k">if</span> <span class="o">(</span><span class="n">t</span><span class="o">.</span><span class="na">getACycle</span><span class="o">()</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="n">t</span><span class="o">.</span><span class="na">neighbors</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">e</span><span class="o">.</span><span class="na">u</span><span class="o">).</span><span class="na">remove</span><span class="o">(</span><span class="n">t</span><span class="o">.</span><span class="na">neighbors</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">e</span><span class="o">.</span><span class="na">u</span><span class="o">).</span><span class="na">size</span><span class="o">()</span> <span class="o">-</span> <span class="n">1</span><span class="o">);</span>
+                    <span class="n">t</span><span class="o">.</span><span class="na">neighbors</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">e</span><span class="o">.</span><span class="na">v</span><span class="o">).</span><span class="na">remove</span><span class="o">(</span><span class="n">t</span><span class="o">.</span><span class="na">neighbors</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">e</span><span class="o">.</span><span class="na">v</span><span class="o">).</span><span class="na">size</span><span class="o">()</span> <span class="o">-</span> <span class="n">1</span><span class="o">);</span>
+                <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+                    <span class="n">totalWeight</span> <span class="o">+=</span> <span class="n">e</span><span class="o">.</span><span class="na">weight</span><span class="o">;</span>
+                <span class="o">}</span>
+            <span class="o">}</span>
+
+            <span class="n">Tree</span> <span class="n">tree</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="na">dfs</span><span class="o">(</span><span class="n">0</span><span class="o">);</span>
+            <span class="kt">int</span><span class="o">[]</span> <span class="n">parent</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">vertices</span><span class="o">.</span><span class="na">size</span><span class="o">()];</span>
+            <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">parent</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+                <span class="n">parent</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="na">getParent</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
+            <span class="o">}</span>
+            <span class="k">return</span> <span class="k">new</span> <span class="n">MST</span><span class="o">(</span><span class="n">tree</span><span class="o">.</span><span class="na">getRoot</span><span class="o">(),</span> <span class="n">parent</span><span class="o">,</span> <span class="n">tree</span><span class="o">.</span><span class="na">getSearchOrder</span><span class="o">(),</span> <span class="n">totalWeight</span><span class="o">);</span>
+        <span class="o">}</span>
+
+        <span class="kd">public</span> <span class="n">PriorityQueue</span><span class="o">&lt;</span><span class="n">WeightedEdge</span><span class="o">&gt;</span> <span class="nf">getEdges</span><span class="o">()</span> <span class="o">{</span>
+            <span class="n">PriorityQueue</span><span class="o">&lt;</span><span class="n">WeightedEdge</span><span class="o">&gt;</span> <span class="n">list</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PriorityQueue</span><span class="o">&lt;&gt;();</span>
+            <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="k">this</span><span class="o">.</span><span class="na">getSize</span><span class="o">();</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+                <span class="k">for</span> <span class="o">(</span><span class="n">Edge</span> <span class="n">e</span> <span class="o">:</span> <span class="k">this</span><span class="o">.</span><span class="na">neighbors</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">i</span><span class="o">))</span> <span class="o">{</span>
+                    <span class="k">if</span> <span class="o">(</span><span class="n">e</span><span class="o">.</span><span class="na">u</span> <span class="o">&lt;</span> <span class="n">e</span><span class="o">.</span><span class="na">v</span><span class="o">)</span> <span class="o">{</span>
+                        <span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">((</span><span class="n">WeightedEdge</span><span class="o">)</span> <span class="n">e</span><span class="o">);</span>
+                    <span class="o">}</span>
+                <span class="o">}</span>
+            <span class="o">}</span>
+            <span class="k">return</span> <span class="n">list</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="nf">getACycle</span><span class="o">()</span> <span class="o">{</span>
+            <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">allVertices</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
+            <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="k">this</span><span class="o">.</span><span class="na">vertices</span><span class="o">.</span><span class="na">size</span><span class="o">();</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+                <span class="n">allVertices</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
+            <span class="o">}</span>
+
+            <span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Edge</span><span class="o">&gt;&gt;</span> <span class="n">neighbors</span> <span class="o">=</span> <span class="n">cloneEdges</span><span class="o">();</span>
+
+            <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">searchOrder</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
+            <span class="kt">int</span><span class="o">[]</span> <span class="n">parent</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">vertices</span><span class="o">.</span><span class="na">size</span><span class="o">()];</span>
+            <span class="c1">// Initialize parent[i] to -1
+</span><span class="c1"></span>            <span class="n">Arrays</span><span class="o">.</span><span class="na">fill</span><span class="o">(</span><span class="n">parent</span><span class="o">,</span> <span class="o">-</span><span class="n">1</span><span class="o">);</span>
+
+            <span class="c1">// Mark visited vertices
+</span><span class="c1"></span>            <span class="kt">boolean</span><span class="o">[]</span> <span class="n">isVisited</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">boolean</span><span class="o">[</span><span class="n">vertices</span><span class="o">.</span><span class="na">size</span><span class="o">()];</span>
+
+            <span class="k">while</span> <span class="o">(</span><span class="n">allVertices</span><span class="o">.</span><span class="na">size</span><span class="o">()</span> <span class="o">&gt;</span> <span class="n">0</span><span class="o">)</span> <span class="o">{</span>
+                <span class="kt">int</span> <span class="n">v</span> <span class="o">=</span> <span class="n">allVertices</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">0</span><span class="o">);</span>
+
+                <span class="n">Stack</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">stack</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Stack</span><span class="o">&lt;&gt;();</span>
+                <span class="n">stack</span><span class="o">.</span><span class="na">push</span><span class="o">(</span><span class="n">v</span><span class="o">);</span>
+                <span class="n">searchOrder</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">v</span><span class="o">);</span>
+                <span class="n">allVertices</span><span class="o">.</span><span class="na">remove</span><span class="o">(</span><span class="k">new</span> <span class="n">Integer</span><span class="o">(</span><span class="n">v</span><span class="o">));</span>
+                <span class="n">isVisited</span><span class="o">[</span><span class="n">v</span><span class="o">]</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span> <span class="c1">// Vertex x visited
+</span><span class="c1"></span>
+                <span class="k">while</span> <span class="o">(!</span><span class="n">stack</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span> <span class="o">{</span>
+                    <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="n">stack</span><span class="o">.</span><span class="na">peek</span><span class="o">();</span>
+                    <span class="k">if</span> <span class="o">(</span><span class="n">neighbors</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">x</span><span class="o">).</span><span class="na">size</span><span class="o">()</span> <span class="o">==</span> <span class="n">0</span><span class="o">)</span> <span class="o">{</span>
+                        <span class="n">stack</span><span class="o">.</span><span class="na">pop</span><span class="o">();</span>
+                    <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+                        <span class="c1">// Find the next unvisited neighbor of x
+</span><span class="c1"></span>                        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">neighbors</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">x</span><span class="o">).</span><span class="na">size</span><span class="o">()</span> <span class="o">-</span> <span class="n">1</span><span class="o">;</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span><span class="o">--)</span> <span class="o">{</span>
+                            <span class="n">Edge</span> <span class="n">e</span> <span class="o">=</span> <span class="n">neighbors</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">x</span><span class="o">).</span><span class="na">get</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
+                            <span class="k">if</span> <span class="o">(!</span><span class="n">isVisited</span><span class="o">[</span><span class="n">e</span><span class="o">.</span><span class="na">v</span><span class="o">])</span> <span class="o">{</span>
+                                <span class="n">parent</span><span class="o">[</span><span class="n">e</span><span class="o">.</span><span class="na">v</span><span class="o">]</span> <span class="o">=</span> <span class="n">x</span><span class="o">;</span> <span class="c1">// The parent of vertex e.v is x
+</span><span class="c1"></span>                                <span class="n">stack</span><span class="o">.</span><span class="na">push</span><span class="o">(</span><span class="n">e</span><span class="o">.</span><span class="na">v</span><span class="o">);</span> <span class="c1">// Add a new neighbor to the stack
+</span><span class="c1"></span>                                <span class="n">isVisited</span><span class="o">[</span><span class="n">e</span><span class="o">.</span><span class="na">v</span><span class="o">]</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span> <span class="c1">// Vertex x visited
+</span><span class="c1"></span>                                <span class="n">searchOrder</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">e</span><span class="o">.</span><span class="na">v</span><span class="o">);</span>
+                                <span class="n">allVertices</span><span class="o">.</span><span class="na">remove</span><span class="o">(</span><span class="k">new</span> <span class="n">Integer</span><span class="o">(</span><span class="n">e</span><span class="o">.</span><span class="na">v</span><span class="o">));</span>
+                                <span class="n">neighbors</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">x</span><span class="o">).</span><span class="na">remove</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
+                                <span class="k">break</span><span class="o">;</span>
+                            <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">e</span><span class="o">.</span><span class="na">v</span> <span class="o">!=</span> <span class="n">parent</span><span class="o">[</span><span class="n">x</span><span class="o">])</span> <span class="o">{</span>
+                                <span class="c1">// A path is found
+</span><span class="c1"></span>                                <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">list</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
+
+                                <span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">e</span><span class="o">.</span><span class="na">v</span><span class="o">);</span>
+                                <span class="k">while</span> <span class="o">(</span><span class="n">x</span> <span class="o">!=</span> <span class="n">e</span><span class="o">.</span><span class="na">v</span><span class="o">)</span> <span class="o">{</span>
+                                    <span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">x</span><span class="o">);</span>
+                                    <span class="n">x</span> <span class="o">=</span> <span class="n">parent</span><span class="o">[</span><span class="n">x</span><span class="o">];</span>
+                                <span class="o">}</span>
+                                <span class="k">return</span> <span class="n">list</span><span class="o">;</span>
+                            <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+                                <span class="n">neighbors</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">x</span><span class="o">).</span><span class="na">remove</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
+                            <span class="o">}</span>
+                        <span class="o">}</span>
+                    <span class="o">}</span>
+                <span class="o">}</span>
+            <span class="o">}</span>
+            <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Edge</span><span class="o">&gt;&gt;</span> <span class="nf">cloneEdges</span><span class="o">()</span> <span class="o">{</span>
+            <span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Edge</span><span class="o">&gt;&gt;</span> <span class="n">neigborCopy</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
+
+            <span class="k">for</span> <span class="o">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Edge</span><span class="o">&gt;</span> <span class="n">neighbor</span> <span class="o">:</span> <span class="n">neighbors</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">List</span><span class="o">&lt;</span><span class="n">Edge</span><span class="o">&gt;</span> <span class="n">edges</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
+                <span class="k">for</span> <span class="o">(</span><span class="n">Edge</span> <span class="n">e</span> <span class="o">:</span> <span class="n">neighbor</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="n">edges</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">e</span><span class="o">);</span>
+                <span class="o">}</span>
+                <span class="n">neigborCopy</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">edges</span><span class="o">);</span>
+            <span class="o">}</span>
+
+            <span class="k">return</span> <span class="n">neigborCopy</span><span class="o">;</span>
+        <span class="o">}</span>
+</code></pre></div><h3 id="union-find并查集-实现kruskal">Union-Find并查集 实现Kruskal</h3>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="cm">/**
+</span><span class="cm"> * @author Minezeratul
+</span><span class="cm"> */</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">KruskalUF</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="n">Queue</span><span class="o">&lt;</span><span class="n">WeightedEdge</span><span class="o">&gt;</span> <span class="n">mst</span><span class="o">;</span>
+    <span class="kt">double</span> <span class="n">weight</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">KruskalUF</span><span class="o">(</span><span class="n">WeightedGraph</span> <span class="n">G</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">mst</span> <span class="o">=</span> <span class="k">new</span> <span class="n">LinkedList</span><span class="o">&lt;&gt;();</span>
+        <span class="n">PriorityQueue</span><span class="o">&lt;</span><span class="n">WeightedEdge</span><span class="o">&gt;</span> <span class="n">pq</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PriorityQueue</span><span class="o">&lt;&gt;((</span><span class="n">Comparator</span><span class="o">.</span><span class="na">comparingDouble</span><span class="o">(</span><span class="n">o</span> <span class="o">-&gt;</span> <span class="n">o</span><span class="o">.</span><span class="na">weight</span><span class="o">)));</span>
+
+        <span class="n">UnionFind</span> <span class="n">uf</span> <span class="o">=</span> <span class="k">new</span> <span class="n">UnionFind</span><span class="o">(</span><span class="n">G</span><span class="o">.</span><span class="na">getSize</span><span class="o">());</span>
+
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">G</span><span class="o">.</span><span class="na">getSize</span><span class="o">();</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">G</span><span class="o">.</span><span class="na">getNeighbor</span><span class="o">(</span><span class="n">i</span><span class="o">).</span><span class="na">size</span><span class="o">();</span> <span class="n">j</span><span class="o">++)</span> <span class="o">{</span>
+                <span class="n">pq</span><span class="o">.</span><span class="na">offer</span><span class="o">((</span><span class="n">WeightedEdge</span><span class="o">)</span> <span class="n">G</span><span class="o">.</span><span class="na">getNeighbor</span><span class="o">(</span><span class="n">i</span><span class="o">).</span><span class="na">get</span><span class="o">(</span><span class="n">j</span><span class="o">));</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+
+        <span class="k">while</span> <span class="o">(!</span><span class="n">pq</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">()</span> <span class="o">&amp;&amp;</span> <span class="n">mst</span><span class="o">.</span><span class="na">size</span><span class="o">()</span> <span class="o">&lt;</span> <span class="n">G</span><span class="o">.</span><span class="na">getSize</span><span class="o">()</span> <span class="o">-</span> <span class="n">1</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">WeightedEdge</span> <span class="n">e</span> <span class="o">=</span> <span class="n">pq</span><span class="o">.</span><span class="na">poll</span><span class="o">();</span>
+            <span class="kt">int</span> <span class="n">v</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="na">u</span><span class="o">,</span> <span class="n">w</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="na">v</span><span class="o">;</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">uf</span><span class="o">.</span><span class="na">connected</span><span class="o">(</span><span class="n">v</span><span class="o">,</span> <span class="n">w</span><span class="o">))</span> <span class="o">{</span>
+                <span class="k">continue</span><span class="o">;</span>
+            <span class="o">}</span>
+            <span class="n">uf</span><span class="o">.</span><span class="na">union</span><span class="o">(</span><span class="n">v</span><span class="o">,</span> <span class="n">w</span><span class="o">);</span>
+            <span class="n">mst</span><span class="o">.</span><span class="na">offer</span><span class="o">(</span><span class="n">e</span><span class="o">);</span>
+            <span class="n">weight</span> <span class="o">+=</span> <span class="n">e</span><span class="o">.</span><span class="na">weight</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">toString</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="s">&#34;&#34;</span> <span class="o">+</span> <span class="n">mst</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">String</span><span class="o">[]</span> <span class="n">vertices</span> <span class="o">=</span> <span class="o">{</span><span class="s">&#34;0&#34;</span><span class="o">,</span> <span class="s">&#34;1&#34;</span><span class="o">,</span> <span class="s">&#34;2&#34;</span><span class="o">,</span> <span class="s">&#34;3&#34;</span><span class="o">,</span> <span class="s">&#34;4&#34;</span><span class="o">};</span>
+
+        <span class="kt">int</span><span class="o">[][]</span> <span class="n">edges</span> <span class="o">=</span> <span class="o">{</span>
+                <span class="o">{</span><span class="n">0</span><span class="o">,</span> <span class="n">1</span><span class="o">,</span> <span class="n">2</span><span class="o">},</span> <span class="o">{</span><span class="n">0</span><span class="o">,</span> <span class="n">3</span><span class="o">,</span> <span class="n">8</span><span class="o">},</span>
+                <span class="o">{</span><span class="n">1</span><span class="o">,</span> <span class="n">0</span><span class="o">,</span> <span class="n">2</span><span class="o">},</span> <span class="o">{</span><span class="n">1</span><span class="o">,</span> <span class="n">2</span><span class="o">,</span> <span class="n">7</span><span class="o">},</span> <span class="o">{</span><span class="n">1</span><span class="o">,</span> <span class="n">3</span><span class="o">,</span> <span class="n">3</span><span class="o">},</span>
+                <span class="o">{</span><span class="n">2</span><span class="o">,</span> <span class="n">1</span><span class="o">,</span> <span class="n">7</span><span class="o">},</span> <span class="o">{</span><span class="n">2</span><span class="o">,</span> <span class="n">3</span><span class="o">,</span> <span class="n">4</span><span class="o">},</span> <span class="o">{</span><span class="n">2</span><span class="o">,</span> <span class="n">4</span><span class="o">,</span> <span class="n">5</span><span class="o">},</span>
+                <span class="o">{</span><span class="n">3</span><span class="o">,</span> <span class="n">0</span><span class="o">,</span> <span class="n">8</span><span class="o">},</span> <span class="o">{</span><span class="n">3</span><span class="o">,</span> <span class="n">1</span><span class="o">,</span> <span class="n">3</span><span class="o">},</span> <span class="o">{</span><span class="n">3</span><span class="o">,</span> <span class="n">2</span><span class="o">,</span> <span class="n">4</span><span class="o">},</span> <span class="o">{</span><span class="n">3</span><span class="o">,</span> <span class="n">4</span><span class="o">,</span> <span class="n">6</span><span class="o">},</span>
+                <span class="o">{</span><span class="n">4</span><span class="o">,</span> <span class="n">2</span><span class="o">,</span> <span class="n">5</span><span class="o">},</span> <span class="o">{</span><span class="n">4</span><span class="o">,</span> <span class="n">3</span><span class="o">,</span> <span class="n">6</span><span class="o">}</span>
+        <span class="o">};</span>
+
+        <span class="n">WeightedGraph</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">graph</span> <span class="o">=</span> <span class="k">new</span> <span class="n">WeightedGraph</span><span class="o">&lt;&gt;(</span><span class="n">vertices</span><span class="o">,</span> <span class="n">edges</span><span class="o">);</span>
+        <span class="n">graph</span><span class="o">.</span><span class="na">getMinimumSpanningTree</span><span class="o">().</span><span class="na">printTree</span><span class="o">();</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">graph</span><span class="o">.</span><span class="na">getMinimumSpanningTree</span><span class="o">().</span><span class="na">getTotalWeight</span><span class="o">());</span>
+        <span class="n">KruskalUF</span> <span class="n">k</span> <span class="o">=</span> <span class="k">new</span> <span class="n">KruskalUF</span><span class="o">(</span><span class="n">graph</span><span class="o">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">k</span><span class="o">.</span><span class="na">weight</span><span class="o">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">k</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div><h2 id="3dijkstra-单源最短路径-即最小总权重的路径">3.Dijkstra 单源最短路径 ，即最小总权重的路径</h2>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java">	<span class="c1">//要求图中不存在负权边
+</span><span class="c1"></span>	<span class="c1">//每次遍历到始点距离最近且未访问过的顶点的邻接节点，直到扩展到终点为止
+</span><span class="c1"></span>	<span class="c1">//寻找点到点之间的最小总权重路线
+</span><span class="c1"></span>    <span class="kd">public</span> <span class="n">ShortestPathTree</span> <span class="nf">getShortestPath</span><span class="o">(</span><span class="kt">int</span> <span class="n">sourceVertex</span><span class="o">){</span><span class="c1">//Algorithm Dijkstra
+</span><span class="c1"></span>        <span class="kt">double</span><span class="o">[]</span> <span class="n">cost</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">double</span><span class="o">[</span><span class="n">size</span><span class="o">()];</span>
+        <span class="n">Arrays</span><span class="o">.</span><span class="na">fill</span><span class="o">(</span><span class="n">cost</span> <span class="o">,</span> <span class="n">Double</span><span class="o">.</span><span class="na">POSITIVE_INFINITY</span><span class="o">);</span>
+        <span class="n">cost</span><span class="o">[</span><span class="n">sourceVertex</span><span class="o">]</span> <span class="o">=</span> <span class="n">0</span> <span class="o">;</span>
+
+        <span class="kt">int</span><span class="o">[]</span> <span class="n">parent</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">size</span><span class="o">()];</span>
+        <span class="n">parent</span><span class="o">[</span><span class="n">sourceVertex</span><span class="o">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">1</span><span class="o">;</span>
+
+        <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">T</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
+
+        <span class="k">while</span> <span class="o">(</span><span class="n">T</span><span class="o">.</span><span class="na">size</span><span class="o">()</span> <span class="o">&lt;</span> <span class="n">size</span><span class="o">()){</span>
+            <span class="kt">int</span> <span class="n">u</span> <span class="o">=</span> <span class="o">-</span><span class="n">1</span><span class="o">;</span>
+            <span class="kt">double</span> <span class="n">curMinCost</span> <span class="o">=</span> <span class="n">Double</span><span class="o">.</span><span class="na">POSITIVE_INFINITY</span><span class="o">;</span>
+
+            <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">size</span><span class="o">();</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+                <span class="c1">//开始搜寻加权图
+</span><span class="c1"></span>                <span class="k">if</span> <span class="o">(!</span><span class="n">T</span><span class="o">.</span><span class="na">contains</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="n">cost</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">&lt;</span> <span class="n">curMinCost</span><span class="o">){</span>
+                    <span class="n">curMinCost</span> <span class="o">=</span> <span class="n">cost</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
+                    <span class="n">u</span> <span class="o">=</span> <span class="n">i</span><span class="o">;</span>
+                <span class="o">}</span>
+            <span class="o">}</span>
+
+            <span class="n">T</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">u</span><span class="o">);</span>
+
+            <span class="k">for</span> <span class="o">(</span><span class="n">Edge</span> <span class="n">e</span><span class="o">:</span><span class="n">neighbors</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">u</span><span class="o">))</span> <span class="o">{</span>
+                <span class="c1">//与Prim的不同之处
+</span><span class="c1"></span>                <span class="k">if</span> <span class="o">(!</span><span class="n">T</span><span class="o">.</span><span class="na">contains</span><span class="o">(</span><span class="n">e</span><span class="o">.</span><span class="na">v</span><span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="n">cost</span><span class="o">[</span><span class="n">e</span><span class="o">.</span><span class="na">v</span><span class="o">]</span> <span class="o">&gt;</span> <span class="n">cost</span><span class="o">[</span><span class="n">u</span><span class="o">]</span> <span class="o">+</span> <span class="o">((</span><span class="n">MyWeightedEdge</span><span class="o">)</span><span class="n">e</span><span class="o">).</span><span class="na">weight</span><span class="o">){</span>
+                    
+                    <span class="n">cost</span><span class="o">[</span><span class="n">e</span><span class="o">.</span><span class="na">v</span><span class="o">]</span> <span class="o">=</span> <span class="n">cost</span><span class="o">[</span><span class="n">u</span><span class="o">]</span> <span class="o">+</span> <span class="o">((</span><span class="n">MyWeightedEdge</span><span class="o">)</span><span class="n">e</span><span class="o">).</span><span class="na">weight</span><span class="o">;</span>
+                    <span class="n">parent</span><span class="o">[</span><span class="n">e</span><span class="o">.</span><span class="na">v</span><span class="o">]</span> <span class="o">=</span> <span class="n">u</span><span class="o">;</span>
+                <span class="o">}</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="n">ShortestPathTree</span><span class="o">(</span><span class="n">sourceVertex</span> <span class="o">,</span> <span class="n">parent</span> <span class="o">,</span> <span class="n">T</span> <span class="o">,</span> <span class="n">cost</span><span class="o">);</span>
+    <span class="o">}</span>
+</code></pre></div><p><figure style="flex-grow: 293; flex-basis: 703px">
+		<a href="/p/graph/dijkstra.png" data-size="771x263"><img src="/p/graph/dijkstra.png"
+				srcset="/p/graph/dijkstra_hu92866581a3d873b77f4a5fd81637ae67_85840_480x0_resize_box_2.png 480w, /p/graph/dijkstra_hu92866581a3d873b77f4a5fd81637ae67_85840_1024x0_resize_box_2.png 1024w"
+				width="771"
+				height="263"
+				loading="lazy"
+				alt="Dijkstra">
+		</a>
+		
+		<figcaption>Dijkstra</figcaption>
+		
+	</figure></p>
+<p>如图所示，我们从<code>1</code>开始 , 然后就到2(min cost) ，更新<code>cost</code>和<code>parent</code> ；然后从2去到0 ， 更新 ， 从 0 去到 6 ；</p>
+<p>此时会变成 <figure style="flex-grow: 256; flex-basis: 614px">
+		<a href="/p/graph/dijkstra3.png" data-size="720x281"><img src="/p/graph/dijkstra3.png"
+				srcset="/p/graph/dijkstra3_hu2899e919b8da16c153fb6f47f171c4ec_90508_480x0_resize_box_2.png 480w, /p/graph/dijkstra3_hu2899e919b8da16c153fb6f47f171c4ec_90508_1024x0_resize_box_2.png 1024w"
+				width="720"
+				height="281"
+				loading="lazy"
+				alt="Dijkstra">
+		</a>
+		
+		<figcaption>Dijkstra</figcaption>
+		
+	</figure></p>
+<p>3和5的权重相同，我们先去到3，此时更新cost，cost[4]变成了18 ， 因为我们还没有搜寻到{5,  4 , 4}</p>
+<p><figure style="flex-grow: 243; flex-basis: 584px">
+		<a href="/p/graph/dijkstra4.png" data-size="719x295"><img src="/p/graph/dijkstra4.png"
+				srcset="/p/graph/dijkstra4_hu7221133467ecf569e18878cb23804f6f_118790_480x0_resize_box_2.png 480w, /p/graph/dijkstra4_hu7221133467ecf569e18878cb23804f6f_118790_1024x0_resize_box_2.png 1024w"
+				width="719"
+				height="295"
+				loading="lazy"
+				alt="Dijkstra">
+		</a>
+		
+		<figcaption>Dijkstra</figcaption>
+		
+	</figure></p>
+<p>此时添加5 ， cost[4]才更新成最小总权重15</p>
+<p><figure style="flex-grow: 235; flex-basis: 565px">
+		<a href="/p/graph/dijkstra2.png" data-size="641x272"><img src="/p/graph/dijkstra2.png"
+				srcset="/p/graph/dijkstra2_hu25e8a94b7b3cd1fb3b8e876f9167f7bc_105291_480x0_resize_box_2.png 480w, /p/graph/dijkstra2_hu25e8a94b7b3cd1fb3b8e876f9167f7bc_105291_1024x0_resize_box_2.png 1024w"
+				width="641"
+				height="272"
+				loading="lazy"
+				alt="Dijkstra">
+		</a>
+		
+		<figcaption>Dijkstra</figcaption>
+		
+	</figure></p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/java/">Java</a>
+        
+            <a href="/tags/algorithms/">Algorithms</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Maybe it can be made by mz</span>
+    </section>
+    </footer>
+
+    
+</article>
+
+    <aside class="related-contents--wrapper">
+    
+    
+        <h2 class="section-title">Related contents</h2>
+        <div class="related-contents">
+            <div class="flex article-list--tile">
+                
+                    
+<article class="has-image">
+    <a href="/p/leetcode-523/">
+        
+        
+            <div class="article-image">
+                <img src="/p/leetcode-523/wallhaven-l3zmwy.4097c3b76a6c658b5f002cd65545e6bc_hudbd5d696bf0fe2f4290679ab32168e14_781731_250x150_fill_q75_box_smart1.jpg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy" 
+                        data-key="leetcode-523" 
+                        data-hash="md5-QJfDt2psZYtfACzWVUXmvA==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">CheckSubArray</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="has-image">
+    <a href="/p/lcweek243/">
+        
+        
+            <div class="article-image">
+                <img src="/p/lcweek243/11.f0ea2ed406e71b7d470b86d33f0fa849_hu2bec06fe9b6da6a10901f7c47e4cf23e_1020898_250x150_fill_box_smart1_2.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy" 
+                        data-key="LCweek243" 
+                        data-hash="md5-8Oou1AbnG31HC4bTPw&#43;oSQ==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Week-243 chubao</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="has-image">
+    <a href="/p/hamming/">
+        
+        
+            <div class="article-image">
+                <img src="/p/hamming/wallhaven-6q5p36.97102fab849e183aa410c15b238244d9_hufae14abfad3a71b129b2d8f1c44c25e5_153461_250x150_fill_q75_box_smart1.jpg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy" 
+                        data-key="hamming" 
+                        data-hash="md5-lxAvq4SeGDqkEMFbI4JE2Q==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Hamming algs</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="has-image">
+    <a href="/p/stacktoreverse/">
+        
+        
+            <div class="article-image">
+                <img src="/p/stacktoreverse/wallhaven-39kpw3.37b3da92a5c4552f447796665454cb94_hu9c930e440c445e06821af826ec0c1139_1083221_250x150_fill_q75_box_smart1.jpg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy" 
+                        data-key="stackToReverse" 
+                        data-hash="md5-N7PakqXEVS9Ed5ZmVFTLlA==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">In Reverse , we finally meet in the sunset</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="has-image">
+    <a href="/p/quicksort/">
+        
+        
+            <div class="article-image">
+                <img src="/p/quicksort/wallhaven-y858yd.d63faaf0d16f9d3ad7b15f054e453b41_hu5438825b9b6d1014226d20d231e650c2_2128318_250x150_fill_q75_box_smart1.jpg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy" 
+                        data-key="quickSort" 
+                        data-hash="md5-1j&#43;q8NFvnTrXsV8FTkU7QQ==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Collections of quickSort</h2>
+        </div>
+    </a>
+</article>
+                
+            </div>
+        </div>
+    
+</aside>
+
+
+    
+        
+    
+
+    <footer class="site-footer">
+	
+    <section class="copyright">
+        &copy; 
+        
+        2021 Minezeratul
+    </section>
+  
+    <section class="powerby">
+        Welcome to the world of <a href="https://github.com/minezeratul" target="_blank" rel="noopener">Minezeratul</a><br>
+		
+		<span id="runtime_span"></span>
+		<script type="text/javascript">function show_runtime(){window.setTimeout("show_runtime()",1000);X=new 
+			Date("4/20/2021 00:00:00");
+		Y=new Date();T=(Y.getTime()-X.getTime());M=24*60*60*1000;
+		a=T/M;A=Math.floor(a);b=(a-A)*24;B=Math.floor(b);c=(b-B)*60;C=Math.floor((b-B)*60);D=Math.floor((c-C)*60);
+		runtime_span.innerHTML="本站运行: "+A+"天"+B+"小时"+C+"分"+D+"秒"}show_runtime();</script>
+    </section>
+	
+</footer>
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer="true"
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer="true"
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css"integrity="sha256-c0uckgykQ9v5k&#43;IqViZOZKc47Jn7KQil4/MP3ySA3F8="crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css"integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE="crossorigin="anonymous"
+            >
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"
+                defer="false"
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
