@@ -352,7 +352,7 @@ document.addEventListener('copy', addLink);
                 <span class="k">return</span> <span class="n">totalWeight</span><span class="o">;</span>
             <span class="o">}</span>
         <span class="o">}</span>
-</code></pre></div><h2 id="shortestpathtree类似">ShortestPathTree类似</h2>
+</code></pre></div><h2 id="shortestpathtree类">ShortestPathTree类</h2>
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ShortestPathTree</span> <span class="kd">extends</span> <span class="n">Tree</span><span class="o">{</span>
         <span class="kd">private</span> <span class="kt">double</span><span class="o">[]</span> <span class="n">cost</span><span class="o">;</span>
 
@@ -427,8 +427,8 @@ document.addEventListener('copy', addLink);
 </code></pre></div><h2 id="2kruskal-另一种寻找最小生成树算法">2.Kruskal 另一种寻找最小生成树算法</h2>
 <p>重复寻找最小总权重edge，若不出现环，则添加到树</p>
 <p>用了PriorityQueue去实现</p>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="n">MST</span> <span class="nf">getMinimumSpanningTree</span><span class="o">()</span> <span class="o">{</span> <span class="c1">//KrusKal 相当于 Union-Find 
-</span><span class="c1"></span>            <span class="n">WeightedGraph</span><span class="o">&lt;</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">t</span> <span class="o">=</span> <span class="k">new</span> <span class="n">WeightedGraph</span><span class="o">&lt;&gt;();</span>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="n">MST</span> <span class="nf">getMinimumSpanningTree</span><span class="o">()</span> <span class="o">{</span>
+            <span class="n">WeightedGraph</span><span class="o">&lt;</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">t</span> <span class="o">=</span> <span class="k">new</span> <span class="n">WeightedGraph</span><span class="o">&lt;&gt;();</span>
             <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="k">this</span><span class="o">.</span><span class="na">getSize</span><span class="o">();</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
                 <span class="n">t</span><span class="o">.</span><span class="na">addVertex</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">vertices</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">i</span><span class="o">));</span>
             <span class="o">}</span>
@@ -556,8 +556,8 @@ document.addEventListener('copy', addLink);
 
         <span class="n">UnionFind</span> <span class="n">uf</span> <span class="o">=</span> <span class="k">new</span> <span class="n">UnionFind</span><span class="o">(</span><span class="n">G</span><span class="o">.</span><span class="na">getSize</span><span class="o">());</span>
 
-        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">G</span><span class="o">.</span><span class="na">getSize</span><span class="o">();</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-            <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">G</span><span class="o">.</span><span class="na">getNeighbor</span><span class="o">(</span><span class="n">i</span><span class="o">).</span><span class="na">size</span><span class="o">();</span> <span class="n">j</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">G</span><span class="o">.</span><span class="na">getSize</span><span class="o">();</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span><span class="c1">//add all edges
+</span><span class="c1"></span>            <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">G</span><span class="o">.</span><span class="na">getNeighbor</span><span class="o">(</span><span class="n">i</span><span class="o">).</span><span class="na">size</span><span class="o">();</span> <span class="n">j</span><span class="o">++)</span> <span class="o">{</span>
                 <span class="n">pq</span><span class="o">.</span><span class="na">offer</span><span class="o">((</span><span class="n">WeightedEdge</span><span class="o">)</span> <span class="n">G</span><span class="o">.</span><span class="na">getNeighbor</span><span class="o">(</span><span class="n">i</span><span class="o">).</span><span class="na">get</span><span class="o">(</span><span class="n">j</span><span class="o">));</span>
             <span class="o">}</span>
         <span class="o">}</span>
