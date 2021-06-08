@@ -6,7 +6,21 @@
     <description>Recent content in Posts on Minezeratul</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 02 Jun 2021 23:58:08 +0800</lastBuildDate><atom:link href="https://minezeratul.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 08 Jun 2021 17:25:08 +0800</lastBuildDate><atom:link href="https://minezeratul.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>try-with-resources优先于try-finally</title>
+      <link>https://minezeratul.github.io/p/note/</link>
+      <pubDate>Tue, 08 Jun 2021 17:25:08 +0800</pubDate>
+      
+      <guid>https://minezeratul.github.io/p/note/</guid>
+      <description>Reading Day  try-with-resources是jdk1.7引入的语法，使得关闭资源操作无需层层嵌套在finally
+ 当try-finally关闭资源时，其出现了两处异常，往往只会返回第一处异常。
+当java7开始引入try-with-resources后，这些问题就迎刃而解了。不过使用这个结构的时候，必须接入AutoCloseable接口
+其中包括了单个返回void的close方法。现在Java库与第三方类库中的许多类和接口都实现了或拓展了AutoCloseable接口
+Try-Catch-Finally 结构 可见，我们需要手动关闭两个Stream资源。而且为了防止异常的产生而无法关闭，需要借助finally正常关闭资源
+public class DemoTest { public static void main(String[] args) { BufferedInputStream bin = null; BufferedOutputStream bout = null; try { bin = new BufferedInputStream(new FileInputStream(new File(&amp;#34;test.txt&amp;#34;))); bout = new BufferedOutputStream(new FileOutputStream(new File(&amp;#34;out.txt&amp;#34;))); int b; while ((b = bin.read()) != -1) { bout.write(b); } } catch (IOException e) { e.printStackTrace(); } finally { if (bin != null) { try { bin.</description>
+    </item>
+    
     <item>
       <title>Graph Algorithms Part I</title>
       <link>https://minezeratul.github.io/p/graph/</link>

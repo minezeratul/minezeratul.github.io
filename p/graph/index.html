@@ -395,21 +395,27 @@ document.addEventListener('copy', addLink);
         <span class="kt">double</span> <span class="n">totalWeight</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
 
         <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">T</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
-
+        <span class="c1">//boolean[] isTnT = new boolean[size()];
+</span><span class="c1"></span>
         <span class="k">while</span> <span class="o">(</span><span class="n">T</span><span class="o">.</span><span class="na">size</span><span class="o">()</span> <span class="o">&lt;</span> <span class="n">size</span><span class="o">()){</span>    
             <span class="kt">int</span> <span class="n">u</span> <span class="o">=</span> <span class="o">-</span><span class="n">1</span> <span class="o">;</span>
             <span class="kt">double</span> <span class="n">curMinCost</span> <span class="o">=</span> <span class="n">Double</span><span class="o">.</span><span class="na">POSITIVE_INFINITY</span><span class="o">;</span>
 
             <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">size</span><span class="o">();</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
                 <span class="k">if</span> <span class="o">(!</span><span class="n">T</span><span class="o">.</span><span class="na">contains</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="n">cost</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">&lt;</span> <span class="n">curMinCost</span><span class="o">){</span>
-                    <span class="c1">//开始寻找最小值权重edge
+                    <span class="c1">//我们可以用一个boolean数组来代替contains方法 : !isTnT[i]
+</span><span class="c1"></span>                    <span class="c1">//从而优化时间复杂度
+</span><span class="c1"></span>                    <span class="c1">//开始寻找最小值权重edge
 </span><span class="c1"></span>                    <span class="n">curMinCost</span> <span class="o">=</span> <span class="n">cost</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
                     <span class="n">u</span> <span class="o">=</span> <span class="n">i</span><span class="o">;</span>
                 <span class="o">}</span>
             <span class="o">}</span>
 
-            <span class="n">T</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">u</span><span class="o">);</span>
+            <span class="c1">// if (u == -1) break; else T.add(u);  
+</span><span class="c1"></span>            <span class="c1">//Add a new vertex to T
+</span><span class="c1"></span>            <span class="n">T</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">u</span><span class="o">);</span>
             <span class="n">totalWeight</span> <span class="o">+=</span> <span class="n">cost</span><span class="o">[</span><span class="n">u</span><span class="o">];</span><span class="c1">//累加最小权重
+</span><span class="c1"></span>            <span class="c1">//isTnT[u] = true;
 </span><span class="c1"></span>
             <span class="k">for</span> <span class="o">(</span><span class="n">Edge</span> <span class="n">e</span><span class="o">:</span><span class="n">neighbors</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">u</span><span class="o">)){</span>
                 <span class="k">if</span> <span class="o">(!</span><span class="n">T</span><span class="o">.</span><span class="na">contains</span><span class="o">(</span><span class="n">e</span><span class="o">.</span><span class="na">v</span><span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="n">cost</span><span class="o">[</span><span class="n">e</span><span class="o">.</span><span class="na">v</span><span class="o">]</span> <span class="o">&gt;</span> <span class="o">((</span><span class="n">MyWeightedEdge</span><span class="o">)</span><span class="n">e</span><span class="o">).</span><span class="na">weight</span><span class="o">){</span><span class="c1">//adjust cost[v]

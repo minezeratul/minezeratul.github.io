@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<link type="favicon" rel="shortcut icon" href="favicon.icon"><meta name='description' content='Java Learning'><title>try-with-resources优先于try-finally</title>
+
+<link rel='canonical' href='https://minezeratul.github.io/p/note/'>
+
+<link rel="stylesheet" href="/scss/style.min.css"><script>
+(function(window,document,undefined){
+			var hearts = [];
+			window.requestAnimationFrame = (function(){
+				return window.requestAnimationFrame ||
+				window.webkitRequestAnimationFrame ||
+				window.mozRequestAnimationFrame ||
+				window.oRequestAnimationFrame ||
+				window.msRequestAnimationFrame ||
+				function (callback){
+					setTimeout(callback,1000/60);
+				}
+			})();
+			init();
+			function init(){
+				css(".heart{width: 10px;height: 10px;position: fixed;background: #f00;transform: rotate(45deg);-webkit-transform: rotate(45deg);-moz-transform: rotate(45deg);}.heart:after,.heart:before{content: '';width: inherit;height: inherit;background: inherit;border-radius: 50%;-webkit-border-radius: 50%;-moz-border-radius: 50%;position: absolute;}.heart:after{top: -5px;}.heart:before{left: -5px;}");
+				attachEvent();
+				gameloop();
+			}
+			function gameloop(){
+				for(var i=0;i<hearts.length;i++){
+					if(hearts[i].alpha <=0){
+						document.body.removeChild(hearts[i].el);
+						hearts.splice(i,1);
+						continue;
+					}
+					hearts[i].y--;
+					hearts[i].scale += 0.004;
+					hearts[i].alpha -= 0.013;
+					hearts[i].el.style.cssText = "left:"+hearts[i].x+"px;top:"+hearts[i].y+"px;opacity:"+hearts[i].alpha+";transform:scale("+hearts[i].scale+","+hearts[i].scale+") rotate(45deg);background:"+hearts[i].color;
+				}
+				requestAnimationFrame(gameloop);
+			}
+			function attachEvent(){
+				var old = typeof window.onclick==="function" && window.onclick;
+				window.onclick = function(event){
+					old && old();
+					createHeart(event);
+				}
+			}
+			function createHeart(event){
+				var d = document.createElement("div");
+				d.className = "heart";
+				hearts.push({
+					el : d,
+					x : event.clientX - 5,
+					y : event.clientY - 5,
+					scale : 1,
+					alpha : 1,
+					color : randomColor()
+				});
+				document.body.appendChild(d);
+			}
+			function css(css){
+				var style = document.createElement("style");
+				style.type="text/css";
+				try{
+					style.appendChild(document.createTextNode(css));
+				}catch(ex){
+					style.styleSheet.cssText = css;
+				}
+				document.getElementsByTagName('head')[0].appendChild(style);
+			}
+			function randomColor(){
+				return "rgb("+(~~(Math.random()*255))+","+(~~(Math.random()*255))+","+(~~(Math.random()*255))+")";
+			}
+		})(window,document);
+</script>
+<script>
+function addLink(event) {
+    event.preventDefault();
+
+    var pagelink = '\n\nThanks for reading. You are copying from: ' + document.location.href,
+        copytext =  window.getSelection() + pagelink;
+
+    (event.clipboardData || window.clipboardData).setData('Text', copytext);
+}
+
+document.addEventListener('copy', addLink);
+</script><meta property='og:title' content='try-with-resources优先于try-finally'>
+<meta property='og:description' content='Java Learning'>
+<meta property='og:url' content='https://minezeratul.github.io/p/note/'>
+<meta property='og:site_name' content='Minezeratul'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Java' /><meta property='article:tag' content='Notes' /><meta property='article:published_time' content='2021-06-08T17:25:08&#43;08:00'/><meta property='article:modified_time' content='2021-06-08T17:25:08&#43;08:00'/><meta property='og:image' content='https://minezeratul.github.io/p/note/wallhaven-3z32j3.jpg' />
+<meta name="twitter:title" content="try-with-resources优先于try-finally">
+<meta name="twitter:description" content="Java Learning"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://minezeratul.github.io/p/note/wallhaven-3z32j3.jpg' />
+    <link type="favicon" rel="shortcut icon" href="icon.png" />
+
+    </head>
+    <body class="">
+	
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.body.dataset.scheme = 'dark';
+			
+        } else {
+            document.body.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended article-page with-toolbar">
+            <aside class="sidebar left-sidebar sticky">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header class="site-info">
+        
+            <figure class="site-avatar">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar3_hu45b9d54795338903be33d24fdbb0632c_114789_300x0_resize_box_2.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+        
+        <h1 class="site-name"><a href="https://minezeratul.github.io/">Minezeratul</a></h1>
+        <h2 class="site-description">What&#39;s past is prologue</h2>
+    </header>
+
+    <ol class="menu" id="main-menu">
+        
+        
+        
+
+        <li >
+            <a href='/'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/about/'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>About</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/archives/'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/search/'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+	
+        
+            <li id="dark-mode-toggle">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                <span>Dark Mode</span>
+            </li>
+
+        
+    </ol>
+
+</aside>
+
+            <main class="main full-width">
+
+    <div id="article-toolbar">
+        <a href="https://minezeratul.github.io/" class="back-home">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="15 6 9 12 15 18" />
+</svg>
+
+
+
+            <span>Back</span>
+        </a>
+    </div>
+
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/p/note/">
+                <img src="/p/note/wallhaven-3z32j3_hufe1b3409fa910156ba1dab10f6dbb05f_1637926_800x0_resize_q75_box.jpg"
+                        srcset="/p/note/wallhaven-3z32j3_hufe1b3409fa910156ba1dab10f6dbb05f_1637926_800x0_resize_q75_box.jpg 800w, /p/note/wallhaven-3z32j3_hufe1b3409fa910156ba1dab10f6dbb05f_1637926_1600x0_resize_q75_box.jpg 1600w"
+                        width="800" 
+                        height="519" 
+                        loading="lazy"
+                        alt="Featured image of post try-with-resources优先于try-finally" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+        <a href="/categories/java/"
+            >
+            Java
+        </a>
+        
+        <a href="/categories/notes/"
+            >
+            Notes
+        </a>
+        
+    </header>
+    
+
+    <h2 class="article-title">
+        <a href="/p/note/">try-with-resources优先于try-finally</a>
+    </h2>
+
+    
+    <h3 class="article-subtitle">
+        Java Learning
+    </h3>
+    <footer class="article-time">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+        <time class="article-time--published">Jun 08, 2021&emsp;
+        </time>
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+        <time class="article-time--published">
+            2 min read
+        </time>
+    </footer></div>
+</header>
+
+    <section class="article-content">
+    <h1 id="reading-day">Reading Day</h1>
+<blockquote>
+<p>try-with-resources是jdk1.7引入的语法，使得关闭资源操作无需层层嵌套在finally</p>
+</blockquote>
+<p><strong>当try-finally关闭资源时，其出现了两处异常，往往只会返回第一处异常。</strong></p>
+<p>当java7开始引入<code>try-with-resources</code>后，这些问题就迎刃而解了。不过使用这个结构的时候，必须接入<strong>AutoCloseable接口</strong></p>
+<p>其中包括了单个返回void的close方法。现在Java库与第三方类库中的许多类和接口都实现了或拓展了AutoCloseable接口</p>
+<h2 id="try-catch-finally-结构">Try-Catch-Finally 结构</h2>
+<p>可见，我们需要手动关闭两个Stream资源。而且为了防止异常的产生而无法关闭，需要借助finally正常关闭资源</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">DemoTest</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        	<span class="n">BufferedInputStream</span> <span class="n">bin</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+			<span class="n">BufferedOutputStream</span> <span class="n">bout</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+			<span class="k">try</span> <span class="o">{</span>
+				<span class="n">bin</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferedInputStream</span><span class="o">(</span><span class="k">new</span> <span class="n">FileInputStream</span><span class="o">(</span><span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="s">&#34;test.txt&#34;</span><span class="o">)));</span>
+				<span class="n">bout</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferedOutputStream</span><span class="o">(</span><span class="k">new</span> <span class="n">FileOutputStream</span><span class="o">(</span><span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="s">&#34;out.txt&#34;</span><span class="o">)));</span>
+				<span class="kt">int</span> <span class="n">b</span><span class="o">;</span>
+				<span class="k">while</span> <span class="o">((</span><span class="n">b</span> <span class="o">=</span> <span class="n">bin</span><span class="o">.</span><span class="na">read</span><span class="o">())</span> <span class="o">!=</span> <span class="o">-</span><span class="n">1</span><span class="o">)</span> <span class="o">{</span>
+					<span class="n">bout</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">b</span><span class="o">);</span>
+				<span class="o">}</span>
+			<span class="o">}</span>
+			<span class="k">catch</span> <span class="o">(</span><span class="n">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+				<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+			<span class="o">}</span>
+			<span class="k">finally</span> <span class="o">{</span>
+				<span class="k">if</span> <span class="o">(</span><span class="n">bin</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+					<span class="k">try</span> <span class="o">{</span>
+						<span class="n">bin</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+					<span class="o">}</span>
+					<span class="k">catch</span> <span class="o">(</span><span class="n">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+						<span class="k">throw</span> <span class="n">e</span><span class="o">;</span>
+					<span class="o">}</span>
+					<span class="k">finally</span> <span class="o">{</span>
+						<span class="k">if</span> <span class="o">(</span><span class="n">bout</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+							<span class="k">try</span> <span class="o">{</span>
+								<span class="n">bout</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+							<span class="o">}</span>
+							<span class="k">catch</span> <span class="o">(</span><span class="n">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+								<span class="k">throw</span> <span class="n">e</span><span class="o">;</span>
+							<span class="o">}</span>
+						<span class="o">}</span>
+					<span class="o">}</span>
+				<span class="o">}</span>
+			<span class="o">}</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+</code></pre></div><h1 id="try-with-resources结构">Try-with-resources结构</h1>
+<p>而在try-with-resources中，我们只需要这样，编译器会帮我们自动补全close()，并且还会将异常正确报出，而不会由于嵌</p>
+<p>套只指出一处异常。</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">TryWithResource</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">try</span> <span class="o">(</span><span class="n">BufferedInputStream</span> <span class="n">bin</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferedInputStream</span><span class="o">(</span><span class="k">new</span> <span class="n">FileInputStream</span><span class="o">(</span><span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="s">&#34;test.txt&#34;</span><span class="o">)));</span>
+             <span class="n">BufferedOutputStream</span> <span class="n">bout</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferedOutputStream</span><span class="o">(</span><span class="k">new</span> <span class="n">FileOutputStream</span><span class="o">(</span><span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="s">&#34;out.txt&#34;</span><span class="o">))))</span> <span class="o">{</span>
+            <span class="kt">int</span> <span class="n">b</span><span class="o">;</span>
+            <span class="k">while</span> <span class="o">((</span><span class="n">b</span> <span class="o">=</span> <span class="n">bin</span><span class="o">.</span><span class="na">read</span><span class="o">())</span> <span class="o">!=</span> <span class="o">-</span><span class="n">1</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">bout</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">b</span><span class="o">);</span>
+            <span class="o">}</span>
+        <span class="o">}</span><span class="k">catch</span> <span class="o">(</span><span class="n">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div><p>反编译class , 可见close()的补全</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">TryWithResource</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nf">TryWithResource</span><span class="o">()</span> <span class="o">{</span>
+        
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="n">Connection</span> <span class="n">conn</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Connection</span><span class="o">();</span>
+            <span class="n">Throwable</span> <span class="n">var2</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+            <span class="k">try</span> <span class="o">{</span>
+                <span class="n">conn</span><span class="o">.</span><span class="na">sendData</span><span class="o">();</span>
+            <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Throwable</span> <span class="n">var12</span><span class="o">)</span> <span class="o">{</span>
+				<span class="n">var2</span> <span class="o">=</span> <span class="n">var12</span><span class="o">;</span>
+				<span class="k">throw</span> <span class="n">var12</span><span class="o">;</span>
+			<span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
+				<span class="k">if</span> <span class="o">(</span><span class="n">conn</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+					<span class="k">if</span> <span class="o">(</span><span class="n">var2</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+						<span class="k">try</span> <span class="o">{</span>
+							<span class="n">conn</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+						<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Throwable</span> <span class="n">var11</span><span class="o">)</span> <span class="o">{</span>
+							<span class="n">var2</span><span class="o">.</span><span class="na">addSuppressed</span><span class="o">(</span><span class="n">var11</span><span class="o">);</span>
+						<span class="o">}</span>
+					<span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+						<span class="n">conn</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+					<span class="o">}</span>
+				<span class="o">}</span>
+			<span class="o">}</span>
+		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">var14</span><span class="o">)</span> <span class="o">{</span>
+			<span class="n">var14</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+		<span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div>
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/java/">Java</a>
+        
+            <a href="/tags/notes/">Notes</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Maybe it can be made by mz</span>
+    </section>
+    </footer>
+
+    
+</article>
+
+    <aside class="related-contents--wrapper">
+    
+    
+        <h2 class="section-title">Related contents</h2>
+        <div class="related-contents">
+            <div class="flex article-list--tile">
+                
+                    
+<article class="has-image">
+    <a href="/p/graph/">
+        
+        
+            <div class="article-image">
+                <img src="/p/graph/wallhaven-o3ywdp.289cd354a7ba845d9c82791c3974a603_hu254556f4d7c6fac32ed9b7127f78f282_531223_250x150_fill_q75_box_smart1.jpg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy" 
+                        data-key="graph" 
+                        data-hash="md5-KJzTVKe6hF2cgnkcOXSmAw==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Graph Algorithms Part I</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="has-image">
+    <a href="/p/leetcode-523/">
+        
+        
+            <div class="article-image">
+                <img src="/p/leetcode-523/wallhaven-l3zmwy.4097c3b76a6c658b5f002cd65545e6bc_hudbd5d696bf0fe2f4290679ab32168e14_781731_250x150_fill_q75_box_smart1.jpg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy" 
+                        data-key="leetcode-523" 
+                        data-hash="md5-QJfDt2psZYtfACzWVUXmvA==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">CheckSubArray</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="has-image">
+    <a href="/p/lcweek243/">
+        
+        
+            <div class="article-image">
+                <img src="/p/lcweek243/11.f0ea2ed406e71b7d470b86d33f0fa849_hu2bec06fe9b6da6a10901f7c47e4cf23e_1020898_250x150_fill_box_smart1_2.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy" 
+                        data-key="LCweek243" 
+                        data-hash="md5-8Oou1AbnG31HC4bTPw&#43;oSQ==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Week-243 chubao</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="has-image">
+    <a href="/p/hamming/">
+        
+        
+            <div class="article-image">
+                <img src="/p/hamming/wallhaven-6q5p36.97102fab849e183aa410c15b238244d9_hufae14abfad3a71b129b2d8f1c44c25e5_153461_250x150_fill_q75_box_smart1.jpg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy" 
+                        data-key="hamming" 
+                        data-hash="md5-lxAvq4SeGDqkEMFbI4JE2Q==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Hamming algs</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="has-image">
+    <a href="/p/stacktoreverse/">
+        
+        
+            <div class="article-image">
+                <img src="/p/stacktoreverse/wallhaven-39kpw3.37b3da92a5c4552f447796665454cb94_hu9c930e440c445e06821af826ec0c1139_1083221_250x150_fill_q75_box_smart1.jpg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy" 
+                        data-key="stackToReverse" 
+                        data-hash="md5-N7PakqXEVS9Ed5ZmVFTLlA==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">In Reverse , we finally meet in the sunset</h2>
+        </div>
+    </a>
+</article>
+                
+            </div>
+        </div>
+    
+</aside>
+
+
+    
+        
+    
+
+    <footer class="site-footer">
+	
+    <section class="copyright">
+        &copy; 
+        
+        2021 Minezeratul
+    </section>
+  
+    <section class="powerby">
+        Welcome to the world of <a href="https://github.com/minezeratul" target="_blank" rel="noopener">Minezeratul</a><br>
+		
+		<span id="runtime_span"></span>
+		<script type="text/javascript">function show_runtime(){window.setTimeout("show_runtime()",1000);X=new 
+			Date("4/20/2021 00:00:00");
+		Y=new Date();T=(Y.getTime()-X.getTime());M=24*60*60*1000;
+		a=T/M;A=Math.floor(a);b=(a-A)*24;B=Math.floor(b);c=(b-B)*60;C=Math.floor((b-B)*60);D=Math.floor((c-C)*60);
+		runtime_span.innerHTML="本站运行: "+A+"天"+B+"小时"+C+"分"+D+"秒"}show_runtime();</script>
+    </section>
+	
+</footer>
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer="true"
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer="true"
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css"integrity="sha256-c0uckgykQ9v5k&#43;IqViZOZKc47Jn7KQil4/MP3ySA3F8="crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css"integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE="crossorigin="anonymous"
+            >
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"
+                defer="false"
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
