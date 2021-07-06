@@ -6,7 +6,51 @@
     <description>Recent content in Coding on Minezeratul</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 02 Jun 2021 23:58:08 +0800</lastBuildDate><atom:link href="https://minezeratul.github.io/categories/coding/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 06 Jul 2021 15:33:26 +0800</lastBuildDate><atom:link href="https://minezeratul.github.io/categories/coding/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>String Freq Sort</title>
+      <link>https://minezeratul.github.io/p/leetcode-451/</link>
+      <pubDate>Tue, 06 Jul 2021 15:33:26 +0800</pubDate>
+      
+      <guid>https://minezeratul.github.io/p/leetcode-451/</guid>
+      <description>Leetcode 451 451. 根据字符出现频率排序 利用hashmap记录 ， 或者用数组模拟hashmap , 然后利用PriorityQueue大顶堆来排序
+public String frequencySort(String s) { StringBuilder sb = new StringBuilder(); //Map&amp;lt;Character , Integer&amp;gt; map = new HashMap&amp;lt;&amp;gt;();  //for (char ch : s.toCharArray()){  // map.put(ch , map.getOrDefault(ch , 0 ) + 1);  //}  //也可以开一个128的数组替换 , 优化性能  int[] frequency = new int[128]; for (char ch : s.toCharArray()){ frequency[ch]++; } PriorityQueue&amp;lt;node&amp;gt; pq = new PriorityQueue&amp;lt;node&amp;gt;((o1 , o2) -&amp;gt; o1.freq !</description>
+    </item>
+    
+    <item>
+      <title>FindErrorNum</title>
+      <link>https://minezeratul.github.io/p/leetcode-645/</link>
+      <pubDate>Tue, 06 Jul 2021 10:08:44 +0800</pubDate>
+      
+      <guid>https://minezeratul.github.io/p/leetcode-645/</guid>
+      <description>Leetcode 645 FindErrorNum 645. 错误的集合 第一种方法，用数组模拟哈希表，获取出现次数
+public int[] findErrorNums(int[] nums) { int n = nums.length; int[] res = new int[2];//导致集合丢失了一个数字 并且有一个数字重复。  int[] tmp = new int[n + 1]; for (int num : nums){ //统计次数  tmp[num]++; } for (int i = 1; i &amp;lt; tmp.length; i++) { if (tmp[i] == 1){ //有效  continue; } if (tmp[i] == 2){ //duplicated  res[0] = i; }else { //lost  res[1] = i; } } return res; } 第二种方法 ， 数学</description>
+    </item>
+    
+    <item>
+      <title>Passing message</title>
+      <link>https://minezeratul.github.io/p/leetcode-lcp07/</link>
+      <pubDate>Mon, 05 Jul 2021 16:15:12 +0800</pubDate>
+      
+      <guid>https://minezeratul.github.io/p/leetcode-lcp07/</guid>
+      <description>Leetcode LCP-07 LCP 07. 传递信息 看用例就可以知道这是一个图，[u , v]
+用dfs深度优先来一步一步搜寻到末端
+public int numWays(int n, int[][] relations, int k) { int cnt = 0; boolean[][] isVisited = new boolean[n][n];//判断是否经过  for (int[] relation : relations) { isVisited[relation[0]][relation[1]] = true; } return dfs(0 , isVisited , k); } public int dfs(int n , boolean[][] isVisited , int k){ if (k == 0){ return isVisited.length - 1 == n ? 1 : 0; } int cnt = 0 ; for (int i = 0; i &amp;lt; isVisited[n].</description>
+    </item>
+    
+    <item>
+      <title>Ice-Cream</title>
+      <link>https://minezeratul.github.io/p/leetcode-1833/</link>
+      <pubDate>Mon, 05 Jul 2021 15:51:33 +0800</pubDate>
+      
+      <guid>https://minezeratul.github.io/p/leetcode-1833/</guid>
+      <description>Leetcode 1833 1833. 雪糕的最大数量 夏天到了，终于放暑假了！LeetCode也叫人吃雪糕了
+由题意可知，要买最多雪糕，可以想出贪心
+第一种做法
+public int maxIceCream(int[] costs, int coins) { int cnt = 0; Arrays.sort(costs);//sorted,从最便宜的开始买  for(int cost : costs){ if(coins &amp;gt;= cost){//超过即退出  coins -= cost; cnt++; }else{ break; } } return cnt; } 第二种排序，用计数排序来实现
+public int maxIceCream2(int[] costs, int coins) { int[] freq = new int[100001]; for (int cost:costs){ //用数组模拟哈希表记录出现次数  freq[cost]++; } int cnt = 0; for (int i = 1; i &amp;lt;= 100000; i++) { if (coins &amp;gt;= i) {//超过即退出  int curCount = Math.</description>
+    </item>
+    
     <item>
       <title>Graph Algorithms Part I</title>
       <link>https://minezeratul.github.io/p/graph/</link>
