@@ -6,7 +6,26 @@
     <description>Recent content in Algorithms on Minezeratul</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 02 Jun 2021 23:58:08 +0800</lastBuildDate><atom:link href="https://minezeratul.github.io/tags/algorithms/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 20 Jul 2021 09:24:47 +0800</lastBuildDate><atom:link href="https://minezeratul.github.io/tags/algorithms/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Graph Algorithms Part II</title>
+      <link>https://minezeratul.github.io/p/graph2/</link>
+      <pubDate>Tue, 20 Jul 2021 09:24:47 +0800</pubDate>
+      
+      <guid>https://minezeratul.github.io/p/graph2/</guid>
+      <description>Graph Algorithms Part II. PrimMST 即时版本 用PriorityQueue存储vertex 详情可见algs4 4.3.5 不需要保存所有非树顶点w到树顶点的边，而只需要保存其中权重最小的那条，将v添加后检查是否需要更新这条权重最小的边
+public MST getMinimumSpanningTree(int startingVertex) { List&amp;lt;Integer&amp;gt; T = new ArrayList&amp;lt;Integer&amp;gt;(); // T initially contains the startingVertex;  T.add(startingVertex); // Number of vertices  int numberOfVertices = vertices.size(); // Parent of a vertex  int[] parent = new int[numberOfVertices]; // Initially set the parent of all vertices to -1  Arrays.fill(parent, -1); // Total weight of the tree thus far  double totalWeight = 0; // Clone the priority queue, so to keep the original queue intact  List&amp;lt;PriorityQueue&amp;lt;WeightedEdge&amp;gt;&amp;gt; queues = deepClone(this.</description>
+    </item>
+    
+    <item>
+      <title>Graph Algorithms Part I.2</title>
+      <link>https://minezeratul.github.io/p/graph1.2/</link>
+      <pubDate>Fri, 02 Jul 2021 23:58:08 +0800</pubDate>
+      
+      <guid>https://minezeratul.github.io/p/graph1.2/</guid>
+      <description>Graph Algorithms Part I.2 小优化 用数组isTnT 代替contains()去查找一个顶点u是否在T里 MST public MST getMinimumSpanningTree(int startingVertex) { // cost[v] stores the cost by adding v to the tree  double[] cost = new double[getSize()]; // Initial cost  Arrays.fill(cost, Double.POSITIVE_INFINITY); cost[startingVertex] = 0; // Cost of source is 0  int[] parent = new int[getSize()]; // Parent of a vertex  parent[startingVertex] = -1; // startingVertex is the root  double totalWeight = 0; // Total weight of the tree thus far  List&amp;lt;Integer&amp;gt; T = new ArrayList&amp;lt;&amp;gt;(); boolean[] isTnT = new boolean[getSize()]; // Expand T  while (T.</description>
+    </item>
+    
     <item>
       <title>Graph Algorithms Part I</title>
       <link>https://minezeratul.github.io/p/graph/</link>

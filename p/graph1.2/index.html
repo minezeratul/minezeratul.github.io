@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<link type="favicon" rel="shortcut icon" href="favicon.icon"><meta name='description' content='Prim  &amp; Djikstra 小优化'><title>Graph Algorithms Part I.2</title>
+
+<link rel='canonical' href='https://minezeratul.github.io/p/graph1.2/'>
+
+<link rel="stylesheet" href="/scss/style.min.css"><script>
+(function(window,document,undefined){
+			var hearts = [];
+			window.requestAnimationFrame = (function(){
+				return window.requestAnimationFrame ||
+				window.webkitRequestAnimationFrame ||
+				window.mozRequestAnimationFrame ||
+				window.oRequestAnimationFrame ||
+				window.msRequestAnimationFrame ||
+				function (callback){
+					setTimeout(callback,1000/60);
+				}
+			})();
+			init();
+			function init(){
+				css(".heart{width: 10px;height: 10px;position: fixed;background: #f00;transform: rotate(45deg);-webkit-transform: rotate(45deg);-moz-transform: rotate(45deg);}.heart:after,.heart:before{content: '';width: inherit;height: inherit;background: inherit;border-radius: 50%;-webkit-border-radius: 50%;-moz-border-radius: 50%;position: absolute;}.heart:after{top: -5px;}.heart:before{left: -5px;}");
+				attachEvent();
+				gameloop();
+			}
+			function gameloop(){
+				for(var i=0;i<hearts.length;i++){
+					if(hearts[i].alpha <=0){
+						document.body.removeChild(hearts[i].el);
+						hearts.splice(i,1);
+						continue;
+					}
+					hearts[i].y--;
+					hearts[i].scale += 0.004;
+					hearts[i].alpha -= 0.013;
+					hearts[i].el.style.cssText = "left:"+hearts[i].x+"px;top:"+hearts[i].y+"px;opacity:"+hearts[i].alpha+";transform:scale("+hearts[i].scale+","+hearts[i].scale+") rotate(45deg);background:"+hearts[i].color;
+				}
+				requestAnimationFrame(gameloop);
+			}
+			function attachEvent(){
+				var old = typeof window.onclick==="function" && window.onclick;
+				window.onclick = function(event){
+					old && old();
+					createHeart(event);
+				}
+			}
+			function createHeart(event){
+				var d = document.createElement("div");
+				d.className = "heart";
+				hearts.push({
+					el : d,
+					x : event.clientX - 5,
+					y : event.clientY - 5,
+					scale : 1,
+					alpha : 1,
+					color : randomColor()
+				});
+				document.body.appendChild(d);
+			}
+			function css(css){
+				var style = document.createElement("style");
+				style.type="text/css";
+				try{
+					style.appendChild(document.createTextNode(css));
+				}catch(ex){
+					style.styleSheet.cssText = css;
+				}
+				document.getElementsByTagName('head')[0].appendChild(style);
+			}
+			function randomColor(){
+				return "rgb("+(~~(Math.random()*255))+","+(~~(Math.random()*255))+","+(~~(Math.random()*255))+")";
+			}
+		})(window,document);
+</script>
+<script>
+function addLink(event) {
+    event.preventDefault();
+
+    var pagelink = '\n\nThanks for reading. You are copying from: ' + document.location.href,
+        copytext =  window.getSelection() + pagelink;
+
+    (event.clipboardData || window.clipboardData).setData('Text', copytext);
+}
+
+document.addEventListener('copy', addLink);
+</script><meta property='og:title' content='Graph Algorithms Part I.2'>
+<meta property='og:description' content='Prim  &amp; Djikstra 小优化'>
+<meta property='og:url' content='https://minezeratul.github.io/p/graph1.2/'>
+<meta property='og:site_name' content='Minezeratul'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Java' /><meta property='article:tag' content='Algorithms' /><meta property='article:published_time' content='2021-07-02T23:58:08&#43;08:00'/><meta property='article:modified_time' content='2021-07-02T23:58:08&#43;08:00'/><meta property='og:image' content='https://minezeratul.github.io/p/graph1.2/wallhaven-vg36x3.jpg' />
+<meta name="twitter:title" content="Graph Algorithms Part I.2">
+<meta name="twitter:description" content="Prim  &amp; Djikstra 小优化"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://minezeratul.github.io/p/graph1.2/wallhaven-vg36x3.jpg' />
+    <link type="favicon" rel="shortcut icon" href="icon.png" />
+
+    </head>
+    <body class="">
+	
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.body.dataset.scheme = 'dark';
+			
+        } else {
+            document.body.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended article-page with-toolbar">
+            <aside class="sidebar left-sidebar sticky">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header class="site-info">
+        
+            <figure class="site-avatar">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar3_hu45b9d54795338903be33d24fdbb0632c_114789_300x0_resize_box_2.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+        
+        <h1 class="site-name"><a href="https://minezeratul.github.io/">Minezeratul</a></h1>
+        <h2 class="site-description">What&#39;s past is prologue</h2>
+    </header>
+
+    <ol class="menu" id="main-menu">
+        
+        
+        
+
+        <li >
+            <a href='/'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/about/'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>About</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/archives/'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/search/'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+	
+        
+            <li id="dark-mode-toggle">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                <span>Dark Mode</span>
+            </li>
+
+        
+    </ol>
+
+</aside>
+
+            <main class="main full-width">
+
+    <div id="article-toolbar">
+        <a href="https://minezeratul.github.io/" class="back-home">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="15 6 9 12 15 18" />
+</svg>
+
+
+
+            <span>Back</span>
+        </a>
+    </div>
+
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/p/graph1.2/">
+                <img src="/p/graph1.2/wallhaven-vg36x3_hu391d8c48ccf48756e0894cf255dfd5e6_3941005_800x0_resize_q75_box.jpg"
+                        srcset="/p/graph1.2/wallhaven-vg36x3_hu391d8c48ccf48756e0894cf255dfd5e6_3941005_800x0_resize_q75_box.jpg 800w, /p/graph1.2/wallhaven-vg36x3_hu391d8c48ccf48756e0894cf255dfd5e6_3941005_1600x0_resize_q75_box.jpg 1600w"
+                        width="800" 
+                        height="450" 
+                        loading="lazy"
+                        alt="Featured image of post Graph Algorithms Part I.2" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+        <a href="/categories/java/"
+            >
+            Java
+        </a>
+        
+        <a href="/categories/coding/"
+            >
+            Coding
+        </a>
+        
+    </header>
+    
+
+    <h2 class="article-title">
+        <a href="/p/graph1.2/">Graph Algorithms Part I.2</a>
+    </h2>
+
+    
+    <h3 class="article-subtitle">
+        Prim  &amp; Djikstra 小优化
+    </h3>
+    <footer class="article-time">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+        <time class="article-time--published">Jul 02, 2021&emsp;
+        </time>
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+        <time class="article-time--published">
+            3 min read
+        </time>
+    </footer></div>
+</header>
+
+    <section class="article-content">
+    <h1 id="graph-algorithms-part-i2-小优化">Graph Algorithms Part I.2 小优化</h1>
+<h2 id="用数组istnt-代替contains去查找一个顶点u是否在t里">用数组isTnT 代替contains()去查找一个顶点u是否在T里</h2>
+<h3 id="mst">MST</h3>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java">  <span class="kd">public</span> <span class="n">MST</span> <span class="nf">getMinimumSpanningTree</span><span class="o">(</span><span class="kt">int</span> <span class="n">startingVertex</span><span class="o">)</span> <span class="o">{</span>
+    <span class="c1">// cost[v] stores the cost by adding v to the tree
+</span><span class="c1"></span>    <span class="kt">double</span><span class="o">[]</span> <span class="n">cost</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">double</span><span class="o">[</span><span class="n">getSize</span><span class="o">()];</span>
+    <span class="c1">// Initial cost
+</span><span class="c1"></span>    <span class="n">Arrays</span><span class="o">.</span><span class="na">fill</span><span class="o">(</span><span class="n">cost</span><span class="o">,</span> <span class="n">Double</span><span class="o">.</span><span class="na">POSITIVE_INFINITY</span><span class="o">);</span>
+
+    <span class="n">cost</span><span class="o">[</span><span class="n">startingVertex</span><span class="o">]</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="c1">// Cost of source is 0
+</span><span class="c1"></span>
+    <span class="kt">int</span><span class="o">[]</span> <span class="n">parent</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">getSize</span><span class="o">()];</span> <span class="c1">// Parent of a vertex
+</span><span class="c1"></span>    <span class="n">parent</span><span class="o">[</span><span class="n">startingVertex</span><span class="o">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">1</span><span class="o">;</span> <span class="c1">// startingVertex is the root
+</span><span class="c1"></span>    <span class="kt">double</span> <span class="n">totalWeight</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="c1">// Total weight of the tree thus far
+</span><span class="c1"></span>
+    <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">T</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
+    <span class="kt">boolean</span><span class="o">[]</span> <span class="n">isTnT</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">boolean</span><span class="o">[</span><span class="n">getSize</span><span class="o">()];</span>
+
+    <span class="c1">// Expand T
+</span><span class="c1"></span>    <span class="k">while</span> <span class="o">(</span><span class="n">T</span><span class="o">.</span><span class="na">size</span><span class="o">()</span> <span class="o">&lt;</span> <span class="n">getSize</span><span class="o">())</span> <span class="o">{</span>
+      <span class="c1">// Find smallest cost v in V - T 
+</span><span class="c1"></span>      <span class="kt">int</span> <span class="n">u</span> <span class="o">=</span> <span class="o">-</span><span class="n">1</span><span class="o">;</span>
+      <span class="c1">// Vertex to be determined
+</span><span class="c1"></span>
+      <span class="kt">double</span> <span class="n">currentMinCost</span> <span class="o">=</span> <span class="n">Double</span><span class="o">.</span><span class="na">POSITIVE_INFINITY</span><span class="o">;</span>
+      <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">getSize</span><span class="o">();</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+
+        <span class="c1">//!T.contains(i)
+</span><span class="c1"></span>        <span class="k">if</span> <span class="o">(!</span><span class="n">isTnT</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="n">cost</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">&lt;</span> <span class="n">currentMinCost</span><span class="o">)</span> <span class="o">{</span>
+          <span class="n">currentMinCost</span> <span class="o">=</span> <span class="n">cost</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
+          <span class="n">u</span> <span class="o">=</span> <span class="n">i</span><span class="o">;</span>
+        <span class="o">}</span>
+      <span class="o">}</span>
+
+      <span class="n">isTnT</span><span class="o">[</span><span class="n">u</span><span class="o">]</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+      <span class="n">T</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">u</span><span class="o">);</span> <span class="c1">// Add a new vertex to T
+</span><span class="c1"></span>      <span class="n">totalWeight</span> <span class="o">+=</span> <span class="n">cost</span><span class="o">[</span><span class="n">u</span><span class="o">];</span> <span class="c1">// Add cost[u] to the tree
+</span><span class="c1"></span>
+      <span class="c1">// Adjust cost[v] for v that is adjacent to u and v in V - T
+</span><span class="c1"></span>      <span class="k">for</span> <span class="o">(</span><span class="n">Edge</span> <span class="n">e</span> <span class="o">:</span> <span class="n">neighbors</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">u</span><span class="o">))</span> <span class="o">{</span>
+        <span class="c1">//!T.contains(e.v)
+</span><span class="c1"></span>        <span class="k">if</span> <span class="o">(!</span><span class="n">isTnT</span><span class="o">[</span><span class="n">e</span><span class="o">.</span><span class="na">v</span><span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="n">cost</span><span class="o">[</span><span class="n">e</span><span class="o">.</span><span class="na">v</span><span class="o">]</span> <span class="o">&gt;</span> <span class="o">((</span><span class="n">WeightedEdge</span><span class="o">)</span> <span class="n">e</span><span class="o">).</span><span class="na">weight</span><span class="o">)</span> <span class="o">{</span>
+          <span class="n">cost</span><span class="o">[</span><span class="n">e</span><span class="o">.</span><span class="na">v</span><span class="o">]</span> <span class="o">=</span> <span class="o">((</span><span class="n">WeightedEdge</span><span class="o">)</span> <span class="n">e</span><span class="o">).</span><span class="na">weight</span><span class="o">;</span>
+          <span class="n">parent</span><span class="o">[</span><span class="n">e</span><span class="o">.</span><span class="na">v</span><span class="o">]</span> <span class="o">=</span> <span class="n">u</span><span class="o">;</span>
+        <span class="o">}</span>
+      <span class="o">}</span>
+    <span class="o">}</span> <span class="c1">// End of while
+</span><span class="c1"></span>
+    <span class="k">return</span> <span class="k">new</span> <span class="n">MST</span><span class="o">(</span><span class="n">startingVertex</span><span class="o">,</span> <span class="n">parent</span><span class="o">,</span> <span class="n">T</span><span class="o">,</span> <span class="n">totalWeight</span><span class="o">);</span>
+  <span class="o">}</span>
+</code></pre></div><h3 id="dijkstra">Dijkstra</h3>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="n">ShortestPathTree</span> <span class="nf">getShortestPath</span><span class="o">(</span><span class="kt">int</span> <span class="n">sourceVertex</span><span class="o">)</span> <span class="o">{</span>
+    <span class="c1">// cost[v] stores the cost of the path from v to the source
+</span><span class="c1"></span>    <span class="kt">double</span><span class="o">[]</span> <span class="n">cost</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">double</span><span class="o">[</span><span class="n">getSize</span><span class="o">()];</span>
+    <span class="c1">// Initial cost set to infinity
+</span><span class="c1"></span>    <span class="n">Arrays</span><span class="o">.</span><span class="na">fill</span><span class="o">(</span><span class="n">cost</span><span class="o">,</span> <span class="n">Double</span><span class="o">.</span><span class="na">POSITIVE_INFINITY</span><span class="o">);</span>
+    
+    <span class="n">cost</span><span class="o">[</span><span class="n">sourceVertex</span><span class="o">]</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="c1">// Cost of source is 0
+</span><span class="c1"></span>
+    <span class="c1">// parent[v] stores the previous vertex of v in the path
+</span><span class="c1"></span>    <span class="kt">int</span><span class="o">[]</span> <span class="n">parent</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">getSize</span><span class="o">()];</span>
+    <span class="n">parent</span><span class="o">[</span><span class="n">sourceVertex</span><span class="o">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">1</span><span class="o">;</span> <span class="c1">// The parent of source is set to -1
+</span><span class="c1"></span>
+    <span class="c1">// T stores the vertices whose path found so far
+</span><span class="c1"></span>    <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">T</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
+    <span class="kt">boolean</span><span class="o">[]</span> <span class="n">isTnT</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">boolean</span><span class="o">[</span><span class="n">getSize</span><span class="o">()];</span>
+    
+    <span class="c1">// Expand T
+</span><span class="c1"></span>    <span class="k">while</span> <span class="o">(</span><span class="n">T</span><span class="o">.</span><span class="na">size</span><span class="o">()</span> <span class="o">&lt;</span> <span class="n">getSize</span><span class="o">())</span> <span class="o">{</span>
+      <span class="c1">// Find smallest cost v in V - T 
+</span><span class="c1"></span>      <span class="kt">int</span> <span class="n">u</span> <span class="o">=</span> <span class="o">-</span><span class="n">1</span><span class="o">;</span> <span class="c1">// Vertex to be determined
+</span><span class="c1"></span>      <span class="kt">double</span> <span class="n">currentMinCost</span> <span class="o">=</span> <span class="n">Double</span><span class="o">.</span><span class="na">POSITIVE_INFINITY</span><span class="o">;</span>
+      <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">getSize</span><span class="o">();</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="c1">//!T.contains(i)
+</span><span class="c1"></span>        <span class="k">if</span> <span class="o">(!</span><span class="n">isTnT</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="n">cost</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">&lt;</span> <span class="n">currentMinCost</span><span class="o">)</span> <span class="o">{</span>
+          <span class="n">currentMinCost</span> <span class="o">=</span> <span class="n">cost</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
+          <span class="n">u</span> <span class="o">=</span> <span class="n">i</span><span class="o">;</span>
+        <span class="o">}</span>
+      <span class="o">}</span>
+
+      <span class="n">isTnT</span><span class="o">[</span><span class="n">u</span><span class="o">]</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+      <span class="n">T</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">u</span><span class="o">);</span> <span class="c1">// Add a new vertex to T
+</span><span class="c1"></span>
+      <span class="c1">// Adjust cost[v] for v that is adjacent to u and v in V - T
+</span><span class="c1"></span>      <span class="k">for</span> <span class="o">(</span><span class="n">Edge</span> <span class="n">e</span> <span class="o">:</span> <span class="n">neighbors</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">u</span><span class="o">))</span> <span class="o">{</span>
+        <span class="c1">//!T.contains(e.v)
+</span><span class="c1"></span>        <span class="k">if</span> <span class="o">(!</span><span class="n">isTnT</span><span class="o">[</span><span class="n">e</span><span class="o">.</span><span class="na">v</span><span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="n">cost</span><span class="o">[</span><span class="n">e</span><span class="o">.</span><span class="na">v</span><span class="o">]</span> <span class="o">&gt;</span> <span class="n">cost</span><span class="o">[</span><span class="n">u</span><span class="o">]</span> <span class="o">+</span> <span class="o">((</span><span class="n">WeightedEdge</span><span class="o">)</span> <span class="n">e</span><span class="o">).</span><span class="na">weight</span><span class="o">)</span> <span class="o">{</span>
+          <span class="n">cost</span><span class="o">[</span><span class="n">e</span><span class="o">.</span><span class="na">v</span><span class="o">]</span> <span class="o">=</span> <span class="n">cost</span><span class="o">[</span><span class="n">u</span><span class="o">]</span> <span class="o">+</span> <span class="o">((</span><span class="n">WeightedEdge</span><span class="o">)</span> <span class="n">e</span><span class="o">).</span><span class="na">weight</span><span class="o">;</span>
+          <span class="n">parent</span><span class="o">[</span><span class="n">e</span><span class="o">.</span><span class="na">v</span><span class="o">]</span> <span class="o">=</span> <span class="n">u</span><span class="o">;</span>
+        <span class="o">}</span>
+      <span class="o">}</span>
+    <span class="o">}</span> <span class="c1">// End of while
+</span><span class="c1"></span>
+    <span class="c1">// Create a ShortestPathTree
+</span><span class="c1"></span>    <span class="k">return</span> <span class="k">new</span> <span class="n">ShortestPathTree</span><span class="o">(</span><span class="n">sourceVertex</span><span class="o">,</span> <span class="n">parent</span><span class="o">,</span> <span class="n">T</span><span class="o">,</span> <span class="n">cost</span><span class="o">);</span>
+  <span class="o">}</span>
+</code></pre></div>
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/java/">Java</a>
+        
+            <a href="/tags/algorithms/">Algorithms</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Maybe it can be made by mz</span>
+    </section>
+    </footer>
+
+    
+</article>
+
+    <aside class="related-contents--wrapper">
+    
+    
+        <h2 class="section-title">Related contents</h2>
+        <div class="related-contents">
+            <div class="flex article-list--tile">
+                
+                    
+<article class="has-image">
+    <a href="/p/graph2/">
+        
+        
+            <div class="article-image">
+                <img src="/p/graph2/wallhaven-8oky1j.54e188b889d291eced689a3ff2105fc4_hu15f8624ba93dc5dbc7d7c54a2b0bed3b_1058803_250x150_fill_q75_box_smart1.jpg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy" 
+                        data-key="graph2" 
+                        data-hash="md5-VOGIuInSkeztaJo/8hBfxA==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Graph Algorithms Part II</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="has-image">
+    <a href="/p/graph/">
+        
+        
+            <div class="article-image">
+                <img src="/p/graph/wallhaven-o3ywdp.289cd354a7ba845d9c82791c3974a603_hu254556f4d7c6fac32ed9b7127f78f282_531223_250x150_fill_q75_box_smart1.jpg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy" 
+                        data-key="graph" 
+                        data-hash="md5-KJzTVKe6hF2cgnkcOXSmAw==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Graph Algorithms Part I</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="has-image">
+    <a href="/p/leetcode-451/">
+        
+        
+            <div class="article-image">
+                <img src="/p/leetcode-451/wallhaven-j3e7j5.6f33ea44d3a8385bcbf6c598dc5d6c53_hudda1cf6777e9075b2d0686fd65b53af4_1985421_250x150_fill_q75_box_smart1.jpg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy" 
+                        data-key="leetcode-451" 
+                        data-hash="md5-bzPqRNOoOFvL9sWY3F1sUw==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">String Freq Sort</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="has-image">
+    <a href="/p/leetcode-645/">
+        
+        
+            <div class="article-image">
+                <img src="/p/leetcode-645/wallhaven-dp3yg3.c90679d3f75c0a138dad82ca2bf00641_hu9a39724aad0744ec345d914343dc7c46_216393_250x150_fill_q75_box_smart1.jpg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy" 
+                        data-key="leetcode-645" 
+                        data-hash="md5-yQZ50/dcChONrYLKK/AGQQ==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">FindErrorNum</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="has-image">
+    <a href="/p/leetcode-lcp07/">
+        
+        
+            <div class="article-image">
+                <img src="/p/leetcode-lcp07/wallhaven-8okjz2.4649658bfbdb93a227c30da1afa84607_hu8c8c89a0a09d756b05c4d585d09b6e7b_5389260_250x150_fill_box_smart1_2.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy" 
+                        data-key="leetcode-LCP07" 
+                        data-hash="md5-Rklli/vbk6Inww2hr6hGBw==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Passing message</h2>
+        </div>
+    </a>
+</article>
+                
+            </div>
+        </div>
+    
+</aside>
+
+
+    
+        
+    
+
+    <footer class="site-footer">
+	
+    <section class="copyright">
+        &copy; 
+        
+        2021 Minezeratul
+    </section>
+  
+    <section class="powerby">
+        Welcome to the world of <a href="https://github.com/minezeratul" target="_blank" rel="noopener">Minezeratul</a><br>
+		
+		<span id="runtime_span"></span>
+		<script type="text/javascript">function show_runtime(){window.setTimeout("show_runtime()",1000);X=new 
+			Date("4/20/2021 00:00:00");
+		Y=new Date();T=(Y.getTime()-X.getTime());M=24*60*60*1000;
+		a=T/M;A=Math.floor(a);b=(a-A)*24;B=Math.floor(b);c=(b-B)*60;C=Math.floor((b-B)*60);D=Math.floor((c-C)*60);
+		runtime_span.innerHTML="本站运行: "+A+"天"+B+"小时"+C+"分"+D+"秒"}show_runtime();</script>
+    </section>
+	
+</footer>
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer="true"
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer="true"
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css"integrity="sha256-c0uckgykQ9v5k&#43;IqViZOZKc47Jn7KQil4/MP3ySA3F8="crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css"integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE="crossorigin="anonymous"
+            >
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"
+                defer="false"
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
