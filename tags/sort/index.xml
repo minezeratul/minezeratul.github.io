@@ -6,7 +6,20 @@
     <description>Recent content in Sort on Minezeratul</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 22 May 2021 21:08:13 +0800</lastBuildDate><atom:link href="https://minezeratul.github.io/tags/sort/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 05 Jul 2021 15:51:33 +0800</lastBuildDate><atom:link href="https://minezeratul.github.io/tags/sort/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Ice-Cream</title>
+      <link>https://minezeratul.github.io/p/leetcode-1833/</link>
+      <pubDate>Mon, 05 Jul 2021 15:51:33 +0800</pubDate>
+      
+      <guid>https://minezeratul.github.io/p/leetcode-1833/</guid>
+      <description>Leetcode 1833 1833. 雪糕的最大数量 夏天到了，终于放暑假了！LeetCode也叫人吃雪糕了
+由题意可知，要买最多雪糕，可以想出贪心
+第一种做法
+public int maxIceCream(int[] costs, int coins) { int cnt = 0; Arrays.sort(costs);//sorted,从最便宜的开始买  for(int cost : costs){ if(coins &amp;gt;= cost){//超过即退出  coins -= cost; cnt++; }else{ break; } } return cnt; } 第二种排序，用计数排序来实现
+public int maxIceCream2(int[] costs, int coins) { int[] freq = new int[100001]; for (int cost:costs){ //用数组模拟哈希表记录出现次数  freq[cost]++; } int cnt = 0; for (int i = 1; i &amp;lt;= 100000; i++) { if (coins &amp;gt;= i) {//超过即退出  int curCount = Math.</description>
+    </item>
+    
     <item>
       <title>Collections of quickSort</title>
       <link>https://minezeratul.github.io/p/quicksort/</link>

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>bit on Minezeratul</title>
+    <link>https://minezeratul.github.io/tags/bit/</link>
+    <description>Recent content in bit on Minezeratul</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 29 May 2021 08:58:15 +0800</lastBuildDate><atom:link href="https://minezeratul.github.io/tags/bit/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Hamming algs</title>
+      <link>https://minezeratul.github.io/p/hamming/</link>
+      <pubDate>Sat, 29 May 2021 08:58:15 +0800</pubDate>
+      
+      <guid>https://minezeratul.github.io/p/hamming/</guid>
+      <description>Leetcode 477 这是5.28的每日一题477. 汉明距离总和
+两个整数的 汉明距离 指的是这两个数字的二进制数对应位不同的数量。
+给你一个整数数组 nums，请你计算并返回 nums 中任意两个数之间汉明距离的总和。
+Input:[4,14,2] Output:6
+题目要求数组的长度不超过 10^4。说明不能用 O^2 的时间复杂度的解法 , 所以461. 汉明距离的解法会超时
+public int totalHammingDistance(int[] nums) { int ans = 0, n = nums.length; //10^9 &amp;lt; 2^30 ， 枚举到29位  for (int i = 0; i &amp;lt; 30; ++i) { int c = 0; for (int val : nums) { //来取出其第 i 位的值 , 得出不同位  c += (val &amp;gt;&amp;gt; i) &amp;amp; 1; } ans += c * (n - c); } return ans; } 461.</description>
+    </item>
+    
+    <item>
+      <title>K-Largest XOR Value</title>
+      <link>https://minezeratul.github.io/p/13rd-blog/</link>
+      <pubDate>Sat, 22 May 2021 19:47:51 +0800</pubDate>
+      
+      <guid>https://minezeratul.github.io/p/13rd-blog/</guid>
+      <description>Leetcode 1738 这是Leetcode 5.19的题目 1738. 找出第 K 大的异或坐标值 ，是215. 数组中的第K个最大元素 的二维异或版本 215回顾
+第一种方法，用前缀异或 + PriorityQueue , Java是用最小堆实现pq
+public int kthLargestValue(int[][] matrix, int k) { int m = mat.length , n = mat[0].length; int[][] pre = new int[m + 1][n + 1]; PriorityQueue&amp;lt;Integer&amp;gt; pq = new PriorityQueue&amp;lt;&amp;gt;(); for (int i = 1; i &amp;lt;= m ; i++) { for (int j = 1; j &amp;lt;= n ; j++) { //二维数组的前缀异或  pre[i][j] = pre[i - 1][j] ^ pre[i][j - 1] ^ pre[i - 1][j - 1] ^ mat[i - 1][j - 1]; if (pq.</description>
+    </item>
+    
+    <item>
+      <title>又又又是XOR</title>
+      <link>https://minezeratul.github.io/p/eleventh-blog/</link>
+      <pubDate>Tue, 18 May 2021 19:32:07 +0800</pubDate>
+      
+      <guid>https://minezeratul.github.io/p/eleventh-blog/</guid>
+      <description>Leetcode 1442 5.18的每日一题1442. 形成两个异或相等数组的三元组数目
+a = arr[i] ^ arr[i + 1] ^ &amp;hellip; ^ arr[j - 1] b = arr[j] ^ arr[j + 1] ^ &amp;hellip; ^ arr[k
+利用了x^y = 0 ，可知两个数必相等。计算每个数的异或 ， 若出现0 ， 则说明该区间有能够令 a == b 成立的三元组 (i, j , k) 的数目
+其实 i ^ k = 0 , i &amp;lt; j &amp;lt;= k , j在区间范围内，异或结果都等于0
+Talk is cheap , show u the code XDDDD
+public int countTriplets(int[] arr) { int n = arr.</description>
+    </item>
+    
+    <item>
+      <title>Trie &amp; XOR</title>
+      <link>https://minezeratul.github.io/p/ninth-blog/</link>
+      <pubDate>Sun, 16 May 2021 23:21:51 +0800</pubDate>
+      
+      <guid>https://minezeratul.github.io/p/ninth-blog/</guid>
+      <description>Leetcode 421 FineMaxXOR 5.16的题目 421. 数组中两个数的最大异或值
+用到了 208. 实现 Trie (前缀树) algs4的chapter5.2
+public class Trie { private Trie[] children; private boolean isEnd; public Trie() { children = new Trie[26];//字母表映射  isEnd = false; } //插入字符串 	//我们从字典树的根开始,插入字符串。对于当前字符对应的子节点,有两种情况 	//子节点存在。沿着指针移动到子节点,继续处理下一个字符。 	//子节点不存在。创建一个新的子节点,记录在children数组的对应位置上,  //然后沿着指针移动到子节点,继续搜索下一个字符。  public void insert(String word) { Trie node = this;//root  for (int i = 0; i &amp;lt; word.length(); i++) { char ch = word.charAt(i); int index = ch - &amp;#39;a&amp;#39;; if (node.</description>
+    </item>
+    
+    <item>
+      <title>NumArray307</title>
+      <link>https://minezeratul.github.io/p/5th-blog/</link>
+      <pubDate>Thu, 13 May 2021 00:00:00 +0800</pubDate>
+      
+      <guid>https://minezeratul.github.io/p/5th-blog/</guid>
+      <description>Leetcode 307 这是今天做的一个题 307. 区域和检索 - 数组可修改
+和 303. 区域和检索 - 数组不可变 不同的是 数组可修改
+上一个dalao的分析 , 放弃996了
+/** * 数组不变，求区间和：「前缀和」、「树状数组」、「线段树」 * * 多次修改某个数，求区间和：「树状数组」、「线段树」 * * 多次整体修改某个区间，求区间和：「线段树」、「树状数组」（看修改区间的数据范围） * * 多次将某个区间变成同一个数，求区间和：「线段树」、「树状数组」（看修改区间的数据范围） * */ 学了个树状数组方法。
+class NumArray { int[] tree; int lowBits(int x){ return x &amp;amp; -x;//保留二进制下最后出现的1的位置，其余位置置0  } //当一个偶数与它的负值向与时，结果是能被这个偶数整除的最大的2的n次幂 , 比如10返回2  //当一个奇数与它的负值向与时结果一定是1  // 查询前缀和的方法  int query(int x){ int ans = 0; for (int i = x; i &amp;gt; 0 ; i -= lowBits(i)) { ans += tree[i]; } return ans; } // 在树状数组 x 位置中增加值 u  void add(int x ,int u){ for (int i = x; i &amp;lt;= n ; i += lowBits(i)) { tree[i] += u; } } int[] nums; int n; // 初始化「树状数组」  public NumArray(int[] nums) { this.</description>
+    </item>
+    
+    <item>
+      <title>xorQueries</title>
+      <link>https://minezeratul.github.io/p/4th-blog/</link>
+      <pubDate>Wed, 12 May 2021 18:40:29 +0800</pubDate>
+      
+      <guid>https://minezeratul.github.io/p/4th-blog/</guid>
+      <description>Leetcode 1310 今天又是爆肝的一天 , 感觉这个月应该 是异或月了，全是异或题（痛哭）
+今天的每日一题是1310. 子数组异或查询
+queries数组提供的是查询的范围
+然后返回一个包含所有查询结果的数组
+我们可以用类似 prefix sum 前缀和
+采取 prefix XOR前缀异或 来完成该题
+对于每个查询都要计算，因此我们应该优化每个查询的计算时间
+queries(L , R)
+= array[L] ⊕ &amp;hellip;. ⊕ array[R] , 又 x ⊕ x = 0
+= ( array[0] ⊕ &amp;hellip;. ⊕ array[L - 1] ) ⊕ ( array[0] ⊕ &amp;hellip;. ⊕ array[L - 1] ) ⊕ ( array[L] ⊕ &amp;hellip;. ⊕ array[R] )
+= ( array[0] ⊕ &amp;hellip;. ⊕ array[L - 1] ) ⊕ ( array[0] ⊕ &amp;hellip;.</description>
+    </item>
+    
+    <item>
+      <title>My First Blog here</title>
+      <link>https://minezeratul.github.io/p/first-blog/</link>
+      <pubDate>Fri, 07 May 2021 00:00:00 +0800</pubDate>
+      
+      <guid>https://minezeratul.github.io/p/first-blog/</guid>
+      <description>Hello , This is my first blog here I&amp;rsquo;m Minezeratul 今天的每日一题为 1486. 数组异或操作
+异或操作 , 即为XOR ， 同为0 ，异为1 ，1^0 = 1 0^0 = 0
+public static int xorOperation(int n, int start) { if (n == 1) { return start; } int res = 0 ; for (int i = 0; i &amp;lt; n; i++) { res ^= start + 2 * i; } return res; } 时间复杂度为O(n)</description>
+    </item>
+    
+  </channel>
+</rss>

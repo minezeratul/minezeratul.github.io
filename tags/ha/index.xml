@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ha on Minezeratul</title>
+    <link>https://minezeratul.github.io/tags/ha/</link>
+    <description>Recent content in Ha on Minezeratul</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 08 May 2021 00:00:00 +0800</lastBuildDate><atom:link href="https://minezeratul.github.io/tags/ha/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Least Bricks</title>
+      <link>https://minezeratul.github.io/p/second-blog/</link>
+      <pubDate>Sat, 08 May 2021 00:00:00 +0800</pubDate>
+      
+      <guid>https://minezeratul.github.io/p/second-blog/</guid>
+      <description>Leetcode 554 大家好，我是mz
+这是2021.5.2的每日一题554. 砖墙
+题目要求一条自顶向下 的、穿过 最少 砖块的垂线 ， 也可以理解为 总行数- 间隙最多
+这样就可以得出穿过最少砖块的路线
+我选择用了 [哈希表] 去记录了每个间隙所生成的位置 , 然后用Math.max去寻找最大间隙.
+public int leastBricks(List&amp;lt;List&amp;lt;Integer&amp;gt;&amp;gt; wall) { Map&amp;lt;Integer , Integer&amp;gt; map = new HashMap&amp;lt;&amp;gt;(); for (List&amp;lt;Integer&amp;gt; widths:wall){ int n = widths.size(); int sum = 0; for (int i = 0; i &amp;lt; n - 1; i++) { sum += widths.get(i); map.put(sum , map.getOrDefault(sum , 0) + 1);//记录间隙位置  } } int cnt = 0; for (Map.</description>
+    </item>
+    
+  </channel>
+</rss>

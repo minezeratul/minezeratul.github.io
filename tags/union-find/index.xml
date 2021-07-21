@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Union-Find on Minezeratul</title>
+    <link>https://minezeratul.github.io/tags/union-find/</link>
+    <description>Recent content in Union-Find on Minezeratul</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 21 Jul 2021 19:31:34 +0800</lastBuildDate><atom:link href="https://minezeratul.github.io/tags/union-find/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>UnionFind</title>
+      <link>https://minezeratul.github.io/p/unionfind/</link>
+      <pubDate>Wed, 21 Jul 2021 19:31:34 +0800</pubDate>
+      
+      <guid>https://minezeratul.github.io/p/unionfind/</guid>
+      <description>Union-Find 并查集 Union-Find 并查集算法的关键在于union和connected的效率 ， 若只是简单的连接节点 **find , union , connected **三个函数的时间复杂度会是O(n) ，而通过平衡树，可使复杂度降低到O(logn) 再而通过路径压缩，可使得union和connected的时间复杂度达到O(1) 这是优化版的Union-Find , 防止了树退化成链表而降低了效率 public class UnionFind { private int count;//连通分量个数  private int[] parent;//存储一棵树 , 记录每个节点的父节点，相当于指向父节点的指针  private int[] size;//记录每棵树重量  public UnionFind() { } public UnionFind(int n) { this.count = n; parent = new int[n]; size = new int[n]; for (int i = 0; i &amp;lt; n; i++) { parent[i] = i;//节点指向自己  size[i] = 1; } } public void union(int p, int q) { int rootP = find(p); int rootQ = find(q); if (rootP == rootQ) { return; } //get the balanced tree  // 将两棵树合并为一棵树，小树接到大树下面，较平衡  // 使其不会退化成链表而降低效率  if (size[rootP] &amp;gt; size[rootQ]) { parent[rootQ] = rootP; size[rootP] += size[rootQ]; } else { parent[rootP] = rootQ; size[rootQ] += size[rootP]; } count--; } private int find(int x) { //路径压缩  while (parent[x] !</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>BinarySearch on Minezeratul</title>
+    <link>https://minezeratul.github.io/tags/binarysearch/</link>
+    <description>Recent content in BinarySearch on Minezeratul</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 15 May 2021 20:47:24 +0800</lastBuildDate><atom:link href="https://minezeratul.github.io/tags/binarysearch/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>minDays 1482</title>
+      <link>https://minezeratul.github.io/p/seventh-blog/</link>
+      <pubDate>Sat, 15 May 2021 20:47:24 +0800</pubDate>
+      
+      <guid>https://minezeratul.github.io/p/seventh-blog/</guid>
+      <description>Leetcode 1482 这是5.9号的题目 1482. 制作 m 束花所需的最少天数
+二分的应用场景不一定有序，只要具备排他性、两段性，就可以二分
+寻找最优临界值的题目，往往可以借助二分搜索
+/** * @param bloomDay 什么时候开花 * @param m m束 * @param k k朵花做成一束 * @return */ public static int minDays(int[] bloomDay, int m, int k) { int n = bloomDay.length; if (n &amp;lt; m * k)//不够花束  return -1; int low = Integer.MAX_VALUE, high = 0; for (int i = 0; i &amp;lt; n; i++) { low = Math.min(low, bloomDay[i]);//找到最小值作为low  high = Math.</description>
+    </item>
+    
+  </channel>
+</rss>

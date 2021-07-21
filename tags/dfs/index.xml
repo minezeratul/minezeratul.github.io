@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>dfs on Minezeratul</title>
+    <link>https://minezeratul.github.io/tags/dfs/</link>
+    <description>Recent content in dfs on Minezeratul</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 05 Jul 2021 16:15:12 +0800</lastBuildDate><atom:link href="https://minezeratul.github.io/tags/dfs/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Passing message</title>
+      <link>https://minezeratul.github.io/p/leetcode-lcp07/</link>
+      <pubDate>Mon, 05 Jul 2021 16:15:12 +0800</pubDate>
+      
+      <guid>https://minezeratul.github.io/p/leetcode-lcp07/</guid>
+      <description>Leetcode LCP-07 LCP 07. 传递信息 看用例就可以知道这是一个图，[u , v]
+用dfs深度优先来一步一步搜寻到末端
+public int numWays(int n, int[][] relations, int k) { int cnt = 0; boolean[][] isVisited = new boolean[n][n];//判断是否经过  for (int[] relation : relations) { isVisited[relation[0]][relation[1]] = true; } return dfs(0 , isVisited , k); } public int dfs(int n , boolean[][] isVisited , int k){ if (k == 0){ return isVisited.length - 1 == n ? 1 : 0; } int cnt = 0 ; for (int i = 0; i &amp;lt; isVisited[n].</description>
+    </item>
+    
+  </channel>
+</rss>

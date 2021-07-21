@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Hashmap on Minezeratul</title>
+    <link>https://minezeratul.github.io/tags/hashmap/</link>
+    <description>Recent content in Hashmap on Minezeratul</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 06 Jul 2021 10:08:44 +0800</lastBuildDate><atom:link href="https://minezeratul.github.io/tags/hashmap/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>FindErrorNum</title>
+      <link>https://minezeratul.github.io/p/leetcode-645/</link>
+      <pubDate>Tue, 06 Jul 2021 10:08:44 +0800</pubDate>
+      
+      <guid>https://minezeratul.github.io/p/leetcode-645/</guid>
+      <description>Leetcode 645 FindErrorNum 645. 错误的集合 第一种方法，用数组模拟哈希表，获取出现次数
+public int[] findErrorNums(int[] nums) { int n = nums.length; int[] res = new int[2];//导致集合丢失了一个数字 并且有一个数字重复。  int[] tmp = new int[n + 1]; for (int num : nums){ //统计次数  tmp[num]++; } for (int i = 1; i &amp;lt; tmp.length; i++) { if (tmp[i] == 1){ //有效  continue; } if (tmp[i] == 2){ //duplicated  res[0] = i; }else { //lost  res[1] = i; } } return res; } 第二种方法 ， 数学</description>
+    </item>
+    
+    <item>
+      <title>CheckSubArray</title>
+      <link>https://minezeratul.github.io/p/leetcode-523/</link>
+      <pubDate>Wed, 02 Jun 2021 09:46:48 +0800</pubDate>
+      
+      <guid>https://minezeratul.github.io/p/leetcode-523/</guid>
+      <description>Leetcode 523 523. 连续的子数组和 给你一个整数数组 nums 和一个整数 k ，编写一个函数来判断该数组是否含有同时满足下述条件的连续子数组：
+子数组大小 至少为2 ，且子数组元素总和为 k 的倍数。 如果存在，返回 true ；否则，返回 false 。
+如果存在一个整数 n ，令整数 x 符合 x = n * k ，则称 x 是 k 的一个倍数。
+public boolean checkSubarraySum(int[] nums, int k) { int n = nums.length; if (n &amp;lt; 2) {//大小至少为2  return false; } //利用了同余定理  //即 ( pre(j) - pre (i) ) % k == 0 则 pre(j) % k == pre(i) % k  //推导 =&amp;gt; pre (i) % k = (a0 + a1 + .</description>
+    </item>
+    
+    <item>
+      <title>You hava my word now</title>
+      <link>https://minezeratul.github.io/p/kth-word/</link>
+      <pubDate>Wed, 19 May 2021 10:32:16 +0800</pubDate>
+      
+      <guid>https://minezeratul.github.io/p/kth-word/</guid>
+      <description>Find the Kth-frequency word 这是5.19 的 692. 前K个高频单词
+用哈希表 + 排序， HashMap记录次数 , 然后从大到小排列 public static List&amp;lt;String&amp;gt; topKFrequent(String[] words, int k) { Map&amp;lt;String, Integer&amp;gt; map = new HashMap&amp;lt;&amp;gt;(); List&amp;lt;String&amp;gt; ans = new ArrayList&amp;lt;&amp;gt;(); for (String word : words) { map.put(word, map.getOrDefault(word, 0) + 1); } for (Map.Entry&amp;lt;String, Integer&amp;gt; entry : map.entrySet()) { ans.add(entry.getKey()); } Collections.sort(ans, new Comparator&amp;lt;String&amp;gt;() { //compare&amp;gt;0则大在前 &amp;lt;0则大在后  //compareTo 比较两个str  @Override public int compare(String o1, String o2) { return map.</description>
+    </item>
+    
+  </channel>
+</rss>

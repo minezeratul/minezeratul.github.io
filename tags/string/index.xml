@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>String on Minezeratul</title>
+    <link>https://minezeratul.github.io/tags/string/</link>
+    <description>Recent content in String on Minezeratul</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 06 Jul 2021 15:33:26 +0800</lastBuildDate><atom:link href="https://minezeratul.github.io/tags/string/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>String Freq Sort</title>
+      <link>https://minezeratul.github.io/p/leetcode-451/</link>
+      <pubDate>Tue, 06 Jul 2021 15:33:26 +0800</pubDate>
+      
+      <guid>https://minezeratul.github.io/p/leetcode-451/</guid>
+      <description>Leetcode 451 451. 根据字符出现频率排序 利用hashmap记录 ， 或者用数组模拟hashmap , 然后利用PriorityQueue大顶堆来排序
+public String frequencySort(String s) { StringBuilder sb = new StringBuilder(); //Map&amp;lt;Character , Integer&amp;gt; map = new HashMap&amp;lt;&amp;gt;();  //for (char ch : s.toCharArray()){  // map.put(ch , map.getOrDefault(ch , 0 ) + 1);  //}  //也可以开一个128的数组替换 , 优化性能  int[] frequency = new int[128]; for (char ch : s.toCharArray()){ frequency[ch]++; } PriorityQueue&amp;lt;node&amp;gt; pq = new PriorityQueue&amp;lt;node&amp;gt;((o1 , o2) -&amp;gt; o1.freq !</description>
+    </item>
+    
+    <item>
+      <title>In Reverse , we finally meet in the sunset</title>
+      <link>https://minezeratul.github.io/p/stacktoreverse/</link>
+      <pubDate>Wed, 26 May 2021 21:02:46 +0800</pubDate>
+      
+      <guid>https://minezeratul.github.io/p/stacktoreverse/</guid>
+      <description>Leetcode 1190 5.26的每日一题，需从内到外翻转字符串 ，我们可以遇到)就开始翻转内容
+可以用stack来存储每个(的index，找到第一个)的时候即为优先级最高的里面，开始第一次翻转char[]数组
+Sample input:&amp;quot;(abcd)&amp;quot; output:&amp;quot;dcba&amp;quot;
+public String reverseParentheses(String s) { StringBuilder sb = new StringBuilder();//用stringbuilder构建字符串  char[] chs = s.toCharArray(); int n = s.length(); Stack&amp;lt;Integer&amp;gt; stack = new Stack&amp;lt;&amp;gt;(); for (int i = 0; i &amp;lt; n; i++) { if (chs[i] == &amp;#39;(&amp;#39;) {//记录index  stack.push(i); } if (chs[i] == &amp;#39;)&amp;#39;) {//匹配，开始  reverse(chs, stack.pop() + 1, i); } } for (int i = 0; i &amp;lt; n; i++) { if (chs[i] !</description>
+    </item>
+    
+    <item>
+      <title>You hava my word now</title>
+      <link>https://minezeratul.github.io/p/kth-word/</link>
+      <pubDate>Wed, 19 May 2021 10:32:16 +0800</pubDate>
+      
+      <guid>https://minezeratul.github.io/p/kth-word/</guid>
+      <description>Find the Kth-frequency word 这是5.19 的 692. 前K个高频单词
+用哈希表 + 排序， HashMap记录次数 , 然后从大到小排列 public static List&amp;lt;String&amp;gt; topKFrequent(String[] words, int k) { Map&amp;lt;String, Integer&amp;gt; map = new HashMap&amp;lt;&amp;gt;(); List&amp;lt;String&amp;gt; ans = new ArrayList&amp;lt;&amp;gt;(); for (String word : words) { map.put(word, map.getOrDefault(word, 0) + 1); } for (Map.Entry&amp;lt;String, Integer&amp;gt; entry : map.entrySet()) { ans.add(entry.getKey()); } Collections.sort(ans, new Comparator&amp;lt;String&amp;gt;() { //compare&amp;gt;0则大在前 &amp;lt;0则大在后  //compareTo 比较两个str  @Override public int compare(String o1, String o2) { return map.</description>
+    </item>
+    
+    <item>
+      <title>intToRoman and RomanToInt</title>
+      <link>https://minezeratul.github.io/p/6th-blog/</link>
+      <pubDate>Sat, 15 May 2021 00:00:00 +0800</pubDate>
+      
+      <guid>https://minezeratul.github.io/p/6th-blog/</guid>
+      <description>Leetcode 12 and Leetcode 13 5.14和5.15的每日一题 ，貌似没有什么可写的，可能就需要用StringBuilder来构建string
+12. 整数转罗马数字 class Solution { public String intToRoman(int num) { StringBuilder sb = new StringBuilder(); int[] values = {1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1}; for (int i = 0; i &amp;lt; values.length; i++) { int val = values[i]; while (num &amp;gt;= val){ num -= val; sb.append(getStr(val)); if (num == 0) break; } } return sb.toString(); } private String getStr(int num){ switch (num){ case 1000: return &amp;#34;M&amp;#34;; case 900: return &amp;#34;CM&amp;#34;; case 500: return &amp;#34;D&amp;#34;; case 400: return &amp;#34;CD&amp;#34;; case 100: return &amp;#34;C&amp;#34;; case 90: return &amp;#34;XC&amp;#34;; case 50: return &amp;#34;L&amp;#34;; case 40: return &amp;#34;XL&amp;#34;; case 10: return &amp;#34;X&amp;#34;; case 9: return &amp;#34;IX&amp;#34;; case 5: return &amp;#34;V&amp;#34;; case 4: return &amp;#34;IV&amp;#34;; case 1: return &amp;#34;I&amp;#34;; } return null; } } 13.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>dp on Minezeratul</title>
+    <link>https://minezeratul.github.io/tags/dp/</link>
+    <description>Recent content in dp on Minezeratul</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 16 May 2021 00:47:24 +0800</lastBuildDate><atom:link href="https://minezeratul.github.io/tags/dp/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Rob me if u can</title>
+      <link>https://minezeratul.github.io/p/eighth-blog/</link>
+      <pubDate>Sun, 16 May 2021 00:47:24 +0800</pubDate>
+      
+      <guid>https://minezeratul.github.io/p/eighth-blog/</guid>
+      <description>Leetcode 740 5.5的题目740. 删除并获得点数 和 198. 打家劫舍 有点类似 , 需要在一些地方做出调整
+为了做740，先去当了一遍小偷XDDD
+打家劫舍，经典dp问题，偷还得隔间偷,甚至开了透视知道哪里最多钱（笑
+一间的时候肯定只能偷那个，两间的时候就需要Math.max比较
+n间的时候则需要 when i &amp;gt; 2 , Math.max(dp[i - 2] + num[i] , dp[i - 1])来比较金额大小
+public int rob(int[] nums) { int n = nums.length; if (n == 0 || nums == null) return 0; else if (n == 1) return nums[0]; /** int[] dp = new int[n]; dp[0] = nums[0]; dp[1] = Math.max(nums[0], nums[1]); for (int i = 2; i &amp;lt; n; i++) { dp[i] = Math.</description>
+    </item>
+    
+  </channel>
+</rss>

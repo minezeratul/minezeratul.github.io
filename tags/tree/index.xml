@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tree on Minezeratul</title>
+    <link>https://minezeratul.github.io/tags/tree/</link>
+    <description>Recent content in Tree on Minezeratul</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 17 May 2021 10:43:19 +0800</lastBuildDate><atom:link href="https://minezeratul.github.io/tags/tree/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Are u my cousin?</title>
+      <link>https://minezeratul.github.io/p/tenth-blog/</link>
+      <pubDate>Mon, 17 May 2021 10:43:19 +0800</pubDate>
+      
+      <guid>https://minezeratul.github.io/p/tenth-blog/</guid>
+      <description>Leetcode 993 5.17的每日一题993. 二叉树的堂兄弟节点
+同深度 ， 不同父节点 就可判断
+直接dfs查找，若不存在，返回null
+不在第n层就继续往下走
+public class isCousins993 { TreeNode parX; TreeNode parY; int deepX; int deepY; public boolean isCousins(TreeNode root, int x, int y) { dfs(root, null, 0, x, y); return parX != parY &amp;amp;&amp;amp; deepX == deepY; } private void dfs(TreeNode root, TreeNode par, int deep, int x, int y) { if (root == null) return; if (root.val == x) { deepX = deep; parX = par; } else if (root.</description>
+    </item>
+    
+    <item>
+      <title>leaf Similar</title>
+      <link>https://minezeratul.github.io/p/third-blog/</link>
+      <pubDate>Sat, 08 May 2021 00:00:00 +0800</pubDate>
+      
+      <guid>https://minezeratul.github.io/p/third-blog/</guid>
+      <description>Leetcode 872 Hello , 我是mz
+这是今天的每日一题872. 叶子相似的树
+题目要求获取这些叶子的值并按从左到右的顺序排列形成一个 叶值序列
+叶 ， 即无左右节点 , 并且还有按顺序，我们可以选择用中序遍历来完成要求
+public boolean leafSimilar(TreeNode root1, TreeNode root2) { List&amp;lt;Integer&amp;gt; list1 = new ArrayList&amp;lt;&amp;gt;(); List&amp;lt;Integer&amp;gt; list2 = new ArrayList&amp;lt;&amp;gt;(); inorder(root1, list1); inorder(root2, list2); return list1.equals(list2); } private void inorder(TreeNode root, List&amp;lt;Integer&amp;gt; list) { if (root != null) { inorder(root.left, list); if (root.left == null &amp;amp;&amp;amp; root.right == null) list.add(root.val); inorder(root.right, list); } } 空间复杂度为O（n + m) ，n , m 分别为两个ArrayList</description>
+    </item>
+    
+  </channel>
+</rss>
