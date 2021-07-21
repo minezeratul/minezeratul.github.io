@@ -340,6 +340,7 @@ document.addEventListener('copy', addLink);
     <h1 id="union-find-并查集">Union-Find 并查集</h1>
 <h3 id="union-find-并查集算法的关键在于union和connected的效率--若只是简单的连接节点">Union-Find 并查集算法的关键在于<code>union</code>和<code>connected</code>的效率 ， 若只是简单的连接节点</h3>
 <h3 id="find--union--connected-三个函数的时间复杂度会是on-而通过平衡树可使复杂度降低到ologn">**find , union , connected **三个函数的时间复杂度会是O(n) ，而通过平衡树，可使复杂度降低到O(logn)</h3>
+<h3 id="再而通过路径压缩可使得union和connected的时间复杂度达到o1">再而通过路径压缩，可使得union和connected的时间复杂度达到O(1)</h3>
 <h3 id="这是优化版的union-find--防止了树退化成链表而降低了效率">这是优化版的Union-Find , 防止了树退化成链表而降低了效率</h3>
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">UnionFind</span> <span class="o">{</span>
     <span class="kd">private</span> <span class="kt">int</span> <span class="n">count</span><span class="o">;</span><span class="c1">//连通分量个数

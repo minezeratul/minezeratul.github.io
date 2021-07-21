@@ -15,6 +15,7 @@
         <description>&lt;img src="https://minezeratul.github.io/p/unionfind/wallhaven-6o59k7.png" alt="Featured image of post UnionFind" /&gt;&lt;h1 id=&#34;union-find-并查集&#34;&gt;Union-Find 并查集&lt;/h1&gt;
 &lt;h3 id=&#34;union-find-并查集算法的关键在于union和connected的效率--若只是简单的连接节点&#34;&gt;Union-Find 并查集算法的关键在于&lt;code&gt;union&lt;/code&gt;和&lt;code&gt;connected&lt;/code&gt;的效率 ， 若只是简单的连接节点&lt;/h3&gt;
 &lt;h3 id=&#34;find--union--connected-三个函数的时间复杂度会是on-而通过平衡树可使复杂度降低到ologn&#34;&gt;**find , union , connected **三个函数的时间复杂度会是O(n) ，而通过平衡树，可使复杂度降低到O(logn)&lt;/h3&gt;
+&lt;h3 id=&#34;再而通过路径压缩可使得union和connected的时间复杂度达到o1&#34;&gt;再而通过路径压缩，可使得union和connected的时间复杂度达到O(1)&lt;/h3&gt;
 &lt;h3 id=&#34;这是优化版的union-find--防止了树退化成链表而降低了效率&#34;&gt;这是优化版的Union-Find , 防止了树退化成链表而降低了效率&lt;/h3&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;UnionFind&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
     &lt;span class=&#34;kd&#34;&gt;private&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;count&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;//连通分量个数
