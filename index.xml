@@ -7,12 +7,12 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
         <lastBuildDate>Wed, 21 Jul 2021 19:31:34 +0800</lastBuildDate><atom:link href="https://minezeratul.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
-        <title>UnionFind</title>
+        <title>Union-Find</title>
         <link>https://minezeratul.github.io/p/unionfind/</link>
         <pubDate>Wed, 21 Jul 2021 19:31:34 +0800</pubDate>
         
         <guid>https://minezeratul.github.io/p/unionfind/</guid>
-        <description>&lt;img src="https://minezeratul.github.io/p/unionfind/wallhaven-6o59k7.png" alt="Featured image of post UnionFind" /&gt;&lt;h1 id=&#34;union-find-并查集&#34;&gt;Union-Find 并查集&lt;/h1&gt;
+        <description>&lt;img src="https://minezeratul.github.io/p/unionfind/wallhaven-6o59k7.png" alt="Featured image of post Union-Find" /&gt;&lt;h1 id=&#34;union-find-并查集&#34;&gt;Union-Find 并查集&lt;/h1&gt;
 &lt;h3 id=&#34;union-find-并查集算法的关键在于union和connected的效率--若只是简单的连接节点&#34;&gt;Union-Find 并查集算法的关键在于&lt;code&gt;union&lt;/code&gt;和&lt;code&gt;connected&lt;/code&gt;的效率 ， 若只是简单的连接节点&lt;/h3&gt;
 &lt;h3 id=&#34;find--union--connected-三个函数的时间复杂度会是on-而通过平衡树可使复杂度降低到ologn&#34;&gt;**find , union , connected **三个函数的时间复杂度会是O(n) ，而通过平衡树，可使复杂度降低到O(logn)&lt;/h3&gt;
 &lt;h3 id=&#34;再而通过路径压缩可使得union和connected的时间复杂度达到o1&#34;&gt;再而通过路径压缩，可使得union和connected的时间复杂度达到O(1)&lt;/h3&gt;
