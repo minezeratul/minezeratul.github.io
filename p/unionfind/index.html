@@ -2,9 +2,9 @@
 <html lang="en-us">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'>
-<link type="favicon" rel="shortcut icon" href="favicon.icon"><meta name='description' content='Java Learning'><title>try-with-resources优先于try-finally</title>
+<link type="favicon" rel="shortcut icon" href="favicon.icon"><meta name='description' content='Union-Find'><title>UnionFind</title>
 
-<link rel='canonical' href='https://minezeratul.github.io/p/note/'>
+<link rel='canonical' href='https://minezeratul.github.io/p/unionfind/'>
 
 <link rel="stylesheet" href="/scss/style.min.css"><script>
 (function(window,document,undefined){
@@ -85,14 +85,14 @@ function addLink(event) {
 }
 
 document.addEventListener('copy', addLink);
-</script><meta property='og:title' content='try-with-resources优先于try-finally'>
-<meta property='og:description' content='Java Learning'>
-<meta property='og:url' content='https://minezeratul.github.io/p/note/'>
+</script><meta property='og:title' content='UnionFind'>
+<meta property='og:description' content='Union-Find'>
+<meta property='og:url' content='https://minezeratul.github.io/p/unionfind/'>
 <meta property='og:site_name' content='Minezeratul'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Java' /><meta property='article:tag' content='Notes' /><meta property='article:published_time' content='2021-06-08T17:25:08&#43;08:00'/><meta property='article:modified_time' content='2021-06-08T17:25:08&#43;08:00'/><meta property='og:image' content='https://minezeratul.github.io/p/note/wallhaven-3z32j3.jpg' />
-<meta name="twitter:title" content="try-with-resources优先于try-finally">
-<meta name="twitter:description" content="Java Learning"><meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content='https://minezeratul.github.io/p/note/wallhaven-3z32j3.jpg' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Java' /><meta property='article:tag' content='Algorithms' /><meta property='article:published_time' content='2021-07-21T19:31:34&#43;08:00'/><meta property='article:modified_time' content='2021-07-21T19:31:34&#43;08:00'/><meta property='og:image' content='https://minezeratul.github.io/p/unionfind/wallhaven-6o59k7.png' />
+<meta name="twitter:title" content="UnionFind">
+<meta name="twitter:description" content="Union-Find"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://minezeratul.github.io/p/unionfind/wallhaven-6o59k7.png' />
     <link type="favicon" rel="shortcut icon" href="icon.png" />
 
     </head>
@@ -273,13 +273,13 @@ document.addEventListener('copy', addLink);
     <article class="has-image main-article">
     <header class="article-header">
         <div class="article-image">
-            <a href="/p/note/">
-                <img src="/p/note/wallhaven-3z32j3_hufe1b3409fa910156ba1dab10f6dbb05f_1637926_800x0_resize_q75_box.jpg"
-                        srcset="/p/note/wallhaven-3z32j3_hufe1b3409fa910156ba1dab10f6dbb05f_1637926_800x0_resize_q75_box.jpg 800w, /p/note/wallhaven-3z32j3_hufe1b3409fa910156ba1dab10f6dbb05f_1637926_1600x0_resize_q75_box.jpg 1600w"
+            <a href="/p/unionfind/">
+                <img src="/p/unionfind/wallhaven-6o59k7_hu4159b3c77d519f83d7062c6d564bbeaa_1883045_800x0_resize_box_2.png"
+                        srcset="/p/unionfind/wallhaven-6o59k7_hu4159b3c77d519f83d7062c6d564bbeaa_1883045_800x0_resize_box_2.png 800w, /p/unionfind/wallhaven-6o59k7_hu4159b3c77d519f83d7062c6d564bbeaa_1883045_1600x0_resize_box_2.png 1600w"
                         width="800" 
-                        height="519" 
+                        height="450" 
                         loading="lazy"
-                        alt="Featured image of post try-with-resources优先于try-finally" />
+                        alt="Featured image of post UnionFind" />
                 
             </a>
         </div>
@@ -294,21 +294,21 @@ document.addEventListener('copy', addLink);
             Java
         </a>
         
-        <a href="/categories/notes/"
+        <a href="/categories/coding/"
             >
-            Notes
+            Coding
         </a>
         
     </header>
     
 
     <h2 class="article-title">
-        <a href="/p/note/">try-with-resources优先于try-finally</a>
+        <a href="/p/unionfind/">UnionFind</a>
     </h2>
 
     
     <h3 class="article-subtitle">
-        Java Learning
+        Union-Find
     </h3>
     <footer class="article-time">
         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -320,7 +320,7 @@ document.addEventListener('copy', addLink);
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-        <time class="article-time--published">Jun 08, 2021&emsp;
+        <time class="article-time--published">Jul 21, 2021&emsp;
         </time>
         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
@@ -331,104 +331,73 @@ document.addEventListener('copy', addLink);
 
 
         <time class="article-time--published">
-            2 min read
+            1 min read
         </time>
     </footer></div>
 </header>
 
     <section class="article-content">
-    <h1 id="reading-day">Reading Day</h1>
-<blockquote>
-<p>try-with-resources是jdk1.7引入的语法，使得关闭资源操作无需层层嵌套在finally</p>
-</blockquote>
-<p><strong>当try-finally关闭资源时，其出现了两处异常，往往只会返回第一处异常。</strong></p>
-<p>当java7开始引入<code>try-with-resources</code>后，这些问题就迎刃而解了。不过使用这个结构的时候，必须接入<strong>AutoCloseable接口</strong></p>
-<p>其中包括了单个返回void的close方法。现在Java库与第三方类库中的许多类和接口都实现了或拓展了AutoCloseable接口</p>
-<h2 id="try-catch-finally-结构">Try-Catch-Finally 结构</h2>
-<p>可见，我们需要手动关闭两个Stream资源。而且为了防止异常的产生而无法关闭，需要借助finally正常关闭资源</p>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">DemoTest</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-        	<span class="n">BufferedInputStream</span> <span class="n">bin</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
-			<span class="n">BufferedOutputStream</span> <span class="n">bout</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
-			<span class="k">try</span> <span class="o">{</span>
-				<span class="n">bin</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferedInputStream</span><span class="o">(</span><span class="k">new</span> <span class="n">FileInputStream</span><span class="o">(</span><span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="s">&#34;test.txt&#34;</span><span class="o">)));</span>
-				<span class="n">bout</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferedOutputStream</span><span class="o">(</span><span class="k">new</span> <span class="n">FileOutputStream</span><span class="o">(</span><span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="s">&#34;out.txt&#34;</span><span class="o">)));</span>
-				<span class="kt">int</span> <span class="n">b</span><span class="o">;</span>
-				<span class="k">while</span> <span class="o">((</span><span class="n">b</span> <span class="o">=</span> <span class="n">bin</span><span class="o">.</span><span class="na">read</span><span class="o">())</span> <span class="o">!=</span> <span class="o">-</span><span class="n">1</span><span class="o">)</span> <span class="o">{</span>
-					<span class="n">bout</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">b</span><span class="o">);</span>
-				<span class="o">}</span>
-			<span class="o">}</span>
-			<span class="k">catch</span> <span class="o">(</span><span class="n">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-				<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
-			<span class="o">}</span>
-			<span class="k">finally</span> <span class="o">{</span>
-				<span class="k">if</span> <span class="o">(</span><span class="n">bin</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-					<span class="k">try</span> <span class="o">{</span>
-						<span class="n">bin</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
-					<span class="o">}</span>
-					<span class="k">catch</span> <span class="o">(</span><span class="n">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-						<span class="k">throw</span> <span class="n">e</span><span class="o">;</span>
-					<span class="o">}</span>
-					<span class="k">finally</span> <span class="o">{</span>
-						<span class="k">if</span> <span class="o">(</span><span class="n">bout</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-							<span class="k">try</span> <span class="o">{</span>
-								<span class="n">bout</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
-							<span class="o">}</span>
-							<span class="k">catch</span> <span class="o">(</span><span class="n">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-								<span class="k">throw</span> <span class="n">e</span><span class="o">;</span>
-							<span class="o">}</span>
-						<span class="o">}</span>
-					<span class="o">}</span>
-				<span class="o">}</span>
-			<span class="o">}</span>
-		<span class="o">}</span>
-	<span class="o">}</span>
-</code></pre></div><h1 id="try-with-resources结构">Try-with-resources结构</h1>
-<p>而在try-with-resources中，我们只需要这样，编译器会帮我们自动补全close()，并且还会将异常正确报出，而不会由于嵌</p>
-<p>套只指出一处异常。</p>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">TryWithResource</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">try</span> <span class="o">(</span><span class="n">BufferedInputStream</span> <span class="n">bin</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferedInputStream</span><span class="o">(</span><span class="k">new</span> <span class="n">FileInputStream</span><span class="o">(</span><span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="s">&#34;test.txt&#34;</span><span class="o">)));</span>
-             <span class="n">BufferedOutputStream</span> <span class="n">bout</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferedOutputStream</span><span class="o">(</span><span class="k">new</span> <span class="n">FileOutputStream</span><span class="o">(</span><span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="s">&#34;out.txt&#34;</span><span class="o">))))</span> <span class="o">{</span>
-            <span class="kt">int</span> <span class="n">b</span><span class="o">;</span>
-            <span class="k">while</span> <span class="o">((</span><span class="n">b</span> <span class="o">=</span> <span class="n">bin</span><span class="o">.</span><span class="na">read</span><span class="o">())</span> <span class="o">!=</span> <span class="o">-</span><span class="n">1</span><span class="o">)</span> <span class="o">{</span>
-                <span class="n">bout</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">b</span><span class="o">);</span>
-            <span class="o">}</span>
-        <span class="o">}</span><span class="k">catch</span> <span class="o">(</span><span class="n">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-            <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+    <h1 id="union-find-并查集">Union-Find 并查集</h1>
+<h3 id="union-find-并查集算法的关键在于union和connected的效率--若只是简单的连接节点">Union-Find 并查集算法的关键在于<code>union</code>和<code>connected</code>的效率 ， 若只是简单的连接节点</h3>
+<h3 id="find--union--connected-三个函数的时间复杂度会是on-而通过平衡树可使复杂度降低到ologn">**find , union , connected **三个函数的时间复杂度会是O(n) ，而通过平衡树，可使复杂度降低到O(logn)</h3>
+<h3 id="这是优化版的union-find--防止了树退化成链表而降低了效率">这是优化版的Union-Find , 防止了树退化成链表而降低了效率</h3>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">UnionFind</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">count</span><span class="o">;</span><span class="c1">//连通分量个数
+</span><span class="c1"></span>    <span class="kd">private</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">parent</span><span class="o">;</span><span class="c1">//存储一棵树 , 记录每个节点的父节点，相当于指向父节点的指针
+</span><span class="c1"></span>    <span class="kd">private</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">size</span><span class="o">;</span><span class="c1">//记录每棵树重量
+</span><span class="c1"></span>
+    <span class="kd">public</span> <span class="nf">UnionFind</span><span class="o">()</span> <span class="o">{</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="nf">UnionFind</span><span class="o">(</span><span class="kt">int</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">count</span> <span class="o">=</span> <span class="n">n</span><span class="o">;</span>
+        <span class="n">parent</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">n</span><span class="o">];</span>
+        <span class="n">size</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">n</span><span class="o">];</span>
+
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="n">parent</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">i</span><span class="o">;</span><span class="c1">//节点指向自己
+</span><span class="c1"></span>            <span class="n">size</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">1</span><span class="o">;</span>
         <span class="o">}</span>
     <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div><p>反编译class , 可见close()的补全</p>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">TryWithResource</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="nf">TryWithResource</span><span class="o">()</span> <span class="o">{</span>
-        
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">union</span><span class="o">(</span><span class="kt">int</span> <span class="n">p</span><span class="o">,</span> <span class="kt">int</span> <span class="n">q</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">rootP</span> <span class="o">=</span> <span class="n">find</span><span class="o">(</span><span class="n">p</span><span class="o">);</span>
+        <span class="kt">int</span> <span class="n">rootQ</span> <span class="o">=</span> <span class="n">find</span><span class="o">(</span><span class="n">q</span><span class="o">);</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">rootP</span> <span class="o">==</span> <span class="n">rootQ</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="c1">//get the balanced tree
+</span><span class="c1"></span>        <span class="c1">// 将两棵树合并为一棵树，小树接到大树下面，较平衡
+</span><span class="c1"></span>        <span class="c1">// 使其不会退化成链表而降低效率
+</span><span class="c1"></span>        <span class="k">if</span> <span class="o">(</span><span class="n">size</span><span class="o">[</span><span class="n">rootP</span><span class="o">]</span> <span class="o">&gt;</span> <span class="n">size</span><span class="o">[</span><span class="n">rootQ</span><span class="o">])</span> <span class="o">{</span>
+            <span class="n">parent</span><span class="o">[</span><span class="n">rootQ</span><span class="o">]</span> <span class="o">=</span> <span class="n">rootP</span><span class="o">;</span>
+            <span class="n">size</span><span class="o">[</span><span class="n">rootP</span><span class="o">]</span> <span class="o">+=</span> <span class="n">size</span><span class="o">[</span><span class="n">rootQ</span><span class="o">];</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+            <span class="n">parent</span><span class="o">[</span><span class="n">rootP</span><span class="o">]</span> <span class="o">=</span> <span class="n">rootQ</span><span class="o">;</span>
+            <span class="n">size</span><span class="o">[</span><span class="n">rootQ</span><span class="o">]</span> <span class="o">+=</span> <span class="n">size</span><span class="o">[</span><span class="n">rootP</span><span class="o">];</span>
+        <span class="o">}</span>
+
+        <span class="n">count</span><span class="o">--;</span>
     <span class="o">}</span>
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">try</span> <span class="o">{</span>
-            <span class="n">Connection</span> <span class="n">conn</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Connection</span><span class="o">();</span>
-            <span class="n">Throwable</span> <span class="n">var2</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
-            <span class="k">try</span> <span class="o">{</span>
-                <span class="n">conn</span><span class="o">.</span><span class="na">sendData</span><span class="o">();</span>
-            <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Throwable</span> <span class="n">var12</span><span class="o">)</span> <span class="o">{</span>
-				<span class="n">var2</span> <span class="o">=</span> <span class="n">var12</span><span class="o">;</span>
-				<span class="k">throw</span> <span class="n">var12</span><span class="o">;</span>
-			<span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
-				<span class="k">if</span> <span class="o">(</span><span class="n">conn</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-					<span class="k">if</span> <span class="o">(</span><span class="n">var2</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-						<span class="k">try</span> <span class="o">{</span>
-							<span class="n">conn</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
-						<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Throwable</span> <span class="n">var11</span><span class="o">)</span> <span class="o">{</span>
-							<span class="n">var2</span><span class="o">.</span><span class="na">addSuppressed</span><span class="o">(</span><span class="n">var11</span><span class="o">);</span>
-						<span class="o">}</span>
-					<span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-						<span class="n">conn</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
-					<span class="o">}</span>
-				<span class="o">}</span>
-			<span class="o">}</span>
-		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">var14</span><span class="o">)</span> <span class="o">{</span>
-			<span class="n">var14</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
-		<span class="o">}</span>
+
+    <span class="kd">private</span> <span class="kt">int</span> <span class="nf">find</span><span class="o">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">//路径压缩
+</span><span class="c1"></span>        <span class="k">while</span> <span class="o">(</span><span class="n">parent</span><span class="o">[</span><span class="n">x</span><span class="o">]</span> <span class="o">!=</span> <span class="n">x</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">parent</span><span class="o">[</span><span class="n">x</span><span class="o">]</span> <span class="o">=</span> <span class="n">parent</span><span class="o">[</span><span class="n">parent</span><span class="o">[</span><span class="n">x</span><span class="o">]];</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">parent</span><span class="o">[</span><span class="n">x</span><span class="o">];</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">x</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">connected</span><span class="o">(</span><span class="kt">int</span> <span class="n">p</span><span class="o">,</span> <span class="kt">int</span> <span class="n">q</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">rootP</span> <span class="o">=</span> <span class="n">find</span><span class="o">(</span><span class="n">p</span><span class="o">);</span>
+        <span class="kt">int</span> <span class="n">rootQ</span> <span class="o">=</span> <span class="n">find</span><span class="o">(</span><span class="n">q</span><span class="o">);</span>
+        <span class="k">return</span> <span class="n">rootP</span> <span class="o">==</span> <span class="n">rootQ</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">count</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">count</span><span class="o">;</span>
     <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div>
@@ -441,7 +410,7 @@ document.addEventListener('copy', addLink);
         
             <a href="/tags/java/">Java</a>
         
-            <a href="/tags/notes/">Notes</a>
+            <a href="/tags/algorithms/">Algorithms</a>
         
     </section>
 
@@ -472,28 +441,6 @@ document.addEventListener('copy', addLink);
                 
                     
 <article class="has-image">
-    <a href="/p/unionfind/">
-        
-        
-            <div class="article-image">
-                <img src="/p/unionfind/wallhaven-6o59k7.6e1b7d009eacf7ca95a543efe68af31c_hu4159b3c77d519f83d7062c6d564bbeaa_1883045_250x150_fill_box_smart1_2.png" 
-                        width="250" 
-                        height="150" 
-                        loading="lazy" 
-                        data-key="Unionfind" 
-                        data-hash="md5-bht9AJ6s98qVpUPv5orzHA==">
-                
-            </div>
-        
-
-        <div class="article-details">
-            <h2 class="article-title">UnionFind</h2>
-        </div>
-    </a>
-</article>
-                
-                    
-<article class="has-image">
     <a href="/p/graph2/">
         
         
@@ -510,6 +457,50 @@ document.addEventListener('copy', addLink);
 
         <div class="article-details">
             <h2 class="article-title">Graph Algorithms Part II</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="has-image">
+    <a href="/p/graph1.2/">
+        
+        
+            <div class="article-image">
+                <img src="/p/graph1.2/wallhaven-vg36x3.6f49c4539fcbf6407f085c2cd9a51ae1_hu391d8c48ccf48756e0894cf255dfd5e6_3941005_250x150_fill_q75_box_smart1.jpg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy" 
+                        data-key="graph1.2" 
+                        data-hash="md5-b0nEU5/L9kB/CFws2aUa4Q==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Graph Algorithms Part I.2</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="has-image">
+    <a href="/p/graph/">
+        
+        
+            <div class="article-image">
+                <img src="/p/graph/wallhaven-o3ywdp.289cd354a7ba845d9c82791c3974a603_hu254556f4d7c6fac32ed9b7127f78f282_531223_250x150_fill_q75_box_smart1.jpg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy" 
+                        data-key="graph" 
+                        data-hash="md5-KJzTVKe6hF2cgnkcOXSmAw==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Graph Algorithms Part I</h2>
         </div>
     </a>
 </article>
@@ -554,28 +545,6 @@ document.addEventListener('copy', addLink);
 
         <div class="article-details">
             <h2 class="article-title">FindErrorNum</h2>
-        </div>
-    </a>
-</article>
-                
-                    
-<article class="has-image">
-    <a href="/p/leetcode-lcp07/">
-        
-        
-            <div class="article-image">
-                <img src="/p/leetcode-lcp07/wallhaven-8okjz2.4649658bfbdb93a227c30da1afa84607_hu8c8c89a0a09d756b05c4d585d09b6e7b_5389260_250x150_fill_box_smart1_2.png" 
-                        width="250" 
-                        height="150" 
-                        loading="lazy" 
-                        data-key="leetcode-LCP07" 
-                        data-hash="md5-Rklli/vbk6Inww2hr6hGBw==">
-                
-            </div>
-        
-
-        <div class="article-details">
-            <h2 class="article-title">Passing message</h2>
         </div>
     </a>
 </article>
