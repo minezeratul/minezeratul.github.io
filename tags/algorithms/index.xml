@@ -6,7 +6,20 @@
     <description>Recent content in Algorithms on Minezeratul</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 21 Jul 2021 20:44:50 +0800</lastBuildDate><atom:link href="https://minezeratul.github.io/tags/algorithms/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 06 Sep 2021 15:13:44 +0800</lastBuildDate><atom:link href="https://minezeratul.github.io/tags/algorithms/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Backtrack回溯 全排列</title>
+      <link>https://minezeratul.github.io/p/permute/</link>
+      <pubDate>Mon, 06 Sep 2021 15:13:44 +0800</pubDate>
+      
+      <guid>https://minezeratul.github.io/p/permute/</guid>
+      <description>backtrack 回溯算法 先做决定，然后撤回 , 就是一个决策树的遍历 需要注意的有三个问题   路径
+  选择
+  终止条件
+伪码如下:
+public void backtrack(路径，选择列表){ if (终止条件){ add(路径)； return; } for 选择 in 列表 { 做选择； backtrack(路径，选择列表); 撤回； } }   46. 全排列 题目要求不含重复数字，所以我们还需要注意不符合的选择 class Solution { public List&amp;lt;List&amp;lt;Integer&amp;gt;&amp;gt; res = new LinkedList&amp;lt;&amp;gt;(); public List&amp;lt;List&amp;lt;Integer&amp;gt;&amp;gt; permute(int[] nums){ LinkedList&amp;lt;Integer&amp;gt; track = new LinkedList&amp;lt;&amp;gt;(); backtrack(nums , track); return res; } private void backtrack(int[] nums, LinkedList&amp;lt;Integer&amp;gt; track) { // 触发结束条件  if (track.</description>
+    </item>
+    
     <item>
       <title>并查集Union-Find应用</title>
       <link>https://minezeratul.github.io/p/solve130/</link>
