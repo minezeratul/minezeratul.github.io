@@ -17,7 +17,8 @@
   选择
   终止条件
 伪码如下:
-public void backtrack(路径，选择列表){ if (终止条件){ add(路径)； return; } for 选择 in 列表 { 做选择； backtrack(路径，选择列表); 撤回； } }   46. 全排列 题目要求不含重复数字，所以我们还需要注意不符合的选择 class Solution { public List&amp;lt;List&amp;lt;Integer&amp;gt;&amp;gt; res = new LinkedList&amp;lt;&amp;gt;(); public List&amp;lt;List&amp;lt;Integer&amp;gt;&amp;gt; permute(int[] nums){ LinkedList&amp;lt;Integer&amp;gt; track = new LinkedList&amp;lt;&amp;gt;(); backtrack(nums , track); return res; } private void backtrack(int[] nums, LinkedList&amp;lt;Integer&amp;gt; track) { // 触发结束条件  if (track.</description>
+public void backtrack(路径，选择列表){ if (终止条件){ add(路径)； return; } for 选择 in 列表 { 做选择； backtrack(路径，选择列表); 撤回； } }   而且不管怎么优化，都符合回溯框架，而且时间复杂度都不可能低于 O(N!)，因为穷举整棵决策树是无法避免的。这也是回溯算法的一个特点，不像动态规划存在重叠子问题可以优化，回溯算法就是纯暴力穷举，复杂度一般都很高
+ 46. 全排列 题目要求不含重复数字，所以我们还需要注意不符合的选择 class Solution { public List&amp;lt;List&amp;lt;Integer&amp;gt;&amp;gt; res = new LinkedList&amp;lt;&amp;gt;(); public List&amp;lt;List&amp;lt;Integer&amp;gt;&amp;gt; permute(int[] nums){ LinkedList&amp;lt;Integer&amp;gt; track = new LinkedList&amp;lt;&amp;gt;(); backtrack(nums , track); return res; } private void backtrack(int[] nums, LinkedList&amp;lt;Integer&amp;gt; track) { // 触发结束条件  if (track.</description>
     </item>
     
   </channel>

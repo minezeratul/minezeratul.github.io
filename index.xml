@@ -38,6 +38,8 @@
 &lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;/ul&gt;
+&lt;p&gt;而且不管怎么优化，都符合回溯框架，而且时间复杂度都不可能低于 O(N!)，因为穷举整棵决策树是无法避免的。&lt;strong&gt;这也是回溯算法的一个特点，不像动态规划存在重叠子问题可以优化，回溯算法就是纯暴力穷举，复杂度一般都很高&lt;/strong&gt;&lt;/p&gt;
+&lt;hr&gt;
 &lt;h2 id=&#34;46-全排列httpsleetcode-cncomproblemspermutations-题目要求不含重复数字所以我们还需要注意不符合的选择&#34;&gt;&lt;a class=&#34;link&#34; href=&#34;https://leetcode-cn.com/problems/permutations/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;46. 全排列&lt;/a&gt; 题目要求不含重复数字，所以我们还需要注意不符合的选择&lt;/h2&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;kd&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;Solution&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
