@@ -2,7 +2,7 @@
 <html lang="en-us">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'>
-<link type="favicon" rel="shortcut icon" href="favicon.icon"><meta name='description' content='Stocks'><title>Stocks股票问题</title>
+<link type="favicon" rel="shortcut icon" href="favicon.icon"><meta name='description' content='在？看看炒股？你看那片天绿不绿啊？'><title>Stocks股票问题</title>
 
 <link rel='canonical' href='https://minezeratul.github.io/p/stock/'>
 
@@ -86,12 +86,12 @@ function addLink(event) {
 
 document.addEventListener('copy', addLink);
 </script><meta property='og:title' content='Stocks股票问题'>
-<meta property='og:description' content='Stocks'>
+<meta property='og:description' content='在？看看炒股？你看那片天绿不绿啊？'>
 <meta property='og:url' content='https://minezeratul.github.io/p/stock/'>
 <meta property='og:site_name' content='Minezeratul'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='DP' /><meta property='article:tag' content='Algorithms' /><meta property='article:published_time' content='2021-09-29T11:20:07&#43;08:00'/><meta property='article:modified_time' content='2021-09-29T11:20:07&#43;08:00'/><meta property='og:image' content='https://minezeratul.github.io/p/stock/wallhaven-y8vlyk.jpg' />
 <meta name="twitter:title" content="Stocks股票问题">
-<meta name="twitter:description" content="Stocks"><meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:description" content="在？看看炒股？你看那片天绿不绿啊？"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://minezeratul.github.io/p/stock/wallhaven-y8vlyk.jpg' />
     <link type="favicon" rel="shortcut icon" href="icon.png" />
 
@@ -303,7 +303,7 @@ document.addEventListener('copy', addLink);
 
     
     <h3 class="article-subtitle">
-        Stocks
+        在？看看炒股？你看那片天绿不绿啊？
     </h3>
     <footer class="article-time">
         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -326,7 +326,7 @@ document.addEventListener('copy', addLink);
 
 
         <time class="article-time--published">
-            2 min read
+            3 min read
         </time>
     </footer></div>
 </header>
@@ -339,17 +339,17 @@ document.addEventListener('copy', addLink);
 <blockquote>
 <p>只有一次交易机会，我们只需要找到最小价格日和最大价格日即可解决问题</p>
 </blockquote>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java">	<span class="c1">//交易次数k的限制
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java">    <span class="c1">//交易次数k的限制
 </span><span class="c1"></span>    <span class="c1">//k = 1
-</span><span class="c1"></span><span class="kd">public</span> <span class="kt">int</span> <span class="nf">maxProfit</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">prices</span><span class="o">)</span> <span class="o">{</span>
-      <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">prices</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
-      <span class="kt">int</span> <span class="n">profit</span> <span class="o">=</span> <span class="n">0</span><span class="o">,</span> <span class="n">buy</span> <span class="o">=</span> <span class="n">prices</span><span class="o">[</span><span class="n">0</span><span class="o">];</span>
-      <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">1</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-          <span class="n">profit</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">profit</span><span class="o">,</span> <span class="n">prices</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">-</span> <span class="n">buy</span><span class="o">);</span>
-          <span class="n">buy</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">min</span><span class="o">(</span><span class="n">buy</span><span class="o">,</span> <span class="n">prices</span><span class="o">[</span><span class="n">i</span><span class="o">]);</span>
-      <span class="o">}</span>
-      <span class="k">return</span> <span class="n">profit</span><span class="o">;</span>
-<span class="o">}</span>
+</span><span class="c1"></span>    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">maxProfit</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">prices</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">prices</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+        <span class="kt">int</span> <span class="n">profit</span> <span class="o">=</span> <span class="n">0</span><span class="o">,</span> <span class="n">buy</span> <span class="o">=</span> <span class="n">prices</span><span class="o">[</span><span class="n">0</span><span class="o">];</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">1</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="n">profit</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">profit</span><span class="o">,</span> <span class="n">prices</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">-</span> <span class="n">buy</span><span class="o">);</span>
+            <span class="n">buy</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">min</span><span class="o">(</span><span class="n">buy</span><span class="o">,</span> <span class="n">prices</span><span class="o">[</span><span class="n">i</span><span class="o">]);</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">profit</span><span class="o">;</span>
+    <span class="o">}</span>
 </code></pre></div><h4 id="122-买卖股票的最佳时机-iihttpsleetcode-cncomproblemsbest-time-to-buy-and-sell-stock-ii"><a class="link" href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-ii/"  target="_blank" rel="noopener"
     >122. 买卖股票的最佳时机 II</a></h4>
 <blockquote>
@@ -366,7 +366,7 @@ document.addEventListener('copy', addLink);
 </li>
 </ul>
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java">	<span class="c1">//k = +infinity
-</span><span class="c1"></span>	<span class="kd">public</span> <span class="kt">int</span> <span class="nf">maxProfitDP</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">prices</span><span class="o">)</span> <span class="o">{</span>
+</span><span class="c1"></span>    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">maxProfitDP</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">prices</span><span class="o">)</span> <span class="o">{</span>
         <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">prices</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
         <span class="kt">int</span><span class="o">[][]</span> <span class="n">dp</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">n</span><span class="o">][</span><span class="n">2</span><span class="o">];</span>
         <span class="n">dp</span><span class="o">[</span><span class="n">0</span><span class="o">][</span><span class="n">0</span><span class="o">]</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
@@ -394,7 +394,6 @@ document.addEventListener('copy', addLink);
     <span class="o">}</span>
 
 	<span class="c1">//我们注意到题目要求也符合贪心算法
-</span><span class="c1"></span>	<span class="c1">//Greedy
 </span><span class="c1"></span>    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">maxProfit</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">prices</span><span class="o">)</span> <span class="o">{</span>
         <span class="c1">//只要有赚就卖
 </span><span class="c1"></span>        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">prices</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
@@ -426,7 +425,7 @@ document.addEventListener('copy', addLink);
 <p>每次交易后都会有一天的冷冻期才可以进行下一次交易，即有三种状态：未持有，冷冻期，持有</p>
 </blockquote>
 <p>用dp状态机去解决不同0 / 1 / 2三种情况</p>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java">	<span class="kd">public</span> <span class="kt">int</span> <span class="nf">maxProfit</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">prices</span><span class="o">)</span> <span class="o">{</span>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java">    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">maxProfit</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">prices</span><span class="o">)</span> <span class="o">{</span>
         <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">prices</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
         <span class="k">if</span> <span class="o">(</span><span class="n">n</span> <span class="o">==</span> <span class="n">0</span><span class="o">)</span> <span class="o">{</span>
             <span class="k">return</span> <span class="n">0</span><span class="o">;</span>
@@ -464,6 +463,55 @@ document.addEventListener('copy', addLink);
             <span class="n">dp_pre_0</span> <span class="o">=</span> <span class="n">tmp</span><span class="o">;</span>
         <span class="o">}</span>
         <span class="k">return</span> <span class="n">dp_i_0</span><span class="o">;</span>
+    <span class="o">}</span>
+</code></pre></div><h4 id="123-买卖股票的最佳时机-iiihttpsleetcode-cncomproblemsbest-time-to-buy-and-sell-stock-iii"><a class="link" href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iii/"  target="_blank" rel="noopener"
+    >123. 买卖股票的最佳时机 III</a></h4>
+<p>规定交易次数k = 2</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java">    <span class="c1">//k = 2
+</span><span class="c1"></span>    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">maxProfit_k_2</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">prices</span><span class="o">){</span>
+        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">prices</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">n</span> <span class="o">==</span> <span class="n">0</span><span class="o">){</span>
+            <span class="k">return</span> <span class="n">0</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="kt">int</span> <span class="n">dp_i_1_0</span> <span class="o">=</span> <span class="n">0</span> <span class="o">,</span> <span class="n">dp_i_1_1</span> <span class="o">=</span> <span class="n">Integer</span><span class="o">.</span><span class="na">MIN_VALUE</span> <span class="o">,</span> <span class="n">dp_i_2_0</span> <span class="o">=</span> <span class="n">0</span> <span class="o">,</span> <span class="n">dp_i_2_1</span> <span class="o">=</span> <span class="n">Integer</span><span class="o">.</span><span class="na">MIN_VALUE</span><span class="o">;</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">price</span> <span class="o">:</span> <span class="n">prices</span><span class="o">){</span>
+            <span class="n">dp_i_2_0</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">dp_i_2_0</span> <span class="o">,</span> <span class="n">dp_i_2_1</span> <span class="o">+</span> <span class="n">price</span><span class="o">);</span>
+            <span class="n">dp_i_2_1</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">dp_i_2_1</span> <span class="o">,</span> <span class="n">dp_i_1_0</span> <span class="o">-</span> <span class="n">price</span><span class="o">);</span>
+            <span class="n">dp_i_1_0</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">dp_i_1_0</span> <span class="o">,</span> <span class="n">dp_i_1_1</span> <span class="o">+</span> <span class="n">price</span><span class="o">);</span>
+            <span class="n">dp_i_1_1</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">dp_i_1_1</span> <span class="o">,</span> <span class="o">-</span><span class="n">price</span><span class="o">);</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">dp_i_2_0</span><span class="o">;</span>
+    <span class="o">}</span>
+</code></pre></div><h4 id="188-买卖股票的最佳时机-ivhttpsleetcode-cncomproblemsbest-time-to-buy-and-sell-stock-iv"><a class="link" href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iv/"  target="_blank" rel="noopener"
+    >188. 买卖股票的最佳时机 IV</a></h4>
+<p>规定交易次数为k ，123的延伸版本</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java">    <span class="c1">//k = any integer
+</span><span class="c1"></span>    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">maxProfit_k</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">prices</span> <span class="o">,</span> <span class="kt">int</span> <span class="n">max_K</span><span class="o">){</span>
+        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">prices</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">n</span> <span class="o">==</span> <span class="n">0</span><span class="o">){</span>
+            <span class="k">return</span> <span class="n">0</span><span class="o">;</span>
+        <span class="o">}</span><span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">n</span> <span class="o">/</span> <span class="n">2</span> <span class="o">&lt;</span> <span class="n">max_K</span><span class="o">){</span>
+            <span class="c1">//若k &gt; n / 2 ,即相当于可以进行无数次交易
+</span><span class="c1"></span>            <span class="k">return</span> <span class="n">maxProfit_k_inf</span><span class="o">(</span><span class="n">prices</span><span class="o">);</span><span class="c1">//122
+</span><span class="c1"></span>        <span class="o">}</span>
+
+        <span class="c1">//n股票天数
+</span><span class="c1"></span>        <span class="c1">//max_k交易次数
+</span><span class="c1"></span>        <span class="c1">//0未持有/1持有
+</span><span class="c1"></span>        <span class="kt">int</span><span class="o">[][][]</span> <span class="n">dp</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">n</span><span class="o">][</span><span class="n">max_K</span> <span class="o">+</span> <span class="n">1</span><span class="o">][</span><span class="n">2</span><span class="o">];</span>
+
+        <span class="c1">//initialize
+</span><span class="c1"></span>        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">max_K</span> <span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="n">dp</span><span class="o">[</span><span class="n">0</span><span class="o">][</span><span class="n">i</span><span class="o">][</span><span class="n">1</span><span class="o">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">prices</span><span class="o">[</span><span class="n">0</span><span class="o">];</span>
+        <span class="o">}</span>
+
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">1</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">1</span><span class="o">;</span> <span class="n">j</span> <span class="o">&lt;=</span> <span class="n">max_K</span> <span class="o">;</span> <span class="n">j</span><span class="o">++)</span> <span class="o">{</span>
+                <span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">][</span><span class="n">0</span><span class="o">]</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">dp</span><span class="o">[</span><span class="n">i</span> <span class="o">-</span> <span class="n">1</span><span class="o">][</span><span class="n">j</span><span class="o">][</span><span class="n">0</span><span class="o">]</span> <span class="o">,</span> <span class="n">dp</span><span class="o">[</span><span class="n">i</span> <span class="o">-</span> <span class="n">1</span><span class="o">][</span><span class="n">j</span><span class="o">][</span><span class="n">1</span><span class="o">]</span> <span class="o">+</span> <span class="n">prices</span><span class="o">[</span><span class="n">i</span><span class="o">]);</span>
+                <span class="n">dp</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">][</span><span class="n">1</span><span class="o">]</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">dp</span><span class="o">[</span><span class="n">i</span> <span class="o">-</span> <span class="n">1</span><span class="o">][</span><span class="n">j</span><span class="o">][</span><span class="n">1</span><span class="o">]</span> <span class="o">,</span> <span class="n">dp</span><span class="o">[</span><span class="n">i</span> <span class="o">-</span> <span class="n">1</span><span class="o">][</span><span class="n">j</span> <span class="o">-</span> <span class="n">1</span><span class="o">][</span><span class="n">0</span><span class="o">]</span> <span class="o">-</span> <span class="n">prices</span><span class="o">[</span><span class="n">i</span><span class="o">]);</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">dp</span><span class="o">[</span><span class="n">n</span> <span class="o">-</span> <span class="n">1</span><span class="o">][</span><span class="n">max_K</span><span class="o">][</span><span class="n">0</span><span class="o">];</span>
     <span class="o">}</span>
 </code></pre></div>
 </section>
@@ -503,6 +551,28 @@ document.addEventListener('copy', addLink);
         <h2 class="section-title">Related contents</h2>
         <div class="related-contents">
             <div class="flex article-list--tile">
+                
+                    
+<article class="has-image">
+    <a href="/p/rob/">
+        
+        
+            <div class="article-image">
+                <img src="/p/rob/wallhaven-72rxqo.420566f9ad1b35f4e3c4588889e60eeb_hu82c777642da24717c5e20304c81b1465_548971_250x150_fill_q75_box_smart1.jpg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy" 
+                        data-key="rob" 
+                        data-hash="md5-QgVm&#43;a0bNfTjxFiIieYO6w==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">House Robber打家劫舍</h2>
+        </div>
+    </a>
+</article>
                 
                     
 <article class="has-image">
@@ -588,28 +658,6 @@ document.addEventListener('copy', addLink);
 
         <div class="article-details">
             <h2 class="article-title">Graph Algorithms Part II</h2>
-        </div>
-    </a>
-</article>
-                
-                    
-<article class="has-image">
-    <a href="/p/graph1.2/">
-        
-        
-            <div class="article-image">
-                <img src="/p/graph1.2/wallhaven-vg36x3.6f49c4539fcbf6407f085c2cd9a51ae1_hu391d8c48ccf48756e0894cf255dfd5e6_3941005_250x150_fill_q75_box_smart1.jpg" 
-                        width="250" 
-                        height="150" 
-                        loading="lazy" 
-                        data-key="graph1.2" 
-                        data-hash="md5-b0nEU5/L9kB/CFws2aUa4Q==">
-                
-            </div>
-        
-
-        <div class="article-details">
-            <h2 class="article-title">Graph Algorithms Part I.2</h2>
         </div>
     </a>
 </article>
