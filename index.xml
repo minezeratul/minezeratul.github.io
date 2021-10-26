@@ -143,7 +143,8 @@
         <description>&lt;img src="https://minezeratul.github.io/p/stock/wallhaven-y8vlyk.jpg" alt="Featured image of post Stocks股票问题" /&gt;&lt;h1 id=&#34;股票问题&#34;&gt;股票问题&lt;/h1&gt;
 &lt;p&gt;我们需要注意的是交易次数k的限制&lt;/p&gt;
 &lt;hr&gt;
-&lt;h4 id=&#34;121-买卖股票的最佳时机httpsleetcode-cncomproblemsbest-time-to-buy-and-sell-stock-股票入门题目&#34;&gt;121. 买卖股票的最佳时机](&lt;a href=&#34;https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock/&#34;&gt;https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock/&lt;/a&gt;) 股票入门题目&lt;/h4&gt;
+&lt;h4 id=&#34;121-买卖股票的最佳时机httpsleetcode-cncomproblemsbest-time-to-buy-and-sell-stock-股票入门题目&#34;&gt;&lt;a class=&#34;link&#34; href=&#34;https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;121. 买卖股票的最佳时机&lt;/a&gt; 股票入门题目&lt;/h4&gt;
 &lt;blockquote&gt;
 &lt;p&gt;只有一次交易机会，我们只需要找到最小价格日和最大价格日即可解决问题&lt;/p&gt;
 &lt;/blockquote&gt;
